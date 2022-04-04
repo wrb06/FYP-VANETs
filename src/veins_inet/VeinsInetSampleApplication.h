@@ -28,6 +28,7 @@
 
 class VEINS_INET_API VeinsInetSampleApplication : public veins::VeinsInetApplicationBase {
 protected:
+    bool haveForwarded = false;
 
 protected:
     virtual bool startApplication() override;

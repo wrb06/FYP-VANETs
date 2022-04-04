@@ -79,4 +79,15 @@ void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
     EV_INFO << "Received packet: " << payload << endl;
 
     getParentModule()->getDisplayString().setTagArg("i", 1, "green");
+
+    if (haveForwarded ) return;
+
+    auto packet = createPacket("reply");
+    packet->insertAtBack(payload);
+    sendPacket(std::move(packet));
+
+    haveForwarded = true;
+
+
+
 }

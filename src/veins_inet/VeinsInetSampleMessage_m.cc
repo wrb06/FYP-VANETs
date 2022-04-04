@@ -360,7 +360,7 @@ int VeinsInetSampleMessageDescriptor::findField(const char *fieldName) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount() : 0;
-    if (fieldName[0] == 'r' && strcmp(fieldName, "dataId") == 0) return base+0;
+    if (fieldName[0] == 'd' && strcmp(fieldName, "dataId") == 0) return base+0;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 

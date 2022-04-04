@@ -32,5 +32,5 @@ import inet.common.packet.chunk.Chunk;
 //
 class VeinsInetSampleMessage extends inet::FieldsChunk
 {
-    string roadId;
+    string dataId;
 }
