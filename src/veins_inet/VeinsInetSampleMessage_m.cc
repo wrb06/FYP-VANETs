@@ -231,30 +231,30 @@ VeinsInetSampleMessage& VeinsInetSampleMessage::operator=(const VeinsInetSampleM
 
 void VeinsInetSampleMessage::copy(const VeinsInetSampleMessage& other)
 {
-    this->roadId = other.roadId;
+    this->dataId = other.dataId;
 }
 
 void VeinsInetSampleMessage::parsimPack(omnetpp::cCommBuffer *b) const
 {
     ::inet::FieldsChunk::parsimPack(b);
-    doParsimPacking(b,this->roadId);
+    doParsimPacking(b,this->dataId);
 }
 
 void VeinsInetSampleMessage::parsimUnpack(omnetpp::cCommBuffer *b)
 {
     ::inet::FieldsChunk::parsimUnpack(b);
-    doParsimUnpacking(b,this->roadId);
+    doParsimUnpacking(b,this->dataId);
 }
 
-const char * VeinsInetSampleMessage::getRoadId() const
+const char * VeinsInetSampleMessage::getDataId() const
 {
-    return this->roadId.c_str();
+    return this->dataId.c_str();
 }
 
-void VeinsInetSampleMessage::setRoadId(const char * roadId)
+void VeinsInetSampleMessage::setDataId(const char * dataId)
 {
     handleChange();
-    this->roadId = roadId;
+    this->dataId = dataId;
 }
 
 class VeinsInetSampleMessageDescriptor : public omnetpp::cClassDescriptor
@@ -262,7 +262,7 @@ class VeinsInetSampleMessageDescriptor : public omnetpp::cClassDescriptor
   private:
     mutable const char **propertynames;
     enum FieldConstants {
-        FIELD_roadId,
+        FIELD_dataId,
     };
   public:
     VeinsInetSampleMessageDescriptor();
@@ -337,7 +337,7 @@ unsigned int VeinsInetSampleMessageDescriptor::getFieldTypeFlags(int field) cons
         field -= basedesc->getFieldCount();
     }
     static unsigned int fieldTypeFlags[] = {
-        FD_ISEDITABLE,    // FIELD_roadId
+        FD_ISEDITABLE,    // FIELD_dataId
     };
     return (field >= 0 && field < 1) ? fieldTypeFlags[field] : 0;
 }
@@ -351,7 +351,7 @@ const char *VeinsInetSampleMessageDescriptor::getFieldName(int field) const
         field -= basedesc->getFieldCount();
     }
     static const char *fieldNames[] = {
-        "roadId",
+        "dataId",
     };
     return (field >= 0 && field < 1) ? fieldNames[field] : nullptr;
 }
@@ -360,7 +360,7 @@ int VeinsInetSampleMessageDescriptor::findField(const char *fieldName) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount() : 0;
-    if (fieldName[0] == 'r' && strcmp(fieldName, "roadId") == 0) return base+0;
+    if (fieldName[0] == 'r' && strcmp(fieldName, "dataId") == 0) return base+0;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
@@ -373,7 +373,7 @@ const char *VeinsInetSampleMessageDescriptor::getFieldTypeString(int field) cons
         field -= basedesc->getFieldCount();
     }
     static const char *fieldTypeStrings[] = {
-        "string",    // FIELD_roadId
+        "string",    // FIELD_dataId
     };
     return (field >= 0 && field < 1) ? fieldTypeStrings[field] : nullptr;
 }
@@ -442,7 +442,7 @@ std::string VeinsInetSampleMessageDescriptor::getFieldValueAsString(void *object
     }
     VeinsInetSampleMessage *pp = (VeinsInetSampleMessage *)object; (void)pp;
     switch (field) {
-        case FIELD_roadId: return oppstring2string(pp->getRoadId());
+        case FIELD_dataId: return oppstring2string(pp->getDataId());
         default: return "";
     }
 }
@@ -457,7 +457,7 @@ bool VeinsInetSampleMessageDescriptor::setFieldValueAsString(void *object, int f
     }
     VeinsInetSampleMessage *pp = (VeinsInetSampleMessage *)object; (void)pp;
     switch (field) {
-        case FIELD_roadId: pp->setRoadId((value)); return true;
+        case FIELD_dataId: pp->setDataId((value)); return true;
         default: return false;
     }
 }

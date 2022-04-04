@@ -42,14 +42,14 @@ class VeinsInetSampleMessage;
  * //
  * class VeinsInetSampleMessage extends inet::FieldsChunk
  * {
- *     string roadId;
+ *     string dataId;
  * }
  * </pre>
  */
 class VEINS_INET_API VeinsInetSampleMessage : public ::inet::FieldsChunk
 {
   protected:
-    omnetpp::opp_string roadId;
+    omnetpp::opp_string dataId;
 
   private:
     void copy(const VeinsInetSampleMessage& other);
@@ -68,8 +68,8 @@ class VEINS_INET_API VeinsInetSampleMessage : public ::inet::FieldsChunk
     virtual void parsimUnpack(omnetpp::cCommBuffer *b) override;
 
     // field getter/setter methods
-    virtual const char * getRoadId() const;
-    virtual void setRoadId(const char * roadId);
+    virtual const char * getDataId() const;
+    virtual void setDataId(const char * dataId);
 };
 
 inline void doParsimPacking(omnetpp::cCommBuffer *b, const VeinsInetSampleMessage& obj) {obj.parsimPack(b);}
