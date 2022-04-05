@@ -32,7 +32,10 @@
 
 #include "veins_inet/VeinsInetSampleMessage_m.h"
 
+#include <string>
+
 using namespace inet;
+using namespace std;
 
 Define_Module(VeinsInetSampleApplication);
 
@@ -42,22 +45,28 @@ VeinsInetSampleApplication::VeinsInetSampleApplication()
 
 bool VeinsInetSampleApplication::startApplication()
 {
-    // host[0] requests at t=20s
+    cout << getParentModule()->findSubmodule("cache");
+
+
+    // host[0] requests at t=15s
     if (getParentModule()->getIndex() == 0) {
         auto callback = [this]() {
+            /*
             getParentModule()->getDisplayString().setTagArg("i", 1, "red");
 
             auto payload = makeShared<VeinsInetSampleMessage>();
             timestampPayload(payload);
             payload->setChunkLength(B(100));
-            payload->setDataId(traciVehicle->getRoadId().c_str());
+            payload->setDataId(std::to_string(getParentModule()->getIndex()).c_str());
 
-            auto packet = createPacket("request");
+            auto packet = createPacket("cache request");
             packet->insertAtBack(payload);
             sendPacket(std::move(packet));
+            */
+
 
         };
-        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(20, SIMTIME_S)));
+        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(15, SIMTIME_S)));
     }
 
     return true;
@@ -88,6 +97,5 @@ void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
 
     haveForwarded = true;
 
-
-
+    cout << payload->getDataId() << endl;
 }

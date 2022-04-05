@@ -22,8 +22,14 @@
 
 package v2v_caching.veins_inet;
 
+import inet.examples.ethernet.lans.cable;
 import inet.networklayer.configurator.ipv4.HostAutoConfigurator;
+import inet.networklayer.xmipv6.BindingCache;
 import inet.node.inet.AdhocHost;
+import inet.physicallayer.common.packetlevel.MediumLimitCache;
+import inet.physicallayer.contract.packetlevel.ICommunicationCache;
+import inet.physicallayer.contract.packetlevel.IMediumLimitCache;
+
 
 //
 // Wireless-enabled Host
@@ -35,5 +41,9 @@ module VeinsInetCar extends AdhocHost
 
     submodules:
 
+        cache: Cache {
+            @display("p=996.1539,84.61539");
+        }
+    connections:
 }
 
