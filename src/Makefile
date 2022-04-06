@@ -36,11 +36,11 @@ OBJS = \
     $O/veins_inet/VeinsInetManager.o \
     $O/veins_inet/VeinsInetMobility.o \
     $O/veins_inet/VeinsInetSampleApplication.o \
-    $O/veins_inet/VeinsInetSampleMessage_m.o
+    $O/veins_inet/dataRequest_m.o
 
 # Message files
 MSGFILES = \
-    veins_inet/VeinsInetSampleMessage.msg
+    veins_inet/dataRequest.msg
 
 # SM files
 SMFILES =

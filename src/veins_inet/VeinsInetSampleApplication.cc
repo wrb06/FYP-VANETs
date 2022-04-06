@@ -21,6 +21,7 @@
 //
 
 #include "veins_inet/VeinsInetSampleApplication.h"
+#include "veins_inet/Cache.h"
 
 #include "inet/common/ModuleAccess.h"
 #include "inet/common/packet/Packet.h"
@@ -45,16 +46,28 @@ VeinsInetSampleApplication::VeinsInetSampleApplication()
 
 bool VeinsInetSampleApplication::startApplication()
 {
-    cout << getParentModule()->findSubmodule("cache");
+    if (getParentModule()->getIndex() == 1) {
+        Cache* cache = (Cache*)(getParentModule()->getSubmodule("cache"));
+        cache->refer("test/data1", "testData1");
+        cache->refer("test/data2", "testData2");
+        cache->display();
 
+    }
+
+    if (getParentModule()->getIndex() == 2) {
+        Cache* cache = (Cache*)(getParentModule()->getSubmodule("cache"));
+        cache->refer("test/data3", "testData3");
+        cache->display();
+        cout << cache->getCacheSize();
+    }
 
     // host[0] requests at t=15s
     if (getParentModule()->getIndex() == 0) {
         auto callback = [this]() {
-            /*
+
             getParentModule()->getDisplayString().setTagArg("i", 1, "red");
 
-            auto payload = makeShared<VeinsInetSampleMessage>();
+            auto payload = makeShared<dataRequest>();
             timestampPayload(payload);
             payload->setChunkLength(B(100));
             payload->setDataId(std::to_string(getParentModule()->getIndex()).c_str());
@@ -62,7 +75,7 @@ bool VeinsInetSampleApplication::startApplication()
             auto packet = createPacket("cache request");
             packet->insertAtBack(payload);
             sendPacket(std::move(packet));
-            */
+
 
 
         };
@@ -83,7 +96,7 @@ VeinsInetSampleApplication::~VeinsInetSampleApplication()
 
 void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
 {
-    auto payload = pk->peekAtFront<VeinsInetSampleMessage>();
+    auto payload = pk->peekAtFront<dataRequest>();
 
     EV_INFO << "Received packet: " << payload << endl;
 

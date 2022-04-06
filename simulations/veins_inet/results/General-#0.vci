@@ -1,15 +1,15 @@
-file 3378 1649179345                                            
+file 16744 1649262536                                           
 version 2
-run General-0-20220405-18:22:20-504
+run General-0-20220406-17:28:41-13784
 attr configname General
-attr datetime 20220405-18:22:20
+attr datetime 20220406-17:28:41
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network Scenario
-attr processid 504
+attr processid 13784
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -62,13 +62,61 @@ attr title "Radio reception state, vector"
 vector 3 Scenario.node[0].wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
 attr interpolationmode sample-hold
 attr title "contention window, vector"
-0	2893 33 2 2 0.1 0.1 3 0 2 2 4
-1	2926 11 2 2 0.1 0.1 1 3 3 3 9
-2	2937 11 2 2 0.1 0.1 1 1 1 1 1
-3	2948 12 2 2 0.1 0.1 1 15 15 15 225
-vector 4 Scenario.node[0].app[0] throughput:vector ETV
+vector 4 Scenario.node[1].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 5 Scenario.node[1].wlan[0].radio radioChannel:vector ETV
+attr interpolationmode sample-hold
+attr source radioChannelChanged
+attr title "Radio channel, vector"
+vector 6 Scenario.node[1].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 7 Scenario.node[1].wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
+attr interpolationmode sample-hold
+attr title "contention window, vector"
+vector 8 Scenario.node[2].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 9 Scenario.node[2].wlan[0].radio radioChannel:vector ETV
+attr interpolationmode sample-hold
+attr source radioChannelChanged
+attr title "Radio channel, vector"
+vector 10 Scenario.node[2].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 11 Scenario.node[2].wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
+attr interpolationmode sample-hold
+attr title "contention window, vector"
+vector 12 Scenario.node[0].app[0] throughput:vector ETV
 attr source throughput(packetReceived)
 attr title "throughput, vector"
 attr unit bps
-4	3104 272 27 27 0.1 2.3 23 0 0 0 0
+3	4414 12 2 2 0.1 0.1 1 15 15 15 225
+2	4426 11 2 2 0.1 0.1 1 1 1 1 1
+0	4437 33 2 2 0.1 0.1 3 0 2 2 4
+1	4470 11 2 2 0.1 0.1 1 3 3 3 9
+12	4481 3661 265 265 0.1 25.4 254 0 0 0 0
+4	8142 36 55 55 5.1 5.1 3 0 2 2 4
+5	8178 12 55 55 5.1 5.1 1 3 3 3 9
+6	8190 12 55 55 5.1 5.1 1 1 1 1 1
+7	8202 13 55 55 5.1 5.1 1 15 15 15 225
+8	8215 42 108 108 10.1 10.1 3 0 2 2 4
+9	8257 14 108 108 10.1 10.1 1 3 3 3 9
+10	8271 15 108 108 10.1 10.1 1 1 1 1 1
+11	8286 16 108 108 10.1 10.1 1 15 15 15 225
+vector 13 Scenario.node[1].app[0] throughput:vector ETV
+attr source throughput(packetReceived)
+attr title "throughput, vector"
+attr unit bps
+13	8447 4075 293 293 0.1 28.2 282 0 0 0 0
+vector 14 Scenario.node[2].app[0] throughput:vector ETV
+attr source throughput(packetReceived)
+attr title "throughput, vector"
+attr unit bps
+14	12667 4075 293 293 0.1 28.2 282 0 0 0 0
 

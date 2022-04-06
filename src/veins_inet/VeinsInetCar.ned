@@ -42,7 +42,7 @@ module VeinsInetCar extends AdhocHost
     submodules:
 
         cache: Cache {
-            @display("p=996.1539,84.61539");
+            @display("p=248.3,75.4");
         }
     connections:
 }

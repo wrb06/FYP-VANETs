@@ -35,7 +35,7 @@ void Cache::handleMessage(cMessage *msg)
 
 Cache::Cache()
 {
-    csize = 10;
+    csize = 1000;
 }
 
 Cache::Cache(int n)
@@ -43,15 +43,17 @@ Cache::Cache(int n)
     csize = n;
 }
 
+
+
 // Refers key x with in the LRU cache
-void Cache::refer(int x)
+void Cache::refer(string name, string data)
 {
     // not present in cache
-    if (hashmap.find(x) == hashmap.end()) {
+    if (hashmap.find(name) == hashmap.end()) {
         // cache is full
         if (keys.size() == csize) {
             // delete least recently used element
-            int last = keys.back();
+            string last = keys.back();
 
             // Pops the last element
             keys.pop_back();
@@ -62,12 +64,13 @@ void Cache::refer(int x)
     }
 
     // present in cache
-    else
-        keys.erase(hashmap[x]);
+    else{
+        keys.remove(name);
+    }
 
     // update reference
-    keys.push_front(x);
-    hashmap[x] = keys.begin();
+    keys.push_front(name);
+    hashmap[name] = data;
 }
 
 
@@ -76,8 +79,19 @@ void Cache::display()
 
     // Iterate in the deque and print
     // all the elements in it
-    for (auto it = keys.begin(); it != keys.end(); it++)
-        cout << (*it) << " ";
+    cout << this->getFullPath() << endl;
+    for (auto it = keys.begin(); it != keys.end(); it++){
+        cout << "    " << (*it) << " ";
+        cout << "    " << hashmap[(*it)] << endl;
+    }
 
     cout << endl;
+}
+
+void Cache::setCacheSize(int n){
+    csize = n;
+}
+
+int Cache::getCacheSize(){
+    return csize;
 }

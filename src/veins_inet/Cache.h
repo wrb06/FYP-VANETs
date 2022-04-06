@@ -32,15 +32,17 @@ class Cache : public cSimpleModule
     virtual void handleMessage(cMessage *msg);
 
   private:
-    list<int> keys;
-    unordered_map<int, list<int>::iterator> hashmap;
+    list<string> keys;
+    unordered_map<string, string> hashmap;
     int csize = 0;
 
   public:
       Cache();
       Cache(int n);
-      void refer(int);
+      void refer(string name, string data);
       void display();
+      int getCacheSize();
+      void setCacheSize(int n);
 };
 
 #endif
