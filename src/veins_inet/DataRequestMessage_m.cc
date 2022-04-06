@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by nedtool 5.6 from veins_inet/VeinsInetSampleMessage.msg.
+// Generated file, do not edit! Created by nedtool 5.6 from veins_inet/DataRequestMessage.msg.
 //
 
 // Disable warnings about unused variables, empty switch stmts, etc:
@@ -27,7 +27,7 @@
 #include <iostream>
 #include <sstream>
 #include <memory>
-#include "VeinsInetSampleMessage_m.h"
+#include "DataRequestMessage_m.h"
 
 namespace omnetpp {
 
@@ -206,22 +206,22 @@ inline std::ostream& operator<<(std::ostream& out, const std::vector<T,A>& vec)
     return out;
 }
 
-Register_Class(VeinsInetSampleMessage)
+Register_Class(DataRequestMessage)
 
-VeinsInetSampleMessage::VeinsInetSampleMessage() : ::inet::FieldsChunk()
+DataRequestMessage::DataRequestMessage() : ::inet::FieldsChunk()
 {
 }
 
-VeinsInetSampleMessage::VeinsInetSampleMessage(const VeinsInetSampleMessage& other) : ::inet::FieldsChunk(other)
+DataRequestMessage::DataRequestMessage(const DataRequestMessage& other) : ::inet::FieldsChunk(other)
 {
     copy(other);
 }
 
-VeinsInetSampleMessage::~VeinsInetSampleMessage()
+DataRequestMessage::~DataRequestMessage()
 {
 }
 
-VeinsInetSampleMessage& VeinsInetSampleMessage::operator=(const VeinsInetSampleMessage& other)
+DataRequestMessage& DataRequestMessage::operator=(const DataRequestMessage& other)
 {
     if (this == &other) return *this;
     ::inet::FieldsChunk::operator=(other);
@@ -229,44 +229,74 @@ VeinsInetSampleMessage& VeinsInetSampleMessage::operator=(const VeinsInetSampleM
     return *this;
 }
 
-void VeinsInetSampleMessage::copy(const VeinsInetSampleMessage& other)
+void DataRequestMessage::copy(const DataRequestMessage& other)
 {
+    this->sourceAddress = other.sourceAddress;
+    this->destinationAddress = other.destinationAddress;
     this->dataId = other.dataId;
 }
 
-void VeinsInetSampleMessage::parsimPack(omnetpp::cCommBuffer *b) const
+void DataRequestMessage::parsimPack(omnetpp::cCommBuffer *b) const
 {
     ::inet::FieldsChunk::parsimPack(b);
+    doParsimPacking(b,this->sourceAddress);
+    doParsimPacking(b,this->destinationAddress);
     doParsimPacking(b,this->dataId);
 }
 
-void VeinsInetSampleMessage::parsimUnpack(omnetpp::cCommBuffer *b)
+void DataRequestMessage::parsimUnpack(omnetpp::cCommBuffer *b)
 {
     ::inet::FieldsChunk::parsimUnpack(b);
+    doParsimUnpacking(b,this->sourceAddress);
+    doParsimUnpacking(b,this->destinationAddress);
     doParsimUnpacking(b,this->dataId);
 }
 
-const char * VeinsInetSampleMessage::getDataId() const
+int DataRequestMessage::getSourceAddress() const
+{
+    return this->sourceAddress;
+}
+
+void DataRequestMessage::setSourceAddress(int sourceAddress)
+{
+    handleChange();
+    this->sourceAddress = sourceAddress;
+}
+
+int DataRequestMessage::getDestinationAddress() const
+{
+    return this->destinationAddress;
+}
+
+void DataRequestMessage::setDestinationAddress(int destinationAddress)
+{
+    handleChange();
+    this->destinationAddress = destinationAddress;
+}
+
+const char * DataRequestMessage::getDataId() const
 {
     return this->dataId.c_str();
 }
 
-void VeinsInetSampleMessage::setDataId(const char * dataId)
+void DataRequestMessage::setDataId(const char * dataId)
 {
     handleChange();
     this->dataId = dataId;
 }
 
-class VeinsInetSampleMessageDescriptor : public omnetpp::cClassDescriptor
+class DataRequestMessageDescriptor : public omnetpp::cClassDescriptor
 {
   private:
     mutable const char **propertynames;
     enum FieldConstants {
+        FIELD_sourceAddress,
+        FIELD_destinationAddress,
         FIELD_dataId,
     };
   public:
-    VeinsInetSampleMessageDescriptor();
-    virtual ~VeinsInetSampleMessageDescriptor();
+    DataRequestMessageDescriptor();
+    virtual ~DataRequestMessageDescriptor();
 
     virtual bool doesSupport(omnetpp::cObject *obj) const override;
     virtual const char **getPropertyNames() const override;
@@ -288,24 +318,24 @@ class VeinsInetSampleMessageDescriptor : public omnetpp::cClassDescriptor
     virtual void *getFieldStructValuePointer(void *object, int field, int i) const override;
 };
 
-Register_ClassDescriptor(VeinsInetSampleMessageDescriptor)
+Register_ClassDescriptor(DataRequestMessageDescriptor)
 
-VeinsInetSampleMessageDescriptor::VeinsInetSampleMessageDescriptor() : omnetpp::cClassDescriptor(omnetpp::opp_typename(typeid(VeinsInetSampleMessage)), "inet::FieldsChunk")
+DataRequestMessageDescriptor::DataRequestMessageDescriptor() : omnetpp::cClassDescriptor(omnetpp::opp_typename(typeid(DataRequestMessage)), "inet::FieldsChunk")
 {
     propertynames = nullptr;
 }
 
-VeinsInetSampleMessageDescriptor::~VeinsInetSampleMessageDescriptor()
+DataRequestMessageDescriptor::~DataRequestMessageDescriptor()
 {
     delete[] propertynames;
 }
 
-bool VeinsInetSampleMessageDescriptor::doesSupport(omnetpp::cObject *obj) const
+bool DataRequestMessageDescriptor::doesSupport(omnetpp::cObject *obj) const
 {
-    return dynamic_cast<VeinsInetSampleMessage *>(obj)!=nullptr;
+    return dynamic_cast<DataRequestMessage *>(obj)!=nullptr;
 }
 
-const char **VeinsInetSampleMessageDescriptor::getPropertyNames() const
+const char **DataRequestMessageDescriptor::getPropertyNames() const
 {
     if (!propertynames) {
         static const char *names[] = {  nullptr };
@@ -316,19 +346,19 @@ const char **VeinsInetSampleMessageDescriptor::getPropertyNames() const
     return propertynames;
 }
 
-const char *VeinsInetSampleMessageDescriptor::getProperty(const char *propertyname) const
+const char *DataRequestMessageDescriptor::getProperty(const char *propertyname) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     return basedesc ? basedesc->getProperty(propertyname) : nullptr;
 }
 
-int VeinsInetSampleMessageDescriptor::getFieldCount() const
+int DataRequestMessageDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 1+basedesc->getFieldCount() : 1;
+    return basedesc ? 3+basedesc->getFieldCount() : 3;
 }
 
-unsigned int VeinsInetSampleMessageDescriptor::getFieldTypeFlags(int field) const
+unsigned int DataRequestMessageDescriptor::getFieldTypeFlags(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -337,12 +367,14 @@ unsigned int VeinsInetSampleMessageDescriptor::getFieldTypeFlags(int field) cons
         field -= basedesc->getFieldCount();
     }
     static unsigned int fieldTypeFlags[] = {
+        FD_ISEDITABLE,    // FIELD_sourceAddress
+        FD_ISEDITABLE,    // FIELD_destinationAddress
         FD_ISEDITABLE,    // FIELD_dataId
     };
-    return (field >= 0 && field < 1) ? fieldTypeFlags[field] : 0;
+    return (field >= 0 && field < 3) ? fieldTypeFlags[field] : 0;
 }
 
-const char *VeinsInetSampleMessageDescriptor::getFieldName(int field) const
+const char *DataRequestMessageDescriptor::getFieldName(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -351,20 +383,24 @@ const char *VeinsInetSampleMessageDescriptor::getFieldName(int field) const
         field -= basedesc->getFieldCount();
     }
     static const char *fieldNames[] = {
+        "sourceAddress",
+        "destinationAddress",
         "dataId",
     };
-    return (field >= 0 && field < 1) ? fieldNames[field] : nullptr;
+    return (field >= 0 && field < 3) ? fieldNames[field] : nullptr;
 }
 
-int VeinsInetSampleMessageDescriptor::findField(const char *fieldName) const
+int DataRequestMessageDescriptor::findField(const char *fieldName) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount() : 0;
-    if (fieldName[0] == 'd' && strcmp(fieldName, "dataId") == 0) return base+0;
+    if (fieldName[0] == 's' && strcmp(fieldName, "sourceAddress") == 0) return base+0;
+    if (fieldName[0] == 'd' && strcmp(fieldName, "destinationAddress") == 0) return base+1;
+    if (fieldName[0] == 'd' && strcmp(fieldName, "dataId") == 0) return base+2;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
-const char *VeinsInetSampleMessageDescriptor::getFieldTypeString(int field) const
+const char *DataRequestMessageDescriptor::getFieldTypeString(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -373,12 +409,14 @@ const char *VeinsInetSampleMessageDescriptor::getFieldTypeString(int field) cons
         field -= basedesc->getFieldCount();
     }
     static const char *fieldTypeStrings[] = {
+        "int",    // FIELD_sourceAddress
+        "int",    // FIELD_destinationAddress
         "string",    // FIELD_dataId
     };
-    return (field >= 0 && field < 1) ? fieldTypeStrings[field] : nullptr;
+    return (field >= 0 && field < 3) ? fieldTypeStrings[field] : nullptr;
 }
 
-const char **VeinsInetSampleMessageDescriptor::getFieldPropertyNames(int field) const
+const char **DataRequestMessageDescriptor::getFieldPropertyNames(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -391,7 +429,7 @@ const char **VeinsInetSampleMessageDescriptor::getFieldPropertyNames(int field) 
     }
 }
 
-const char *VeinsInetSampleMessageDescriptor::getFieldProperty(int field, const char *propertyname) const
+const char *DataRequestMessageDescriptor::getFieldProperty(int field, const char *propertyname) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -404,7 +442,7 @@ const char *VeinsInetSampleMessageDescriptor::getFieldProperty(int field, const 
     }
 }
 
-int VeinsInetSampleMessageDescriptor::getFieldArraySize(void *object, int field) const
+int DataRequestMessageDescriptor::getFieldArraySize(void *object, int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -412,13 +450,13 @@ int VeinsInetSampleMessageDescriptor::getFieldArraySize(void *object, int field)
             return basedesc->getFieldArraySize(object, field);
         field -= basedesc->getFieldCount();
     }
-    VeinsInetSampleMessage *pp = (VeinsInetSampleMessage *)object; (void)pp;
+    DataRequestMessage *pp = (DataRequestMessage *)object; (void)pp;
     switch (field) {
         default: return 0;
     }
 }
 
-const char *VeinsInetSampleMessageDescriptor::getFieldDynamicTypeString(void *object, int field, int i) const
+const char *DataRequestMessageDescriptor::getFieldDynamicTypeString(void *object, int field, int i) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -426,13 +464,13 @@ const char *VeinsInetSampleMessageDescriptor::getFieldDynamicTypeString(void *ob
             return basedesc->getFieldDynamicTypeString(object,field,i);
         field -= basedesc->getFieldCount();
     }
-    VeinsInetSampleMessage *pp = (VeinsInetSampleMessage *)object; (void)pp;
+    DataRequestMessage *pp = (DataRequestMessage *)object; (void)pp;
     switch (field) {
         default: return nullptr;
     }
 }
 
-std::string VeinsInetSampleMessageDescriptor::getFieldValueAsString(void *object, int field, int i) const
+std::string DataRequestMessageDescriptor::getFieldValueAsString(void *object, int field, int i) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -440,14 +478,16 @@ std::string VeinsInetSampleMessageDescriptor::getFieldValueAsString(void *object
             return basedesc->getFieldValueAsString(object,field,i);
         field -= basedesc->getFieldCount();
     }
-    VeinsInetSampleMessage *pp = (VeinsInetSampleMessage *)object; (void)pp;
+    DataRequestMessage *pp = (DataRequestMessage *)object; (void)pp;
     switch (field) {
+        case FIELD_sourceAddress: return long2string(pp->getSourceAddress());
+        case FIELD_destinationAddress: return long2string(pp->getDestinationAddress());
         case FIELD_dataId: return oppstring2string(pp->getDataId());
         default: return "";
     }
 }
 
-bool VeinsInetSampleMessageDescriptor::setFieldValueAsString(void *object, int field, int i, const char *value) const
+bool DataRequestMessageDescriptor::setFieldValueAsString(void *object, int field, int i, const char *value) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -455,14 +495,16 @@ bool VeinsInetSampleMessageDescriptor::setFieldValueAsString(void *object, int f
             return basedesc->setFieldValueAsString(object,field,i,value);
         field -= basedesc->getFieldCount();
     }
-    VeinsInetSampleMessage *pp = (VeinsInetSampleMessage *)object; (void)pp;
+    DataRequestMessage *pp = (DataRequestMessage *)object; (void)pp;
     switch (field) {
+        case FIELD_sourceAddress: pp->setSourceAddress(string2long(value)); return true;
+        case FIELD_destinationAddress: pp->setDestinationAddress(string2long(value)); return true;
         case FIELD_dataId: pp->setDataId((value)); return true;
         default: return false;
     }
 }
 
-const char *VeinsInetSampleMessageDescriptor::getFieldStructName(int field) const
+const char *DataRequestMessageDescriptor::getFieldStructName(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -475,7 +517,7 @@ const char *VeinsInetSampleMessageDescriptor::getFieldStructName(int field) cons
     };
 }
 
-void *VeinsInetSampleMessageDescriptor::getFieldStructValuePointer(void *object, int field, int i) const
+void *DataRequestMessageDescriptor::getFieldStructValuePointer(void *object, int field, int i) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -483,7 +525,7 @@ void *VeinsInetSampleMessageDescriptor::getFieldStructValuePointer(void *object,
             return basedesc->getFieldStructValuePointer(object, field, i);
         field -= basedesc->getFieldCount();
     }
-    VeinsInetSampleMessage *pp = (VeinsInetSampleMessage *)object; (void)pp;
+    DataRequestMessage *pp = (DataRequestMessage *)object; (void)pp;
     switch (field) {
         default: return nullptr;
     }
