@@ -22,6 +22,8 @@
 
 #include "veins_inet/VeinsInetSampleApplication.h"
 #include "veins_inet/Cache.h"
+#include "veins_inet/DataRequestMessage_m.h"
+#include "veins_inet/DataReplyMessage_m.h"
 
 #include "inet/common/ModuleAccess.h"
 #include "inet/common/packet/Packet.h"
@@ -31,7 +33,7 @@
 #include "inet/networklayer/common/L3AddressTag_m.h"
 #include "inet/transportlayer/contract/udp/UdpControlInfo_m.h"
 
-#include "veins_inet/VeinsInetSampleMessage_m.h"
+
 
 #include <string>
 
@@ -46,6 +48,8 @@ VeinsInetSampleApplication::VeinsInetSampleApplication()
 
 bool VeinsInetSampleApplication::startApplication()
 {
+    cout << "running";
+
     if (getParentModule()->getIndex() == 1) {
         Cache* cache = (Cache*)(getParentModule()->getSubmodule("cache"));
         cache->refer("test/data1", "testData1");
@@ -58,7 +62,6 @@ bool VeinsInetSampleApplication::startApplication()
         Cache* cache = (Cache*)(getParentModule()->getSubmodule("cache"));
         cache->refer("test/data3", "testData3");
         cache->display();
-        cout << cache->getCacheSize();
     }
 
     // host[0] requests at t=15s
@@ -67,14 +70,13 @@ bool VeinsInetSampleApplication::startApplication()
 
             getParentModule()->getDisplayString().setTagArg("i", 1, "red");
 
-            auto payload = makeShared<dataRequest>();
-            timestampPayload(payload);
-            payload->setChunkLength(B(100));
-            payload->setDataId(std::to_string(getParentModule()->getIndex()).c_str());
+            auto sendPayload = makeShared<DataRequestMessage>();
+            timestampPayload(sendPayload);
+            sendPayload->setChunkLength(B(100));
 
-            auto packet = createPacket("cache request");
-            packet->insertAtBack(payload);
-            sendPacket(std::move(packet));
+            auto sendingPacket = createPacket("cache request");
+            sendingPacket->insertAtBack(sendPayload);
+            sendPacket(std::move(sendingPacket));
 
 
 
@@ -96,19 +98,23 @@ VeinsInetSampleApplication::~VeinsInetSampleApplication()
 
 void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
 {
-    auto payload = pk->peekAtFront<dataRequest>();
+    //
+    // To Do: better packet detection
+    //
+    if (!strcmp(pk->getName(), "cache request"))
+    {
+        auto payloadReceived = pk->peekAtFront<DataRequestMessage>();
 
-    EV_INFO << "Received packet: " << payload << endl;
+        EV_INFO << "Received packet: " << payloadReceived << endl;
 
-    getParentModule()->getDisplayString().setTagArg("i", 1, "green");
+        getParentModule()->getDisplayString().setTagArg("i", 1, "green");
 
-    if (haveForwarded ) return;
+        auto replyPayload = makeShared<DataReplyMessage>();
+        timestampPayload(replyPayload);
+        replyPayload->setChunkLength(B(100));
 
-    auto packet = createPacket("reply");
-    packet->insertAtBack(payload);
-    sendPacket(std::move(packet));
-
-    haveForwarded = true;
-
-    cout << payload->getDataId() << endl;
+        auto replyPacket = createPacket("reply");
+        replyPacket->insertAtBack(replyPayload);
+        sendPacket(std::move(replyPacket));
+    }
 }
