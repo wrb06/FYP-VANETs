@@ -12,11 +12,21 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-import inet.common.INETDefs;
-import inet.common.packet.chunk.Chunk;
 
-class DataReplyMessage extends inet::FieldsChunk{
-    string requesterAddress;
-    string dataId;
-    string data;
-}
+#ifndef VEINS_INET_CLASSIFIERS_CARCLASSIFIER_H_
+#define VEINS_INET_CLASSIFIERS_CARCLASSIFIER_H_
+
+#include "inet/queueing/contract/IPacketClassifierFunction.h"
+
+using namespace inet;
+
+class CarClassifier : public inet::queueing::IPacketClassifierFunction, public cObject{
+public:
+    CarClassifier();
+    virtual ~CarClassifier();
+
+    virtual int classifyPacket(Packet *packet) const;
+};
+
+
+#endif /* VEINS_INET_CLASSIFIERS_CARCLASSIFIER_H_ */

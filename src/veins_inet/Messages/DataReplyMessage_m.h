@@ -28,7 +28,7 @@ class DataReplyMessage;
  * <pre>
  * class DataReplyMessage extends inet::FieldsChunk
  * {
- *     int requesterAddress;
+ *     string requesterAddress;
  *     string dataId;
  *     string data;
  * }
@@ -37,7 +37,7 @@ class DataReplyMessage;
 class DataReplyMessage : public ::inet::FieldsChunk
 {
   protected:
-    int requesterAddress = 0;
+    omnetpp::opp_string requesterAddress;
     omnetpp::opp_string dataId;
     omnetpp::opp_string data;
 
@@ -58,8 +58,8 @@ class DataReplyMessage : public ::inet::FieldsChunk
     virtual void parsimUnpack(omnetpp::cCommBuffer *b) override;
 
     // field getter/setter methods
-    virtual int getRequesterAddress() const;
-    virtual void setRequesterAddress(int requesterAddress);
+    virtual const char * getRequesterAddress() const;
+    virtual void setRequesterAddress(const char * requesterAddress);
     virtual const char * getDataId() const;
     virtual void setDataId(const char * dataId);
     virtual const char * getData() const;

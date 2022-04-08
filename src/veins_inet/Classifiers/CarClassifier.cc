@@ -12,11 +12,21 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-import inet.common.INETDefs;
-import inet.common.packet.chunk.Chunk;
 
-class DataReplyMessage extends inet::FieldsChunk{
-    string requesterAddress;
-    string dataId;
-    string data;
+#include "CarClassifier.h"
+
+Register_Class(CarClassifier);
+
+CarClassifier::CarClassifier() {
+    // TODO Auto-generated constructor stub
+
+}
+
+CarClassifier::~CarClassifier() {
+    // TODO Auto-generated destructor stub
+
+}
+
+int CarClassifier::classifyPacket(Packet *packet) const {
+    return 0;
 }

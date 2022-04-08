@@ -249,12 +249,12 @@ void DataRequestMessage::parsimUnpack(omnetpp::cCommBuffer *b)
     doParsimUnpacking(b,this->dataId);
 }
 
-int DataRequestMessage::getRequesterAddress() const
+const char * DataRequestMessage::getRequesterAddress() const
 {
-    return this->requesterAddress;
+    return this->requesterAddress.c_str();
 }
 
-void DataRequestMessage::setRequesterAddress(int requesterAddress)
+void DataRequestMessage::setRequesterAddress(const char * requesterAddress)
 {
     handleChange();
     this->requesterAddress = requesterAddress;
@@ -391,7 +391,7 @@ const char *DataRequestMessageDescriptor::getFieldTypeString(int field) const
         field -= basedesc->getFieldCount();
     }
     static const char *fieldTypeStrings[] = {
-        "int",    // FIELD_requesterAddress
+        "string",    // FIELD_requesterAddress
         "string",    // FIELD_dataId
     };
     return (field >= 0 && field < 2) ? fieldTypeStrings[field] : nullptr;
@@ -461,7 +461,7 @@ std::string DataRequestMessageDescriptor::getFieldValueAsString(void *object, in
     }
     DataRequestMessage *pp = (DataRequestMessage *)object; (void)pp;
     switch (field) {
-        case FIELD_requesterAddress: return long2string(pp->getRequesterAddress());
+        case FIELD_requesterAddress: return oppstring2string(pp->getRequesterAddress());
         case FIELD_dataId: return oppstring2string(pp->getDataId());
         default: return "";
     }
@@ -477,7 +477,7 @@ bool DataRequestMessageDescriptor::setFieldValueAsString(void *object, int field
     }
     DataRequestMessage *pp = (DataRequestMessage *)object; (void)pp;
     switch (field) {
-        case FIELD_requesterAddress: pp->setRequesterAddress(string2long(value)); return true;
+        case FIELD_requesterAddress: pp->setRequesterAddress((value)); return true;
         case FIELD_dataId: pp->setDataId((value)); return true;
         default: return false;
     }

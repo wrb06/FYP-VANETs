@@ -29,6 +29,9 @@ import inet.node.inet.AdhocHost;
 import inet.physicallayer.common.packetlevel.MediumLimitCache;
 import inet.physicallayer.contract.packetlevel.ICommunicationCache;
 import inet.physicallayer.contract.packetlevel.IMediumLimitCache;
+import inet.queueing.classifier.ContentBasedClassifier;
+import inet.queueing.classifier.PacketClassifier;
+import inet.queueing.filter.PacketFilter;
 import v2v_caching.veins_inet.Cache.Cache;
 
 
@@ -42,8 +45,12 @@ module VeinsInetCar extends AdhocHost
 
     submodules:
 
+        packetClassifier: PacketClassifier {
+            @display("p=749.2308,80.76923");
+            classifierClass = "CarClassifier";
+        }
         cache: Cache {
-            @display("p=248.3,75.4");
+            @display("p=983.07697,80.76923");
         }
     connections:
 }

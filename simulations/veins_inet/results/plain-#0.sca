@@ -1,33 +1,19 @@
 version 2
-run canvas-0-20220407-00:54:24-15056
-attr configname canvas
-attr datetime 20220407-00:54:24
-attr experiment canvas
+run plain-0-20220408-18:00:41-9500
+attr configname plain
+attr datetime 20220408-18:00:41
+attr experiment plain
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network Scenario
-attr processid 15056
+attr processid 9500
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
-param *.visualizer.*.obstacleLossVisualizer.displayIntersections true
-param *.visualizer.*.obstacleLossVisualizer.displayFaceNormalVectors true
-param *.visualizer.*.obstacleLossVisualizer.intersectionLineColor "\"yellow\""
-param *.visualizer.*.mediumVisualizer.signalPropagationAnimationSpeed 500/3e8
-param *.visualizer.*.mediumVisualizer.signalTransmissionAnimationSpeed 50000/3e8
-param *.visualizer.*.mediumVisualizer.displaySignals true
-param *.visualizer.canvasVisualizer.mediumVisualizer.displaySignalDepartures false
-param *.visualizer.canvasVisualizer.mediumVisualizer.displaySignalArrivals false
-param *.visualizer.*.physicalLinkVisualizer.displayLinks true
-param *.visualizer.*.mobilityVisualizer.displayPositions true
-param *.visualizer.*.mobilityVisualizer.displayOrientations true
-param *.visualizer.*.mobilityVisualizer.displayVelocities true
-param *.visualizer.*.mobilityVisualizer.displayMovementTrails true
-param *.visualizer.*.mobilityVisualizer.moduleFilter "\"**.antenna.mobility\""
 param *.node[*].numApps 1
 param *.node[*].app[0].typename "\"v2v_caching.veins_inet.VeinsInetSampleApplication\""
 param *.node[*].app[0].interface "\"wlan0\""
@@ -60,25 +46,6 @@ param *.manager.moduleType "\"v2v_caching.veins_inet.VeinsInetCar\""
 param *.physicalEnvironment.config "xmldoc(\"obstacles.xml\")"
 param *.radioMedium.obstacleLoss.typename "\"IdealObstacleLoss\""
 
-scalar Scenario.radioMedium.propagation "Arrival computation count" 6
-scalar Scenario.radioMedium "transmission count" 3
-scalar Scenario.radioMedium "signal send count" 6
-scalar Scenario.radioMedium "reception computation count" 6
-scalar Scenario.radioMedium "interference computation count" 24
-scalar Scenario.radioMedium "reception decision computation count" 4
-scalar Scenario.radioMedium "listening decision computation count" 14
-scalar Scenario.radioMedium "reception cache hit" 83.333333333333
-attr unit %
-scalar Scenario.radioMedium "interference cache hit" 66.666666666667
-attr unit %
-scalar Scenario.radioMedium "noise cache hit" 0
-attr unit %
-scalar Scenario.radioMedium "snir cache hit" 50
-attr unit %
-scalar Scenario.radioMedium "reception decision cache hit" 50
-attr unit %
-scalar Scenario.radioMedium "reception result cache hit" 0
-attr unit %
 scalar Scenario.node[0].lo[0].lo rcvdPkFromHl:count 2
 attr interpolationmode none
 attr source packetReceivedFromUpper
@@ -283,7 +250,7 @@ scalar Scenario.node[0].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLeng
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, max"
-scalar Scenario.node[0].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 0.0001178305761194
+scalar Scenario.node[0].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 7.5910082692308e-005
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, timeavg"
@@ -902,6 +869,18 @@ scalar Scenario.node[0].app[0] packetSent:sum(packetBytes) 200
 attr interpolationmode none
 attr source packetSent
 attr title "packets sent, sum(packetBytes)"
+scalar Scenario.node[0].packetClassifier packetPushed:count 0
+attr interpolationmode none
+attr title "packets pushed, count"
+scalar Scenario.node[0].packetClassifier packetPushed:sum(packetBytes) 0
+attr interpolationmode none
+attr title "packets pushed, sum(packetBytes)"
+scalar Scenario.node[0].packetClassifier packetDropped:count 0
+attr interpolationmode none
+attr title "packets dropped, count"
+scalar Scenario.node[0].packetClassifier packetDropped:sum(packetBytes) 0
+attr interpolationmode none
+attr title "packets dropped, sum(packetBytes)"
 scalar Scenario.node[1].lo[0].lo rcvdPkFromHl:count 1
 attr interpolationmode none
 attr source packetReceivedFromUpper
@@ -993,7 +972,7 @@ scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:m
 attr interpolationmode sample-hold
 attr source "count(packetPushed) - count(packetPopped) - count(packetRemoved) - count(packetDropped)"
 attr title "queue length, max"
-scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:timeavg 1.2537598302844e-005
+scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:timeavg 5.4545993744752e-006
 attr interpolationmode sample-hold
 attr source "count(packetPushed) - count(packetPopped) - count(packetRemoved) - count(packetDropped)"
 attr title "queue length, timeavg"
@@ -1085,7 +1064,7 @@ scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLeng
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, max"
-scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 2.2687367088337e-005
+scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 9.8702812779566e-006
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, timeavg"
@@ -1704,6 +1683,18 @@ scalar Scenario.node[1].app[0] packetSent:sum(packetBytes) 100
 attr interpolationmode none
 attr source packetSent
 attr title "packets sent, sum(packetBytes)"
+scalar Scenario.node[1].packetClassifier packetPushed:count 0
+attr interpolationmode none
+attr title "packets pushed, count"
+scalar Scenario.node[1].packetClassifier packetPushed:sum(packetBytes) 0
+attr interpolationmode none
+attr title "packets pushed, sum(packetBytes)"
+scalar Scenario.node[1].packetClassifier packetDropped:count 0
+attr interpolationmode none
+attr title "packets dropped, count"
+scalar Scenario.node[1].packetClassifier packetDropped:sum(packetBytes) 0
+attr interpolationmode none
+attr title "packets dropped, sum(packetBytes)"
 scalar Scenario.node[2].lo[0].lo rcvdPkFromHl:count 0
 attr interpolationmode none
 attr source packetReceivedFromUpper
@@ -2355,5 +2346,36 @@ scalar Scenario.node[2].app[0] packetSent:sum(packetBytes) 0
 attr interpolationmode none
 attr source packetSent
 attr title "packets sent, sum(packetBytes)"
+scalar Scenario.node[2].packetClassifier packetPushed:count 0
+attr interpolationmode none
+attr title "packets pushed, count"
+scalar Scenario.node[2].packetClassifier packetPushed:sum(packetBytes) 0
+attr interpolationmode none
+attr title "packets pushed, sum(packetBytes)"
+scalar Scenario.node[2].packetClassifier packetDropped:count 0
+attr interpolationmode none
+attr title "packets dropped, count"
+scalar Scenario.node[2].packetClassifier packetDropped:sum(packetBytes) 0
+attr interpolationmode none
+attr title "packets dropped, sum(packetBytes)"
+scalar Scenario.radioMedium.propagation "Arrival computation count" 6
+scalar Scenario.radioMedium "transmission count" 3
+scalar Scenario.radioMedium "signal send count" 6
+scalar Scenario.radioMedium "reception computation count" 6
+scalar Scenario.radioMedium "interference computation count" 24
+scalar Scenario.radioMedium "reception decision computation count" 4
+scalar Scenario.radioMedium "listening decision computation count" 14
+scalar Scenario.radioMedium "reception cache hit" 83.333333333333
+attr unit %
+scalar Scenario.radioMedium "interference cache hit" 66.666666666667
+attr unit %
+scalar Scenario.radioMedium "noise cache hit" 0
+attr unit %
+scalar Scenario.radioMedium "snir cache hit" 50
+attr unit %
+scalar Scenario.radioMedium "reception decision cache hit" 50
+attr unit %
+scalar Scenario.radioMedium "reception result cache hit" 0
+attr unit %
 scalar Scenario.manager roiArea 0
 

@@ -24,6 +24,7 @@
 #include "veins_inet/Cache/Cache.h"
 #include "veins_inet/Messages/DataRequestMessage_m.h"
 #include "veins_inet/Messages/DataReplyMessage_m.h"
+#include "veins_inet/Classifiers/CarClassifier.h"
 
 #include "inet/common/ModuleAccess.h"
 #include "inet/common/packet/Packet.h"
@@ -32,7 +33,7 @@
 #include "inet/networklayer/common/L3AddressResolver.h"
 #include "inet/networklayer/common/L3AddressTag_m.h"
 #include "inet/transportlayer/contract/udp/UdpControlInfo_m.h"
-
+#include "inet/queueing/filter/PacketFilter.h"
 
 
 #include <string>
@@ -48,6 +49,7 @@ VeinsInetSampleApplication::VeinsInetSampleApplication()
 
 bool VeinsInetSampleApplication::startApplication()
 {
+
     cout << "running";
 
     if (getParentModule()->getIndex() == 1) {
@@ -71,10 +73,19 @@ bool VeinsInetSampleApplication::startApplication()
             getParentModule()->getDisplayString().setTagArg("i", 1, "red");
 
             auto sendPayload = makeShared<DataRequestMessage>();
-            timestampPayload(sendPayload);
-            sendPayload->setChunkLength(B(100));
-
             auto sendingPacket = createPacket("cache request");
+
+
+            timestampPayload(sendPayload);
+
+
+
+            sendPayload->setChunkLength(B(100));
+            sendPayload->setRequesterAddress(getParentModule()->getFullPath().c_str());
+            cout << "ad: " << getParentModule()->getFullPath();
+            sendPayload->setDataId("test/data1");
+            cout << "id: " << "test/data1" << endl;
+
             sendingPacket->insertAtBack(sendPayload);
             sendPacket(std::move(sendingPacket));
 
@@ -101,6 +112,11 @@ void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
     //
     // To Do: better packet detection
     //
+
+    //cout << getParentModule()->findSubmodule("packetFilter");
+    //PacketFilter* filter = (*PacketFilter)(getParentModule()->getSubmodule("packetFilter"));
+    //cout << filter->getFullPath();
+
     if (!strcmp(pk->getName(), "cache request"))
     {
         auto payloadReceived = pk->peekAtFront<DataRequestMessage>();
@@ -113,7 +129,7 @@ void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
         timestampPayload(replyPayload);
         replyPayload->setChunkLength(B(100));
 
-        auto replyPacket = createPacket("reply 2");
+        auto replyPacket = createPacket("reply");
         replyPacket->insertAtBack(replyPayload);
         sendPacket(std::move(replyPacket));
     }

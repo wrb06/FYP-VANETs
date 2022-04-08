@@ -19,6 +19,6 @@ import inet.common.packet.chunk.Chunk;
 
 class DataRequestMessage extends inet::FieldsChunk
 {
-    int requesterAddress;
+    string requesterAddress;
     string dataId;
 }
