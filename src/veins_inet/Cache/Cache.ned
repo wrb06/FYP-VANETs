@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package v2v_caching.veins_inet;
+package v2v_caching.veins_inet.Cache;
 
 //
 // TODO auto-generated module

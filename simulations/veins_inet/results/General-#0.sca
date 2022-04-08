@@ -1,14 +1,14 @@
 version 2
-run General-0-20220407-00:55:28-7592
+run General-0-20220408-12:32:56-10048
 attr configname General
-attr datetime 20220407-00:55:28
+attr datetime 20220408-12:32:56
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network Scenario
-attr processid 7592
+attr processid 10048
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -46,6 +46,25 @@ param *.manager.moduleType "\"v2v_caching.veins_inet.VeinsInetCar\""
 param *.physicalEnvironment.config "xmldoc(\"obstacles.xml\")"
 param *.radioMedium.obstacleLoss.typename "\"IdealObstacleLoss\""
 
+scalar Scenario.radioMedium.propagation "Arrival computation count" 6
+scalar Scenario.radioMedium "transmission count" 3
+scalar Scenario.radioMedium "signal send count" 6
+scalar Scenario.radioMedium "reception computation count" 6
+scalar Scenario.radioMedium "interference computation count" 24
+scalar Scenario.radioMedium "reception decision computation count" 4
+scalar Scenario.radioMedium "listening decision computation count" 14
+scalar Scenario.radioMedium "reception cache hit" 83.333333333333
+attr unit %
+scalar Scenario.radioMedium "interference cache hit" 66.666666666667
+attr unit %
+scalar Scenario.radioMedium "noise cache hit" 0
+attr unit %
+scalar Scenario.radioMedium "snir cache hit" 50
+attr unit %
+scalar Scenario.radioMedium "reception decision cache hit" 50
+attr unit %
+scalar Scenario.radioMedium "reception result cache hit" 0
+attr unit %
 scalar Scenario.node[0].lo[0].lo rcvdPkFromHl:count 2
 attr interpolationmode none
 attr source packetReceivedFromUpper
@@ -250,7 +269,7 @@ scalar Scenario.node[0].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLeng
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, max"
-scalar Scenario.node[0].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 7.5910082692308e-005
+scalar Scenario.node[0].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 0.00011961588787879
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, timeavg"
@@ -960,7 +979,7 @@ scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:m
 attr interpolationmode sample-hold
 attr source "count(packetPushed) - count(packetPopped) - count(packetRemoved) - count(packetDropped)"
 attr title "queue length, max"
-scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:timeavg 5.4545993744752e-006
+scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:timeavg 1.2727566295204e-005
 attr interpolationmode sample-hold
 attr source "count(packetPushed) - count(packetPopped) - count(packetRemoved) - count(packetDropped)"
 attr title "queue length, timeavg"
@@ -1052,7 +1071,7 @@ scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLeng
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, max"
-scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 9.8702812779566e-006
+scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 2.3031127378665e-005
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, timeavg"
@@ -2322,24 +2341,5 @@ scalar Scenario.node[2].app[0] packetSent:sum(packetBytes) 0
 attr interpolationmode none
 attr source packetSent
 attr title "packets sent, sum(packetBytes)"
-scalar Scenario.radioMedium.propagation "Arrival computation count" 6
-scalar Scenario.radioMedium "transmission count" 3
-scalar Scenario.radioMedium "signal send count" 6
-scalar Scenario.radioMedium "reception computation count" 6
-scalar Scenario.radioMedium "interference computation count" 24
-scalar Scenario.radioMedium "reception decision computation count" 4
-scalar Scenario.radioMedium "listening decision computation count" 14
-scalar Scenario.radioMedium "reception cache hit" 83.333333333333
-attr unit %
-scalar Scenario.radioMedium "interference cache hit" 66.666666666667
-attr unit %
-scalar Scenario.radioMedium "noise cache hit" 0
-attr unit %
-scalar Scenario.radioMedium "snir cache hit" 50
-attr unit %
-scalar Scenario.radioMedium "reception decision cache hit" 50
-attr unit %
-scalar Scenario.radioMedium "reception result cache hit" 0
-attr unit %
 scalar Scenario.manager roiArea 0
 

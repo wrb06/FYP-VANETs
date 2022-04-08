@@ -21,9 +21,9 @@
 //
 
 #include "veins_inet/VeinsInetSampleApplication.h"
-#include "veins_inet/Cache.h"
-#include "veins_inet/DataRequestMessage_m.h"
-#include "veins_inet/DataReplyMessage_m.h"
+#include "veins_inet/Cache/Cache.h"
+#include "veins_inet/Messages/DataRequestMessage_m.h"
+#include "veins_inet/Messages/DataReplyMessage_m.h"
 
 #include "inet/common/ModuleAccess.h"
 #include "inet/common/packet/Packet.h"
@@ -113,7 +113,7 @@ void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
         timestampPayload(replyPayload);
         replyPayload->setChunkLength(B(100));
 
-        auto replyPacket = createPacket("reply");
+        auto replyPacket = createPacket("reply 2");
         replyPacket->insertAtBack(replyPayload);
         sendPacket(std::move(replyPacket));
     }

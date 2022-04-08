@@ -29,6 +29,7 @@ import inet.node.inet.AdhocHost;
 import inet.physicallayer.common.packetlevel.MediumLimitCache;
 import inet.physicallayer.contract.packetlevel.ICommunicationCache;
 import inet.physicallayer.contract.packetlevel.IMediumLimitCache;
+import v2v_caching.veins_inet.Cache.Cache;
 
 
 //
