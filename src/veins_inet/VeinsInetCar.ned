@@ -45,12 +45,8 @@ module VeinsInetCar extends AdhocHost
 
     submodules:
 
-        packetClassifier: PacketClassifier {
-            @display("p=749.2308,80.76923");
-            classifierClass = "CarClassifier";
-        }
         cache: Cache {
-            @display("p=983.07697,80.76923");
+            @display("p=983.07697,75.38462");
         }
     connections:
 }

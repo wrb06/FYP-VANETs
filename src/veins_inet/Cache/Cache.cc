@@ -49,7 +49,7 @@ Cache::Cache(int n)
 void Cache::refer(string name, string data)
 {
     // not present in cache
-    if (hashmap.find(name) == hashmap.end()) {
+    if (!this->containsDataAt(name)) {
         // cache is full
         if (keys.size() == csize) {
             // delete least recently used element
@@ -84,7 +84,6 @@ void Cache::display()
         cout << "    " << (*it) << " ";
         cout << "    " << hashmap[(*it)] << endl;
     }
-
     cout << endl;
 }
 
@@ -94,4 +93,12 @@ void Cache::setCacheSize(int n){
 
 int Cache::getCacheSize(){
     return csize;
+}
+
+bool Cache::containsDataAt(string name) {
+    return !(hashmap.find(name) == hashmap.end());
+}
+
+string Cache::getDataAt(string name) {
+    return hashmap[name];
 }

@@ -41,6 +41,8 @@ class Cache : public cSimpleModule
       Cache(int n);
       void refer(string name, string data);
       void display();
+      bool containsDataAt(string name);
+      string getDataAt(string name);
       int getCacheSize();
       void setCacheSize(int n);
 };

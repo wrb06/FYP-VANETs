@@ -24,7 +24,6 @@
 #include "veins_inet/Cache/Cache.h"
 #include "veins_inet/Messages/DataRequestMessage_m.h"
 #include "veins_inet/Messages/DataReplyMessage_m.h"
-#include "veins_inet/Classifiers/CarClassifier.h"
 
 #include "inet/common/ModuleAccess.h"
 #include "inet/common/packet/Packet.h"
@@ -33,8 +32,7 @@
 #include "inet/networklayer/common/L3AddressResolver.h"
 #include "inet/networklayer/common/L3AddressTag_m.h"
 #include "inet/transportlayer/contract/udp/UdpControlInfo_m.h"
-#include "inet/queueing/filter/PacketFilter.h"
-
+#include "inet/queueing/classifier/PacketClassifier.h"
 
 #include <string>
 
@@ -43,31 +41,40 @@ using namespace std;
 
 Define_Module(VeinsInetSampleApplication);
 
+#define myAddress getParentModule()->getFullPath()
+
 VeinsInetSampleApplication::VeinsInetSampleApplication()
 {
 }
 
 bool VeinsInetSampleApplication::startApplication()
 {
+    cache = (Cache*)(getParentModule()->getSubmodule("cache"));
 
-    cout << "running";
+    // setup cache
+    switch (getParentModule()->getIndex()){
+        case 0:
+            cache->refer("test/data1", "testData1");
+            cache->refer("test/data2", "testData2");
+            cache->refer("test/data3", "testData3");
+            break;
+        case 1:
+            cache->refer("test/data1", "testData1");
+            cache->refer("test/data2", "testData2");
+            cache->refer("test/data3", "testData3");
+            break;
+        case 2:
+            cache->refer("test/data1", "testData1");
+            cache->refer("test/data2", "testData2");
+            cache->refer("test/data3", "testData3");
+            break;
+        default:
+            break;
+    }
+    cache->display();
 
+    // host[0] requests at t=16s
     if (getParentModule()->getIndex() == 1) {
-        Cache* cache = (Cache*)(getParentModule()->getSubmodule("cache"));
-        cache->refer("test/data1", "testData1");
-        cache->refer("test/data2", "testData2");
-        cache->display();
-
-    }
-
-    if (getParentModule()->getIndex() == 2) {
-        Cache* cache = (Cache*)(getParentModule()->getSubmodule("cache"));
-        cache->refer("test/data3", "testData3");
-        cache->display();
-    }
-
-    // host[0] requests at t=15s
-    if (getParentModule()->getIndex() == 0) {
         auto callback = [this]() {
 
             getParentModule()->getDisplayString().setTagArg("i", 1, "red");
@@ -75,16 +82,10 @@ bool VeinsInetSampleApplication::startApplication()
             auto sendPayload = makeShared<DataRequestMessage>();
             auto sendingPacket = createPacket("cache request");
 
-
             timestampPayload(sendPayload);
-
-
-
-            sendPayload->setChunkLength(B(100));
-            sendPayload->setRequesterAddress(getParentModule()->getFullPath().c_str());
-            cout << "ad: " << getParentModule()->getFullPath();
-            sendPayload->setDataId("test/data1");
-            cout << "id: " << "test/data1" << endl;
+            sendPayload->setChunkLength(B(512));
+            sendPayload->setRequesterAddress(myAddress.c_str());
+            sendPayload->setDataId("test/data3");
 
             sendingPacket->insertAtBack(sendPayload);
             sendPacket(std::move(sendingPacket));
@@ -92,7 +93,7 @@ bool VeinsInetSampleApplication::startApplication()
 
 
         };
-        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(15, SIMTIME_S)));
+        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(16, SIMTIME_S)));
     }
 
     return true;
@@ -107,30 +108,64 @@ VeinsInetSampleApplication::~VeinsInetSampleApplication()
 {
 }
 
+
+
 void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
 {
     //
     // To Do: better packet detection
     //
-
-    //cout << getParentModule()->findSubmodule("packetFilter");
-    //PacketFilter* filter = (*PacketFilter)(getParentModule()->getSubmodule("packetFilter"));
-    //cout << filter->getFullPath();
-
-    if (!strcmp(pk->getName(), "cache request"))
-    {
+    if (!strcmp(pk->peekData()->getClassName(), "DataRequestMessage")){
+        // disassemble packet
         auto payloadReceived = pk->peekAtFront<DataRequestMessage>();
+        string requesterAddress = payloadReceived->getRequesterAddress();
+        string dataId = payloadReceived->getDataId();
 
-        EV_INFO << "Received packet: " << payloadReceived << endl;
+        // log received message
+        cout << "Host: " << myAddress << " Received packet: " << payloadReceived << " From: " << requesterAddress  <<  " Requesting: " << dataId << endl;
 
-        getParentModule()->getDisplayString().setTagArg("i", 1, "green");
+        // ignore our requests
+        if (!strcmp(myAddress.c_str(), requesterAddress.c_str())) {
+            cout << "discarding - own request" << endl;
+        } else if (cache->containsDataAt(payloadReceived->getDataId())){
+            cout << "in my cache" << endl;
+            // if its in the cache generate a reply message
+            auto replyPayload = makeShared<DataReplyMessage>();
+            timestampPayload(replyPayload);
+            replyPayload->setRequesterAddress(requesterAddress.c_str());
+            replyPayload->setData(cache->getDataAt(dataId.c_str()).c_str());
+            replyPayload->setChunkLength(B(512));
+            replyPayload->setDataId(dataId.c_str());
 
-        auto replyPayload = makeShared<DataReplyMessage>();
-        timestampPayload(replyPayload);
-        replyPayload->setChunkLength(B(100));
+            // send message
+            auto replyPacket = createPacket("cache reply");
+            replyPacket->insertAtBack(replyPayload);
+            sendPacket(std::move(replyPacket));
+            cout << "reply sent" << endl;
+        } else {
+            cout << "not in my cache" << endl;
+        }
+        cout << endl;
+    } else if (!strcmp(pk->peekData()->getClassName(), "DataReplyMessage")){
+        // disassemble packet
+        auto payloadReceived = pk->peekAtFront<DataReplyMessage>();
+        string requesterAddress = payloadReceived->getRequesterAddress();
+        string dataId = payloadReceived->getDataId();
+        string data = payloadReceived->getData();
 
-        auto replyPacket = createPacket("reply");
-        replyPacket->insertAtBack(replyPayload);
-        sendPacket(std::move(replyPacket));
+        // log received message
+        cout << "Host: " << myAddress << " Received packet: " << payloadReceived << " From: " << requesterAddress <<  " Requesting: " << dataId << " Data: " << data << endl;
+
+        // ignore replies not for ourself
+        if (strcmp(myAddress.c_str(), payloadReceived->getRequesterAddress())) {
+            cout << "discarding - not for me" << endl;
+        } else {
+            cout << "for me - saving in my cache" << endl;
+            // save in the cache
+            cache->refer(dataId, data);
+            cache->display();
+            return;
+        }
+        cout << endl;
     }
 }
