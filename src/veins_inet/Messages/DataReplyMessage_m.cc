@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by nedtool 5.6 from veins_inet/DataReplyMessage.msg.
+// Generated file, do not edit! Created by nedtool 5.6 from veins_inet/Messages/DataReplyMessage.msg.
 //
 
 // Disable warnings about unused variables, empty switch stmts, etc:
@@ -231,8 +231,7 @@ DataReplyMessage& DataReplyMessage::operator=(const DataReplyMessage& other)
 
 void DataReplyMessage::copy(const DataReplyMessage& other)
 {
-    this->sourceAddress = other.sourceAddress;
-    this->destinationAddress = other.destinationAddress;
+    this->requesterAddress = other.requesterAddress;
     this->dataId = other.dataId;
     this->data = other.data;
 }
@@ -240,8 +239,7 @@ void DataReplyMessage::copy(const DataReplyMessage& other)
 void DataReplyMessage::parsimPack(omnetpp::cCommBuffer *b) const
 {
     ::inet::FieldsChunk::parsimPack(b);
-    doParsimPacking(b,this->sourceAddress);
-    doParsimPacking(b,this->destinationAddress);
+    doParsimPacking(b,this->requesterAddress);
     doParsimPacking(b,this->dataId);
     doParsimPacking(b,this->data);
 }
@@ -249,32 +247,20 @@ void DataReplyMessage::parsimPack(omnetpp::cCommBuffer *b) const
 void DataReplyMessage::parsimUnpack(omnetpp::cCommBuffer *b)
 {
     ::inet::FieldsChunk::parsimUnpack(b);
-    doParsimUnpacking(b,this->sourceAddress);
-    doParsimUnpacking(b,this->destinationAddress);
+    doParsimUnpacking(b,this->requesterAddress);
     doParsimUnpacking(b,this->dataId);
     doParsimUnpacking(b,this->data);
 }
 
-int DataReplyMessage::getSourceAddress() const
+int DataReplyMessage::getRequesterAddress() const
 {
-    return this->sourceAddress;
+    return this->requesterAddress;
 }
 
-void DataReplyMessage::setSourceAddress(int sourceAddress)
+void DataReplyMessage::setRequesterAddress(int requesterAddress)
 {
     handleChange();
-    this->sourceAddress = sourceAddress;
-}
-
-int DataReplyMessage::getDestinationAddress() const
-{
-    return this->destinationAddress;
-}
-
-void DataReplyMessage::setDestinationAddress(int destinationAddress)
-{
-    handleChange();
-    this->destinationAddress = destinationAddress;
+    this->requesterAddress = requesterAddress;
 }
 
 const char * DataReplyMessage::getDataId() const
@@ -304,8 +290,7 @@ class DataReplyMessageDescriptor : public omnetpp::cClassDescriptor
   private:
     mutable const char **propertynames;
     enum FieldConstants {
-        FIELD_sourceAddress,
-        FIELD_destinationAddress,
+        FIELD_requesterAddress,
         FIELD_dataId,
         FIELD_data,
     };
@@ -370,7 +355,7 @@ const char *DataReplyMessageDescriptor::getProperty(const char *propertyname) co
 int DataReplyMessageDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 4+basedesc->getFieldCount() : 4;
+    return basedesc ? 3+basedesc->getFieldCount() : 3;
 }
 
 unsigned int DataReplyMessageDescriptor::getFieldTypeFlags(int field) const
@@ -382,12 +367,11 @@ unsigned int DataReplyMessageDescriptor::getFieldTypeFlags(int field) const
         field -= basedesc->getFieldCount();
     }
     static unsigned int fieldTypeFlags[] = {
-        FD_ISEDITABLE,    // FIELD_sourceAddress
-        FD_ISEDITABLE,    // FIELD_destinationAddress
+        FD_ISEDITABLE,    // FIELD_requesterAddress
         FD_ISEDITABLE,    // FIELD_dataId
         FD_ISEDITABLE,    // FIELD_data
     };
-    return (field >= 0 && field < 4) ? fieldTypeFlags[field] : 0;
+    return (field >= 0 && field < 3) ? fieldTypeFlags[field] : 0;
 }
 
 const char *DataReplyMessageDescriptor::getFieldName(int field) const
@@ -399,22 +383,20 @@ const char *DataReplyMessageDescriptor::getFieldName(int field) const
         field -= basedesc->getFieldCount();
     }
     static const char *fieldNames[] = {
-        "sourceAddress",
-        "destinationAddress",
+        "requesterAddress",
         "dataId",
         "data",
     };
-    return (field >= 0 && field < 4) ? fieldNames[field] : nullptr;
+    return (field >= 0 && field < 3) ? fieldNames[field] : nullptr;
 }
 
 int DataReplyMessageDescriptor::findField(const char *fieldName) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount() : 0;
-    if (fieldName[0] == 's' && strcmp(fieldName, "sourceAddress") == 0) return base+0;
-    if (fieldName[0] == 'd' && strcmp(fieldName, "destinationAddress") == 0) return base+1;
-    if (fieldName[0] == 'd' && strcmp(fieldName, "dataId") == 0) return base+2;
-    if (fieldName[0] == 'd' && strcmp(fieldName, "data") == 0) return base+3;
+    if (fieldName[0] == 'r' && strcmp(fieldName, "requesterAddress") == 0) return base+0;
+    if (fieldName[0] == 'd' && strcmp(fieldName, "dataId") == 0) return base+1;
+    if (fieldName[0] == 'd' && strcmp(fieldName, "data") == 0) return base+2;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
@@ -427,12 +409,11 @@ const char *DataReplyMessageDescriptor::getFieldTypeString(int field) const
         field -= basedesc->getFieldCount();
     }
     static const char *fieldTypeStrings[] = {
-        "int",    // FIELD_sourceAddress
-        "int",    // FIELD_destinationAddress
+        "int",    // FIELD_requesterAddress
         "string",    // FIELD_dataId
         "string",    // FIELD_data
     };
-    return (field >= 0 && field < 4) ? fieldTypeStrings[field] : nullptr;
+    return (field >= 0 && field < 3) ? fieldTypeStrings[field] : nullptr;
 }
 
 const char **DataReplyMessageDescriptor::getFieldPropertyNames(int field) const
@@ -499,8 +480,7 @@ std::string DataReplyMessageDescriptor::getFieldValueAsString(void *object, int 
     }
     DataReplyMessage *pp = (DataReplyMessage *)object; (void)pp;
     switch (field) {
-        case FIELD_sourceAddress: return long2string(pp->getSourceAddress());
-        case FIELD_destinationAddress: return long2string(pp->getDestinationAddress());
+        case FIELD_requesterAddress: return long2string(pp->getRequesterAddress());
         case FIELD_dataId: return oppstring2string(pp->getDataId());
         case FIELD_data: return oppstring2string(pp->getData());
         default: return "";
@@ -517,8 +497,7 @@ bool DataReplyMessageDescriptor::setFieldValueAsString(void *object, int field, 
     }
     DataReplyMessage *pp = (DataReplyMessage *)object; (void)pp;
     switch (field) {
-        case FIELD_sourceAddress: pp->setSourceAddress(string2long(value)); return true;
-        case FIELD_destinationAddress: pp->setDestinationAddress(string2long(value)); return true;
+        case FIELD_requesterAddress: pp->setRequesterAddress(string2long(value)); return true;
         case FIELD_dataId: pp->setDataId((value)); return true;
         case FIELD_data: pp->setData((value)); return true;
         default: return false;

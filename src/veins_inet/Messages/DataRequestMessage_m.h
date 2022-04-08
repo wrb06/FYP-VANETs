@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by nedtool 5.6 from veins_inet/DataRequestMessage.msg.
+// Generated file, do not edit! Created by nedtool 5.6 from veins_inet/Messages/DataRequestMessage.msg.
 //
 
 #ifndef __DATAREQUESTMESSAGE_M_H
@@ -24,12 +24,11 @@ class DataRequestMessage;
 #include "inet/common/packet/chunk/Chunk_m.h" // import inet.common.packet.chunk.Chunk
 
 /**
- * Class generated from <tt>veins_inet/DataRequestMessage.msg:21</tt> by nedtool.
+ * Class generated from <tt>veins_inet/Messages/DataRequestMessage.msg:21</tt> by nedtool.
  * <pre>
  * class DataRequestMessage extends inet::FieldsChunk
  * {
- *     int sourceAddress;
- *     int destinationAddress;
+ *     int requesterAddress;
  *     string dataId;
  * }
  * </pre>
@@ -37,8 +36,7 @@ class DataRequestMessage;
 class DataRequestMessage : public ::inet::FieldsChunk
 {
   protected:
-    int sourceAddress = 0;
-    int destinationAddress = 0;
+    int requesterAddress = 0;
     omnetpp::opp_string dataId;
 
   private:
@@ -58,10 +56,8 @@ class DataRequestMessage : public ::inet::FieldsChunk
     virtual void parsimUnpack(omnetpp::cCommBuffer *b) override;
 
     // field getter/setter methods
-    virtual int getSourceAddress() const;
-    virtual void setSourceAddress(int sourceAddress);
-    virtual int getDestinationAddress() const;
-    virtual void setDestinationAddress(int destinationAddress);
+    virtual int getRequesterAddress() const;
+    virtual void setRequesterAddress(int requesterAddress);
     virtual const char * getDataId() const;
     virtual void setDataId(const char * dataId);
 };
