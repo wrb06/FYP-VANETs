@@ -35,22 +35,21 @@ network Scenario
     @display("bgb=319,384");
     submodules:
         radioMedium: Ieee80211DimensionalRadioMedium {
-            @display("p=64,224");
+            @display("p=10, 10");
         }
         manager: VeinsInetManager {
-            @display("p=192,320");
+            @display("p=60, 10");
         }
         visualizer: IntegratedVisualizer {
-            @display("p=64,320");
+            @display("p=110, 10");
         }
         physicalEnvironment: PhysicalEnvironment {
-            @display("p=192,224");
+            @display("p=160, 10");
         }
         roadsCanvasVisualizer: RoadsCanvasVisualizer {
-            @display("p=64,416");
+            @display("p=210, 10");
         }
         roadsOsgVisualizer: RoadsOsgVisualizer {
-            @display("p=192,416");
+            @display("p=260, 10");
         }
-        node[0]: VeinsInetCar;
 }

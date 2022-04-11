@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 
 <!--
 // Copyright (C) 2018 Christoph Sommer <sommer@ccs-labs.org>
@@ -31,29 +31,5 @@
 // work.  If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
 -->
 
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
-
-    <input>
-        <net-file value="square.net.xml"/>
-        <route-files value="square.rou.xml"/>
-        <additional-files value="square.poly.xml"/>
-    </input>
-
-    <time>
-        <step-length value="0.1"/>
-    </time>
-
-    <processing>
-        <lanechange.duration value="1.5"/>
-    </processing>
-
-    <report>
-        <xml-validation value="never"/>
-        <xml-validation.net value="never"/>
-    </report>
-
-    <gui_only>
-        <start value="true"/>
-    </gui_only>
-
-</configuration>
+<shapes>
+</shapes>

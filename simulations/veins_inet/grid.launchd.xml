@@ -31,8 +31,9 @@
 // work.  If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
 -->
 
-<routes>
-   <vType id="vtype0" accel="2.6" decel="4.5" sigma="0.5" length="4.5" minGap="2.5" maxSpeed="14" color="1,1,0"/>
-   <route id="route0" edges="A0toB0 B0toB1 B1toA1 A1toA0"/>
-   <flow id="flow0" type="vtype0" route="route0" begin="0" period="5" number="3" arrivalPos="0" />
-</routes>
+<launch>
+    <copy file="grid.net.xml" />
+    <copy file="grid.rou.xml" />
+    <copy file="grid.poly.xml" />
+    <copy file="grid.sumocfg" type="config" />
+</launch>

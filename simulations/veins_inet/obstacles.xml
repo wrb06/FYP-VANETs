@@ -32,5 +32,6 @@
 -->
 
 <environment>
-    <object position="min 40 50 0" orientation="0 0 0" shape="cuboid 70 60 20" material="copper" fill-color="235 128 32" opacity="0.8" />
+    <object position="min 35 35 0" orientation="0 0 0" shape="cuboid 80 80 20" material="copper" fill-color="235 128 32" opacity="0.8" />
+    <object position="min 135 135 0" orientation="0 0 0" shape="cuboid 80 80 20" material="copper" fill-color="235 128 32" opacity="0.8" />
 </environment>
