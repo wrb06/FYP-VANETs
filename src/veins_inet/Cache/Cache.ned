@@ -21,8 +21,10 @@ package v2v_caching.veins_inet.Cache;
 simple Cache
 {
     parameters:
+        @display("i=block/table2");
 
     gates:
         input socketIn;
         output socketOut;
+        
 }
