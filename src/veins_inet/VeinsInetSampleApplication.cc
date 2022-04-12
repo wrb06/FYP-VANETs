@@ -22,6 +22,7 @@
 
 #include "veins_inet/VeinsInetSampleApplication.h"
 #include "veins_inet/Cache/Cache.h"
+#include "veins_inet/DataServer/DataServer.h"
 #include "veins_inet/Messages/DataRequestMessage_m.h"
 #include "veins_inet/Messages/DataReplyMessage_m.h"
 
@@ -32,7 +33,6 @@
 #include "inet/networklayer/common/L3AddressResolver.h"
 #include "inet/networklayer/common/L3AddressTag_m.h"
 #include "inet/transportlayer/contract/udp/UdpControlInfo_m.h"
-#include "inet/queueing/classifier/PacketClassifier.h"
 
 #include <string>
 
@@ -49,6 +49,8 @@ VeinsInetSampleApplication::VeinsInetSampleApplication()
 
 bool VeinsInetSampleApplication::startApplication()
 {
+    addGate("messagesIn", cGate::INPUT);
+
     cache = (Cache*)(getParentModule()->getSubmodule("cache"));
 
     // setup cache
@@ -77,6 +79,23 @@ bool VeinsInetSampleApplication::startApplication()
     if (getParentModule()->getIndex() == 1) {
         auto callback = [this]() {
 
+
+            DataServer* dataserver = (DataServer*)(getParentModule()->getSubmodule("dataServer"));
+
+            auto sendPayload = makeShared<DataRequestMessage>();
+            auto sendingPacket = createPacket("cache request");
+
+            timestampPayload(sendPayload);
+            sendPayload->setChunkLength(B(512));
+            sendPayload->setRequesterAddress(myAddress.c_str());
+            sendPayload->setDataId("test/data3");
+            sendingPacket->insertAtBack(sendPayload);
+
+
+            sendDirect(sendingPacket.release(), dataserver->gate("socketIn"));
+
+
+            /*
             getParentModule()->getDisplayString().setTagArg("i", 1, "red");
 
             auto sendPayload = makeShared<DataRequestMessage>();
@@ -89,11 +108,10 @@ bool VeinsInetSampleApplication::startApplication()
 
             sendingPacket->insertAtBack(sendPayload);
             sendPacket(std::move(sendingPacket));
-
-
+            */
 
         };
-        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(16, SIMTIME_S)));
+        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(1, SIMTIME_S)));
     }
 
     return true;
@@ -167,5 +185,7 @@ void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
             return;
         }
         cout << endl;
+    } else {
+        cout << pk->peekData()->getClassName() << endl;
     }
 }

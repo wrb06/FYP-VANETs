@@ -27,24 +27,24 @@ using namespace std;
  */
 class Cache : public cSimpleModule
 {
-  protected:
+protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
 
-  private:
+private:
     list<string> keys;
     unordered_map<string, string> hashmap;
     int csize = 0;
 
-  public:
-      Cache();
-      Cache(int n);
-      void refer(string name, string data);
-      void display();
-      bool containsDataAt(string name);
-      string getDataAt(string name);
-      int getCacheSize();
-      void setCacheSize(int n);
+public:
+    Cache();
+    Cache(int n);
+    void refer(string name, string data);
+    void display();
+    bool containsDataAt(string name);
+    string getDataAt(string name);
+    int getCacheSize();
+    void setCacheSize(int n);
 };
 
 #endif

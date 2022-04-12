@@ -24,7 +24,7 @@ class DataReplyMessage;
 #include "inet/common/packet/chunk/Chunk_m.h" // import inet.common.packet.chunk.Chunk
 
 /**
- * Class generated from <tt>veins_inet/Messages/DataReplyMessage.msg:18</tt> by nedtool.
+ * Class generated from <tt>veins_inet/Messages/DataReplyMessage.msg:19</tt> by nedtool.
  * <pre>
  * class DataReplyMessage extends inet::FieldsChunk
  * {

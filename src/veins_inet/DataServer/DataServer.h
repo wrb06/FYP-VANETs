@@ -12,11 +12,28 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-import inet.common.INETDefs;
-import inet.common.packet.chunk.Chunk;
 
-class DataRequestMessage extends inet::FieldsChunk
+#ifndef __V2V_CACHING_DATASERVER_H_
+#define __V2V_CACHING_DATASERVER_H_
+
+#include <omnetpp.h>
+#include "veins_inet/veins_inet.h"
+#include "inet/common/packet/Packet.h"
+#include "veins_inet/VeinsInetApplicationBase.h"
+
+using namespace omnetpp;
+using namespace std;
+/**
+ * TODO - Generated class
+ */
+class DataServer : public cSimpleModule
 {
-    string requesterAddress;
-    string dataId;
-}
+protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+
+public:
+    string getDataAt(string name);
+};
+
+#endif

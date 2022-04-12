@@ -12,11 +12,18 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-import inet.common.INETDefs;
-import inet.common.packet.chunk.Chunk;
 
-class DataRequestMessage extends inet::FieldsChunk
+package v2v_caching.veins_inet.DataServer;
+
+//
+// TODO auto-generated module
+//
+simple DataServer
 {
-    string requesterAddress;
-    string dataId;
+    parameters:
+        @display("i=block/table2");
+        
+    gates:
+        input socketIn;
+        output socketOut;
 }

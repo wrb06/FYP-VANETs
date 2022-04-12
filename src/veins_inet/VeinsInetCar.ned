@@ -33,6 +33,7 @@ import inet.queueing.classifier.ContentBasedClassifier;
 import inet.queueing.classifier.PacketClassifier;
 import inet.queueing.filter.PacketFilter;
 import v2v_caching.veins_inet.Cache.Cache;
+import v2v_caching.veins_inet.DataServer.DataServer;
 
 
 //
@@ -46,8 +47,10 @@ module VeinsInetCar extends AdhocHost
     submodules:
 
         cache: Cache {
-            @display("p=983.07697,75.38462");
+            @display("p=891.5385,80.76923");
         }
-    connections:
+        dataServer: DataServer {
+            @display("p=1024.6155,75.38462");
+        }
 }
 

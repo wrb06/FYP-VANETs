@@ -24,6 +24,7 @@
 
 #include "veins_inet/veins_inet.h"
 #include "veins_inet/Cache/Cache.h"
+#include "veins_inet/DataServer/DataServer.h"
 #include "veins_inet/VeinsInetApplicationBase.h"
 
 class VEINS_INET_API VeinsInetSampleApplication : public veins::VeinsInetApplicationBase {
