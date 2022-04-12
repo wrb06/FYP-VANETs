@@ -234,6 +234,7 @@ void DataReplyMessage::copy(const DataReplyMessage& other)
     this->requesterAddress = other.requesterAddress;
     this->dataId = other.dataId;
     this->data = other.data;
+    this->broadcast = other.broadcast;
 }
 
 void DataReplyMessage::parsimPack(omnetpp::cCommBuffer *b) const
@@ -242,6 +243,7 @@ void DataReplyMessage::parsimPack(omnetpp::cCommBuffer *b) const
     doParsimPacking(b,this->requesterAddress);
     doParsimPacking(b,this->dataId);
     doParsimPacking(b,this->data);
+    doParsimPacking(b,this->broadcast);
 }
 
 void DataReplyMessage::parsimUnpack(omnetpp::cCommBuffer *b)
@@ -250,6 +252,7 @@ void DataReplyMessage::parsimUnpack(omnetpp::cCommBuffer *b)
     doParsimUnpacking(b,this->requesterAddress);
     doParsimUnpacking(b,this->dataId);
     doParsimUnpacking(b,this->data);
+    doParsimUnpacking(b,this->broadcast);
 }
 
 const char * DataReplyMessage::getRequesterAddress() const
@@ -285,6 +288,17 @@ void DataReplyMessage::setData(const char * data)
     this->data = data;
 }
 
+bool DataReplyMessage::getBroadcast() const
+{
+    return this->broadcast;
+}
+
+void DataReplyMessage::setBroadcast(bool broadcast)
+{
+    handleChange();
+    this->broadcast = broadcast;
+}
+
 class DataReplyMessageDescriptor : public omnetpp::cClassDescriptor
 {
   private:
@@ -293,6 +307,7 @@ class DataReplyMessageDescriptor : public omnetpp::cClassDescriptor
         FIELD_requesterAddress,
         FIELD_dataId,
         FIELD_data,
+        FIELD_broadcast,
     };
   public:
     DataReplyMessageDescriptor();
@@ -355,7 +370,7 @@ const char *DataReplyMessageDescriptor::getProperty(const char *propertyname) co
 int DataReplyMessageDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 3+basedesc->getFieldCount() : 3;
+    return basedesc ? 4+basedesc->getFieldCount() : 4;
 }
 
 unsigned int DataReplyMessageDescriptor::getFieldTypeFlags(int field) const
@@ -370,8 +385,9 @@ unsigned int DataReplyMessageDescriptor::getFieldTypeFlags(int field) const
         FD_ISEDITABLE,    // FIELD_requesterAddress
         FD_ISEDITABLE,    // FIELD_dataId
         FD_ISEDITABLE,    // FIELD_data
+        FD_ISEDITABLE,    // FIELD_broadcast
     };
-    return (field >= 0 && field < 3) ? fieldTypeFlags[field] : 0;
+    return (field >= 0 && field < 4) ? fieldTypeFlags[field] : 0;
 }
 
 const char *DataReplyMessageDescriptor::getFieldName(int field) const
@@ -386,8 +402,9 @@ const char *DataReplyMessageDescriptor::getFieldName(int field) const
         "requesterAddress",
         "dataId",
         "data",
+        "broadcast",
     };
-    return (field >= 0 && field < 3) ? fieldNames[field] : nullptr;
+    return (field >= 0 && field < 4) ? fieldNames[field] : nullptr;
 }
 
 int DataReplyMessageDescriptor::findField(const char *fieldName) const
@@ -397,6 +414,7 @@ int DataReplyMessageDescriptor::findField(const char *fieldName) const
     if (fieldName[0] == 'r' && strcmp(fieldName, "requesterAddress") == 0) return base+0;
     if (fieldName[0] == 'd' && strcmp(fieldName, "dataId") == 0) return base+1;
     if (fieldName[0] == 'd' && strcmp(fieldName, "data") == 0) return base+2;
+    if (fieldName[0] == 'b' && strcmp(fieldName, "broadcast") == 0) return base+3;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
@@ -412,8 +430,9 @@ const char *DataReplyMessageDescriptor::getFieldTypeString(int field) const
         "string",    // FIELD_requesterAddress
         "string",    // FIELD_dataId
         "string",    // FIELD_data
+        "bool",    // FIELD_broadcast
     };
-    return (field >= 0 && field < 3) ? fieldTypeStrings[field] : nullptr;
+    return (field >= 0 && field < 4) ? fieldTypeStrings[field] : nullptr;
 }
 
 const char **DataReplyMessageDescriptor::getFieldPropertyNames(int field) const
@@ -483,6 +502,7 @@ std::string DataReplyMessageDescriptor::getFieldValueAsString(void *object, int 
         case FIELD_requesterAddress: return oppstring2string(pp->getRequesterAddress());
         case FIELD_dataId: return oppstring2string(pp->getDataId());
         case FIELD_data: return oppstring2string(pp->getData());
+        case FIELD_broadcast: return bool2string(pp->getBroadcast());
         default: return "";
     }
 }
@@ -500,6 +520,7 @@ bool DataReplyMessageDescriptor::setFieldValueAsString(void *object, int field, 
         case FIELD_requesterAddress: pp->setRequesterAddress((value)); return true;
         case FIELD_dataId: pp->setDataId((value)); return true;
         case FIELD_data: pp->setData((value)); return true;
+        case FIELD_broadcast: pp->setBroadcast(string2bool(value)); return true;
         default: return false;
     }
 }

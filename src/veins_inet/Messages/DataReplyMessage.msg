@@ -20,4 +20,5 @@ class DataReplyMessage extends inet::FieldsChunk
     string requesterAddress;
     string dataId;
     string data;
+    bool broadcast = false;
 }

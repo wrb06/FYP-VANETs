@@ -1,14 +1,14 @@
 version 2
-run General-0-20220412-16:51:08-3256
+run General-0-20220412-17:09:32-7064
 attr configname General
-attr datetime 20220412-16:51:08
+attr datetime 20220412-17:09:32
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network Scenario
-attr processid 3256
+attr processid 7064
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -1351,7 +1351,7 @@ scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLeng
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, max"
-scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 9.4642857142857e-006
+scalar Scenario.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 9.0212765957447e-005
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, timeavg"
@@ -2061,7 +2061,7 @@ scalar Scenario.node[2].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:m
 attr interpolationmode sample-hold
 attr source "count(packetPushed) - count(packetPopped) - count(packetRemoved) - count(packetDropped)"
 attr title "queue length, max"
-scalar Scenario.node[2].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:timeavg 3.6161056666803e-006
+scalar Scenario.node[2].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:timeavg 3.4471196143306e-005
 attr interpolationmode sample-hold
 attr source "count(packetPushed) - count(packetPopped) - count(packetRemoved) - count(packetDropped)"
 attr title "queue length, timeavg"
@@ -2153,7 +2153,7 @@ scalar Scenario.node[2].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLeng
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, max"
-scalar Scenario.node[2].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 9.4644095494435e-006
+scalar Scenario.node[2].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 9.0224018554295e-005
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, timeavg"

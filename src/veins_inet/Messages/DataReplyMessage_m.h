@@ -31,6 +31,7 @@ class DataReplyMessage;
  *     string requesterAddress;
  *     string dataId;
  *     string data;
+ *     bool broadcast = false;
  * }
  * </pre>
  */
@@ -40,6 +41,7 @@ class DataReplyMessage : public ::inet::FieldsChunk
     omnetpp::opp_string requesterAddress;
     omnetpp::opp_string dataId;
     omnetpp::opp_string data;
+    bool broadcast = false;
 
   private:
     void copy(const DataReplyMessage& other);
@@ -64,6 +66,8 @@ class DataReplyMessage : public ::inet::FieldsChunk
     virtual void setDataId(const char * dataId);
     virtual const char * getData() const;
     virtual void setData(const char * data);
+    virtual bool getBroadcast() const;
+    virtual void setBroadcast(bool broadcast);
 };
 
 inline void doParsimPacking(omnetpp::cCommBuffer *b, const DataReplyMessage& obj) {obj.parsimPack(b);}
