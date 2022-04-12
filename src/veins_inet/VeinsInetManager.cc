@@ -53,6 +53,9 @@ void VeinsInetManager::initialize(int stage)
         root->emit(POST_MODEL_CHANGE, notification, NULL);
     });
 #endif
+
+    // initalise random
+    srand (time(NULL));
 }
 
 void VeinsInetManager::preInitializeModule(cModule* mod, const std::string& nodeId, const Coord& position, const std::string& road_id, double speed, Heading heading, VehicleSignalSet signals)

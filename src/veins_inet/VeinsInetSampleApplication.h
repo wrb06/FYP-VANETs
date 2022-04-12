@@ -32,6 +32,17 @@ protected:
     Cache* cache;
     DataServer* dataServer;
 
+    unordered_map<string, string> availableData = {
+            {"/test/dataId1", "Test data one"},
+            {"/test/dataId2", "Test data two"},
+            {"/test/dataId3", "Test data three"},
+            {"/test/dataId4", "Test data four"},
+            {"/test/dataId5", "Test data five"},
+            {"/test/dataId6", "Test data six"},
+            {"/test/dataId7", "Test data seven"},
+            {"/test/dataId8", "Test data eight"},
+    };
+
 protected:
     virtual bool startApplication() override;
     virtual bool stopApplication() override;

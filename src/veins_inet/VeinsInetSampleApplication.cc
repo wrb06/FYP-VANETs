@@ -49,37 +49,39 @@ VeinsInetSampleApplication::VeinsInetSampleApplication()
 
 bool VeinsInetSampleApplication::startApplication()
 {
+    // add a message gate
     addGate("messagesIn", cGate::INPUT);
 
+    // get variables for ease of use
     cache = (Cache*)(getParentModule()->getSubmodule("cache"));
     dataServer = (DataServer*)(getParentModule()->getSubmodule("dataServer"));
 
-    // setup cache and data store
-    switch (getParentModule()->getIndex()){
-        case 0:
-            break;
-        case 1:
-            break;
-        case 2:
-            dataServer->refer("test/data1", "askdnaskdlnak");
-            cache->refer("test/data1", "askdnaskdlnak");
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        default:
-            break;
+    // randomly assign data to hosts
+    for (auto pair : this->availableData){
+        if(rand()%2 == 0){
+            dataServer->refer(pair.first, pair.second);
+        }
     }
+    // display data
     cache->display();
     dataServer->display();
 
-    // host[1] requests at t=16s
-    if (getParentModule()->getIndex() == 1) {
+    // setup request
+    if (getParentModule()->getIndex() == 0) {
         auto callback = [this]() {
-            startSearch("test/data1");
+            //auto it = availableData.begin();
+            //std::advance(it, rand()%availableData.size());
+            //auto searchFor = *it;
+            //cout << "searching for "<< searchFor.first << endl;
+            //startSearch(searchFor.first);
+            startSearch("/test/dataId1");
         };
-        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(16, SIMTIME_S)));
+        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(5, SIMTIME_S)));
+    } else {
+        auto callback = [this]() {
+            startSearch("/test/dataId1");
+        };
+        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(5+rand()%10, SIMTIME_S)));
     }
 
     return true;
@@ -174,7 +176,7 @@ void VeinsInetSampleApplication::processDataRequestMessage(std::shared_ptr<inet:
         // check dataServer
         cout<< "not found in cache - asking data server" << endl;
         auto sendPayload = makeShared<DataRequestMessage>();
-        auto sendingPacket = createPacket("cache request");
+        auto sendingPacket = createPacket("data request");
 
         timestampPayload(sendPayload);
         sendPayload->setChunkLength(B(512));
@@ -208,7 +210,7 @@ void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::P
     {
         // return packet was empty, ask externally
         cout << "return packet was empty" << endl;
-        if (!strcmp(requesterAddress, getParentModule()->getFullPath().c_str())){
+        if (!strcmp(requesterAddress.c_str(), getParentModule()->getFullPath().c_str())){
             startExternalSearch(dataId);
         }
     }
@@ -226,10 +228,10 @@ void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::P
 
             timestampPayload(replyPayload);
             // setup new packet
-            replyPayload->setRequesterAddress(requesterAddress);
-            replyPayload->setData(data);
+            replyPayload->setRequesterAddress(requesterAddress.c_str());
+            replyPayload->setData(data.c_str());
             replyPayload->setChunkLength(B(512));
-            replyPayload->setDataId(dataId);
+            replyPayload->setDataId(dataId.c_str());
             replyPayload->setBroadcast(false);
 
             replyPacket->insertAtBack(replyPayload);
