@@ -52,6 +52,7 @@ bool VeinsInetSampleApplication::startApplication()
     addGate("messagesIn", cGate::INPUT);
 
     cache = (Cache*)(getParentModule()->getSubmodule("cache"));
+    dataServer = (DataServer*)(getParentModule()->getSubmodule("dataServer"));
 
     // setup cache
     switch (getParentModule()->getIndex()){
@@ -61,14 +62,15 @@ bool VeinsInetSampleApplication::startApplication()
             cache->refer("test/data3", "testData3");
             break;
         case 1:
-            cache->refer("test/data1", "testData1");
-            cache->refer("test/data2", "testData2");
-            cache->refer("test/data3", "testData3");
             break;
         case 2:
             cache->refer("test/data1", "testData1");
             cache->refer("test/data2", "testData2");
             cache->refer("test/data3", "testData3");
+            break;
+        case 3:
+            break;
+        case 4:
             break;
         default:
             break;
@@ -78,40 +80,9 @@ bool VeinsInetSampleApplication::startApplication()
     // host[0] requests at t=16s
     if (getParentModule()->getIndex() == 1) {
         auto callback = [this]() {
-
-
-            DataServer* dataserver = (DataServer*)(getParentModule()->getSubmodule("dataServer"));
-
-            auto sendPayload = makeShared<DataRequestMessage>();
-            auto sendingPacket = createPacket("cache request");
-
-            timestampPayload(sendPayload);
-            sendPayload->setChunkLength(B(512));
-            sendPayload->setRequesterAddress(myAddress.c_str());
-            sendPayload->setDataId("test/data3");
-            sendingPacket->insertAtBack(sendPayload);
-
-
-            sendDirect(sendingPacket.release(), dataserver->gate("socketIn"));
-
-
-            /*
-            getParentModule()->getDisplayString().setTagArg("i", 1, "red");
-
-            auto sendPayload = makeShared<DataRequestMessage>();
-            auto sendingPacket = createPacket("cache request");
-
-            timestampPayload(sendPayload);
-            sendPayload->setChunkLength(B(512));
-            sendPayload->setRequesterAddress(myAddress.c_str());
-            sendPayload->setDataId("test/data3");
-
-            sendingPacket->insertAtBack(sendPayload);
-            sendPacket(std::move(sendingPacket));
-            */
-
+            startSearch("test/data1");
         };
-        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(1, SIMTIME_S)));
+        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(15, SIMTIME_S)));
     }
 
     return true;
@@ -134,58 +105,109 @@ void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
     // To Do: better packet detection
     //
     if (!strcmp(pk->peekData()->getClassName(), "DataRequestMessage")){
-        // disassemble packet
-        auto payloadReceived = pk->peekAtFront<DataRequestMessage>();
-        string requesterAddress = payloadReceived->getRequesterAddress();
-        string dataId = payloadReceived->getDataId();
-
-        // log received message
-        cout << "Host: " << myAddress << " Received packet: " << payloadReceived << " From: " << requesterAddress  <<  " Requesting: " << dataId << endl;
-
-        // ignore our requests
-        if (!strcmp(myAddress.c_str(), requesterAddress.c_str())) {
-            cout << "discarding - own request" << endl;
-        } else if (cache->containsDataAt(payloadReceived->getDataId())){
-            cout << "in my cache" << endl;
-            // if its in the cache generate a reply message
-            auto replyPayload = makeShared<DataReplyMessage>();
-            timestampPayload(replyPayload);
-            replyPayload->setRequesterAddress(requesterAddress.c_str());
-            replyPayload->setData(cache->getDataAt(dataId.c_str()).c_str());
-            replyPayload->setChunkLength(B(512));
-            replyPayload->setDataId(dataId.c_str());
-
-            // send message
-            auto replyPacket = createPacket("cache reply");
-            replyPacket->insertAtBack(replyPayload);
-            sendPacket(std::move(replyPacket));
-            cout << "reply sent" << endl;
-        } else {
-            cout << "not in my cache" << endl;
-        }
-        cout << endl;
+        processDataRequestMessage(pk);
     } else if (!strcmp(pk->peekData()->getClassName(), "DataReplyMessage")){
-        // disassemble packet
-        auto payloadReceived = pk->peekAtFront<DataReplyMessage>();
-        string requesterAddress = payloadReceived->getRequesterAddress();
-        string dataId = payloadReceived->getDataId();
-        string data = payloadReceived->getData();
-
-        // log received message
-        cout << "Host: " << myAddress << " Received packet: " << payloadReceived << " From: " << requesterAddress <<  " Requesting: " << dataId << " Data: " << data << endl;
-
-        // ignore replies not for ourself
-        if (strcmp(myAddress.c_str(), payloadReceived->getRequesterAddress())) {
-            cout << "discarding - not for me" << endl;
-        } else {
-            cout << "for me - saving in my cache" << endl;
-            // save in the cache
-            cache->refer(dataId, data);
-            cache->display();
-            return;
-        }
-        cout << endl;
+        processDataReplyMessage(pk);
     } else {
-        cout << pk->peekData()->getClassName() << endl;
+        processOtherMessage(pk);
     }
+}
+
+void VeinsInetSampleApplication::startSearch(string dataId) {
+    cout<< "begin search for " << dataId << endl;
+
+    if (cache->containsDataAt(dataId)){
+        cout << "found in cache" << endl;
+        return;
+    } else {
+        // check dataServer
+        cout<< "not found in cache - asking data server" << endl;
+        auto sendPayload = makeShared<DataRequestMessage>();
+        auto sendingPacket = createPacket("cache request");
+
+        timestampPayload(sendPayload);
+        sendPayload->setChunkLength(B(512));
+        sendPayload->setRequesterAddress(myAddress.c_str());
+        sendPayload->setDataId(dataId.c_str());
+        sendingPacket->insertAtBack(sendPayload);
+        sendDirect(sendingPacket.release(), dataServer->gate("socketIn"));
+    }
+}
+
+void VeinsInetSampleApplication::startExternalSearch(string dataId) {
+    cout << "sending externally" << endl;
+    auto sendPayload = makeShared<DataRequestMessage>();
+    auto sendingPacket = createPacket("cache request");
+    timestampPayload(sendPayload);
+    sendPayload->setChunkLength(B(512));
+    sendPayload->setRequesterAddress(myAddress.c_str());
+    sendPayload->setDataId(dataId.c_str());
+    sendingPacket->insertAtBack(sendPayload);
+    sendPacket(std::move(sendingPacket));
+}
+
+void VeinsInetSampleApplication::processDataRequestMessage(std::shared_ptr<inet::Packet> pk) {
+    // disassemble packet
+    auto payloadReceived = pk->peekAtFront<DataRequestMessage>();
+    string requesterAddress = payloadReceived->getRequesterAddress();
+    string dataId = payloadReceived->getDataId();
+
+    // log received message
+    cout << "Host: " << myAddress << " Received packet: " << payloadReceived << " From: " << requesterAddress  <<  " Requesting: " << dataId << endl;
+
+    // ignore our requests
+    if (!strcmp(myAddress.c_str(), requesterAddress.c_str())) {
+        cout << "discarding - own request" << endl;
+    } else if (cache->containsDataAt(payloadReceived->getDataId())){
+        cout << "in my cache" << endl;
+        // if its in the cache generate a reply message
+        auto replyPayload = makeShared<DataReplyMessage>();
+        timestampPayload(replyPayload);
+        replyPayload->setRequesterAddress(requesterAddress.c_str());
+        replyPayload->setData(cache->getDataAt(dataId.c_str()).c_str());
+        replyPayload->setChunkLength(B(512));
+        replyPayload->setDataId(dataId.c_str());
+
+        // send message
+        auto replyPacket = createPacket("cache reply");
+        replyPacket->insertAtBack(replyPayload);
+        sendPacket(std::move(replyPacket));
+        cout << "reply sent" << endl;
+    } else {
+        cout << "not in my cache" << endl;
+    }
+    cout << endl;
+}
+
+void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::Packet> pk) {
+    // disassemble packet
+    auto payloadReceived = pk->peekAtFront<DataReplyMessage>();
+    string requesterAddress = payloadReceived->getRequesterAddress();
+    string dataId = payloadReceived->getDataId();
+    string data = payloadReceived->getData();
+
+    // log received message
+    cout << "Host: " << myAddress << " Received packet: " << payloadReceived << " From: " << requesterAddress <<  " Requesting: " << dataId << " Data: " << data << endl;
+
+
+
+    if (data.empty())
+    {
+        // return packet was empty, ask externally
+        cout << "return packet was empty" << endl;
+        startExternalSearch(dataId);
+    }
+    else
+    {
+        cout << "saving in my cache" << endl;
+        // save in the cache
+        cache->refer(dataId, data);
+        cache->display();
+        return;
+    }
+    cout << endl;
+}
+
+void VeinsInetSampleApplication::processOtherMessage(std::shared_ptr<inet::Packet> pk) {
+    cout << pk->peekData()->getClassName() << endl;
 }
