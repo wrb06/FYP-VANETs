@@ -17,6 +17,7 @@
 #define __V2V_CACHING_DATASERVER_H_
 
 #include <omnetpp.h>
+#include <unordered_map>
 #include "veins_inet/veins_inet.h"
 #include "inet/common/packet/Packet.h"
 #include "veins_inet/VeinsInetApplicationBase.h"
@@ -28,12 +29,18 @@ using namespace std;
  */
 class DataServer : public cSimpleModule
 {
+private:
+    unordered_map<string, string> hashmap;
+
 protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
 
 public:
+    void display();
     string getDataAt(string name);
+    bool containsDataAt(string dataId);
+    void refer(string name, string data);
 };
 
 #endif

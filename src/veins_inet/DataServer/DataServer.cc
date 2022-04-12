@@ -32,30 +32,54 @@ using namespace inet;
 
 void DataServer::initialize()
 {
-    // TODO - Generated method body12
+    // TODO - Generated method body
 }
 
 void DataServer::handleMessage(cMessage *msg)
 {
-    auto mainApp = getParentModule()->getSubmodule("app", 0);
-    cout << mainApp->getFullPath() << endl;
+    // receive a request
+    Packet* pk = check_and_cast<Packet*>(msg);
+    auto payloadReceived = pk->peekAtFront<DataRequestMessage>();
+    delete msg;
 
+    auto mainApp = getParentModule()->getSubmodule("app", 0);
     auto replyPayload = makeShared<DataReplyMessage>();
-    replyPayload->setRequesterAddress("rad");
-    replyPayload->setData("data");
+
+    replyPayload->setRequesterAddress(payloadReceived->getRequesterAddress());
     replyPayload->setChunkLength(B(512));
-    replyPayload->setDataId("dataid");
+    replyPayload->setDataId(payloadReceived->getDataId());
+    if (this->containsDataAt(payloadReceived->getDataId()))
+    {
+        replyPayload->setData(getDataAt(payloadReceived->getDataId()).c_str());
+    }
 
     // send message
     auto replyPacket = new Packet("cache reply");
     replyPacket->insertAtBack(replyPayload);
     replyPacket->addTag<inet::L3AddressInd>();
 
-
-    sendDirect(replyPacket, mainApp->gate("messagesIn"));
+    sendDirect(replyPacket, SimTime(100, SIMTIME_MS), SimTime(100, SIMTIME_MS),  mainApp->gate("messagesIn"));
 
 }
 
 string DataServer::getDataAt(string name){
-    return name;
+    return hashmap[name];
+}
+
+bool DataServer::containsDataAt(string dataId) {
+    return !(hashmap.find(dataId) == hashmap.end());
+}
+
+void DataServer::display() {
+    // Iterate in the deque and print
+    // all the elements in it
+    cout << this->getFullPath() << endl;
+    for (auto it = hashmap.begin(); it != hashmap.end(); ++it){
+        cout<< it->first << " " << it->second << endl;
+    }
+    cout << endl;
+}
+
+void DataServer::refer(string name, string data) {
+    hashmap[name] = data;
 }
