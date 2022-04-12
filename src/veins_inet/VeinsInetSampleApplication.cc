@@ -54,7 +54,7 @@ bool VeinsInetSampleApplication::startApplication()
     cache = (Cache*)(getParentModule()->getSubmodule("cache"));
     dataServer = (DataServer*)(getParentModule()->getSubmodule("dataServer"));
 
-    // setup cache
+    // setup cache and data store
     switch (getParentModule()->getIndex()){
         case 0:
             break;
@@ -72,13 +72,14 @@ bool VeinsInetSampleApplication::startApplication()
             break;
     }
     cache->display();
+    dataServer->display();
 
-    // host[0] requests at t=16s
+    // host[1] requests at t=16s
     if (getParentModule()->getIndex() == 1) {
         auto callback = [this]() {
             startSearch("test/data1");
         };
-        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(15, SIMTIME_S)));
+        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(16, SIMTIME_S)));
     }
 
     return true;
@@ -86,6 +87,8 @@ bool VeinsInetSampleApplication::startApplication()
 
 bool VeinsInetSampleApplication::stopApplication()
 {
+    cache->display();
+    dataServer->display();
     return true;
 }
 
@@ -93,13 +96,8 @@ VeinsInetSampleApplication::~VeinsInetSampleApplication()
 {
 }
 
-
-
 void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
 {
-    //
-    // To Do: better packet detection
-    //
     if (!strcmp(pk->peekData()->getClassName(), "DataRequestMessage")){
         processDataRequestMessage(pk);
     } else if (!strcmp(pk->peekData()->getClassName(), "DataReplyMessage")){
@@ -149,9 +147,12 @@ void VeinsInetSampleApplication::processDataRequestMessage(std::shared_ptr<inet:
     string dataId = payloadReceived->getDataId();
 
     // log received message
-    cout << "Host: " << myAddress << " Received packet: " << payloadReceived << " From: " << requesterAddress  <<  " Requesting: " << dataId << endl;
+    cout << "Host: " << myAddress
+         << " Received packet: " << payloadReceived
+         << " From: " << requesterAddress
+         << " Requesting: " << dataId << endl;
 
-    // ignore our requests
+    // ignore our own requests
     if (!strcmp(myAddress.c_str(), requesterAddress.c_str())) {
         cout << "discarding - own request" << endl;
     } else if (cache->containsDataAt(payloadReceived->getDataId())){
@@ -187,22 +188,27 @@ void VeinsInetSampleApplication::processDataRequestMessage(std::shared_ptr<inet:
 }
 
 void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::Packet> pk) {
-    // disassemble packet
+    // disassemble chuk
     auto payloadReceived = pk->peekAtFront<DataReplyMessage>();
     string requesterAddress = payloadReceived->getRequesterAddress();
     string dataId = payloadReceived->getDataId();
     string data = payloadReceived->getData();
+    bool broadcast = payloadReceived->getBroadcast();
 
     // log received message
-    cout << "Host: " << myAddress << " Received packet: " << payloadReceived << " RequesterAddress: " << requesterAddress << " Broadcast:  " << payloadReceived->getBroadcast() << " Requesting: " << dataId << " Data: " << data << endl;
-
-
+    cout << "Host: " << myAddress
+         << " Received packet: " << payloadReceived
+         << " RequesterAddress: " << requesterAddress
+         << " Broadcast:  " << broadcast
+         << " Requesting: " << dataId
+         << " Data: " << data
+         << endl;
 
     if (data.empty())
     {
         // return packet was empty, ask externally
         cout << "return packet was empty" << endl;
-        if (!strcmp(payloadReceived->getRequesterAddress(), getParentModule()->getFullPath().c_str())){
+        if (!strcmp(requesterAddress, getParentModule()->getFullPath().c_str())){
             startExternalSearch(dataId);
         }
     }
@@ -219,10 +225,12 @@ void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::P
             auto replyPayload = makeShared<DataReplyMessage>();
 
             timestampPayload(replyPayload);
-            replyPayload->setRequesterAddress(payloadReceived->getRequesterAddress());
-            replyPayload->setData(payloadReceived->getData());
+            // setup new packet
+            replyPayload->setRequesterAddress(requesterAddress);
+            replyPayload->setData(data);
             replyPayload->setChunkLength(B(512));
-            replyPayload->setDataId(payloadReceived->getDataId());
+            replyPayload->setDataId(dataId);
+            replyPayload->setBroadcast(false);
 
             replyPacket->insertAtBack(replyPayload);
             sendPacket(std::move(replyPacket));
@@ -231,7 +239,7 @@ void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::P
     cout << endl;
 }
 
-
 void VeinsInetSampleApplication::processOtherMessage(std::shared_ptr<inet::Packet> pk) {
     cout << pk->peekData()->getClassName() << endl;
 }
+

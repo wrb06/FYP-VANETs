@@ -74,11 +74,10 @@ bool DataServer::containsDataAt(string dataId) {
 }
 
 void DataServer::display() {
-    // Iterate in the deque and print
-    // all the elements in it
+    // Iterate over the hashmap and print all the elements in it
     cout << this->getFullPath() << endl;
     for (auto it = hashmap.begin(); it != hashmap.end(); ++it){
-        cout<< it->first << " " << it->second << endl;
+        cout<<"    " <<it->first << " " << it->second << endl;
     }
     cout << endl;
 }

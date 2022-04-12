@@ -43,9 +43,6 @@ Cache::Cache(int n)
     csize = n;
 }
 
-
-
-// Refers key x with in the LRU cache
 void Cache::refer(string name, string data)
 {
     // not present in cache
@@ -77,8 +74,7 @@ void Cache::refer(string name, string data)
 void Cache::display()
 {
 
-    // Iterate in the deque and print
-    // all the elements in it
+    // Iterate over the hashmap and print all the elements in its
     cout << this->getFullPath() << endl;
     for (auto it = keys.begin(); it != keys.end(); it++){
         cout << "    " << (*it) << " ";
