@@ -52,6 +52,9 @@ void DataServer::handleMessage(cMessage *msg)
     {
         replyPayload->setData(getDataAt(payloadReceived->getDataId()).c_str());
     }
+    if (strcmp(payloadReceived->getRequesterAddress(), mainApp->getFullName())){
+        replyPayload->setBroadcast(true);
+    }
 
     // send message
     auto replyPacket = new Packet("cache reply");
