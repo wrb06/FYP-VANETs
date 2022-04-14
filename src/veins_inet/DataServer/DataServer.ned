@@ -23,6 +23,9 @@ simple DataServer
     parameters:
         @display("i=block/table2");
         
+        @signal[receive](type="long");
+        @statistic[requestsReceived](title="requests received"; source="receive"; record=vector,stats; interpolationmode=none);
+        
     gates:
         input socketIn;
         output socketOut;

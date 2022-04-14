@@ -32,11 +32,13 @@ using namespace inet;
 
 void DataServer::initialize()
 {
-    // TODO - Generated method body
+    this->receiveSignal = registerSignal("receive");
 }
 
 void DataServer::handleMessage(cMessage *msg)
 {
+    emit(this->receiveSignal, ++requestsReceived);
+
     // receive a request
     Packet* pk = check_and_cast<Packet*>(msg);
     auto payloadReceived = pk->peekAtFront<DataRequestMessage>();

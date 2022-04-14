@@ -30,6 +30,8 @@ using namespace std;
 class DataServer : public cSimpleModule
 {
 private:
+    long requestsReceived = 0;
+    simsignal_t receiveSignal;
     unordered_map<string, string> hashmap;
 
 protected:
