@@ -52,7 +52,7 @@ void DataServer::handleMessage(cMessage *msg)
     {
         replyPayload->setData(getDataAt(payloadReceived->getDataId()).c_str());
     }
-    if (strcmp(payloadReceived->getRequesterAddress(), mainApp->getFullName())){
+    if (strcmp(payloadReceived->getRequesterAddress(), getParentModule()->getFullPath().c_str())){
         replyPayload->setBroadcast(true);
     }
 
@@ -61,7 +61,7 @@ void DataServer::handleMessage(cMessage *msg)
     replyPacket->insertAtBack(replyPayload);
     replyPacket->addTag<inet::L3AddressInd>();
 
-    sendDirect(replyPacket, SimTime(100, SIMTIME_MS), SimTime(100, SIMTIME_MS),  mainApp->gate("messagesIn"));
+    sendDirect(replyPacket, SimTime(rand()%100, SIMTIME_MS), SimTime(rand()%100, SIMTIME_MS),  mainApp->gate("messagesIn"));
 
 }
 

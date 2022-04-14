@@ -81,7 +81,7 @@ bool VeinsInetSampleApplication::startApplication()
         auto callback = [this]() {
             startSearch("/test/dataId1");
         };
-        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(5+rand()%10, SIMTIME_S)));
+        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(10+rand()%10, SIMTIME_S)));
     }
 
     return true;
@@ -110,7 +110,7 @@ void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
 }
 
 void VeinsInetSampleApplication::startSearch(string dataId) {
-    cout<< "begin search for " << dataId << endl;
+    cout << getParentModule()->getFullName() << " begin search for " << dataId << endl;
 
     if (cache->containsDataAt(dataId)){
         cout << "found in cache" << endl;
