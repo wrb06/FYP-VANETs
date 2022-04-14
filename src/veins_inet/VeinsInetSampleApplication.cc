@@ -49,6 +49,9 @@ VeinsInetSampleApplication::VeinsInetSampleApplication()
 
 bool VeinsInetSampleApplication::startApplication()
 {
+    // Initialise
+    this->initialize();
+
     // add a message gate
     addGate("messagesIn", cGate::INPUT);
 
@@ -67,23 +70,17 @@ bool VeinsInetSampleApplication::startApplication()
     dataServer->display();
 
     // setup request
-    if (getParentModule()->getIndex() == 0) {
-        auto callback = [this]() {
-            //auto it = availableData.begin();
-            //std::advance(it, rand()%availableData.size());
-            //auto searchFor = *it;
-            //cout << "searching for "<< searchFor.first << endl;
-            //startSearch(searchFor.first);
-            startSearch("/test/dataId1");
-        };
-        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(5, SIMTIME_S)));
-    } else {
-        auto callback = [this]() {
-            startSearch("/test/dataId1");
-        };
-        timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(10+rand()%10, SIMTIME_S)));
-    }
 
+    auto callback = [this]() {
+        //search for a random bit of data
+        auto it = availableData.begin();
+        std::advance(it, rand()%availableData.size());
+        auto searchFor = *it;
+        cout << "searching for "<< searchFor.first << endl;
+        startSearch(searchFor.first);
+
+    };
+    timerManager.create(veins::TimerSpecification(callback).interval(SimTime(5 + rand()%5, SIMTIME_S)).openEnd());
     return true;
 }
 
@@ -110,9 +107,12 @@ void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
 }
 
 void VeinsInetSampleApplication::startSearch(string dataId) {
+    this->logStarted(dataId);
+
     cout << getParentModule()->getFullName() << " begin search for " << dataId << endl;
 
     if (cache->containsDataAt(dataId)){
+        this->logReceived(dataId);
         cout << "found in cache" << endl;
         return;
     } else {
@@ -190,7 +190,7 @@ void VeinsInetSampleApplication::processDataRequestMessage(std::shared_ptr<inet:
 }
 
 void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::Packet> pk) {
-    // disassemble chuk
+    // disassemble chunk
     auto payloadReceived = pk->peekAtFront<DataReplyMessage>();
     string requesterAddress = payloadReceived->getRequesterAddress();
     string dataId = payloadReceived->getDataId();
@@ -236,6 +236,8 @@ void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::P
 
             replyPacket->insertAtBack(replyPayload);
             sendPacket(std::move(replyPacket));
+        } else {
+            logReceived(dataId);
         }
     }
     cout << endl;
@@ -245,3 +247,31 @@ void VeinsInetSampleApplication::processOtherMessage(std::shared_ptr<inet::Packe
     cout << pk->peekData()->getClassName() << endl;
 }
 
+void VeinsInetSampleApplication::initialize() {
+    this->packetReceivedTime = registerSignal("receiveTime");
+    cout<<"initialised"<<endl;
+
+}
+
+void VeinsInetSampleApplication::logReceived(string dataId) {
+    double currentTime = simTime().dbl();
+
+    for (auto value : requests){
+        if (value.first == dataId){
+            emit(this->packetReceivedTime, (long)(currentTime - value.second.dbl()));
+            remove(requests.begin(), requests.end(), value);
+            return;
+        }
+    }
+}
+
+void VeinsInetSampleApplication::logStarted(string dataId) {
+    for (auto value : requests){
+        // 1s timeout for requests
+        if (value.first == dataId && simTime().dbl() > value.second.dbl() + 1.0 ){
+            value.second = simTime();
+            return;
+        }
+    }
+    requests.push_back(std::make_pair(dataId, simTime().dbl()));
+}

@@ -28,9 +28,14 @@
 #include "veins_inet/VeinsInetApplicationBase.h"
 
 class VEINS_INET_API VeinsInetSampleApplication : public veins::VeinsInetApplicationBase {
+private:
+
 protected:
     Cache* cache;
     DataServer* dataServer;
+
+    vector<pair<string, simtime_t>> requests;
+    simsignal_t packetReceivedTime;
 
     unordered_map<string, string> availableData = {
             {"/test/dataId1", "Test data one"},
@@ -43,7 +48,6 @@ protected:
             {"/test/dataId8", "Test data eight"},
     };
 
-protected:
     virtual bool startApplication() override;
     virtual bool stopApplication() override;
     virtual void processPacket(std::shared_ptr<inet::Packet> pk) override;
@@ -52,6 +56,9 @@ protected:
     virtual void processDataRequestMessage(std::shared_ptr<inet::Packet> pk);
     virtual void processDataReplyMessage(std::shared_ptr<inet::Packet> pk);
     virtual void processOtherMessage(std::shared_ptr<inet::Packet> pk);
+    virtual void initialize();
+    virtual void logReceived(string dataId);
+    virtual void logStarted(string dataId);
 
 public:
     VeinsInetSampleApplication();

@@ -28,5 +28,9 @@ simple VeinsInetSampleApplication extends VeinsInetApplicationBase
 {
     parameters:
         @class(VeinsInetSampleApplication);
+        
+        @signal[receiveTime](type="double");
+        
+        @statistic[RequestReceiveTime](title = "request time"; source="receiveTime"; record=vector, stats; interpolationmode=none);
     gates:
 }
