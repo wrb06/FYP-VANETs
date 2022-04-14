@@ -22,7 +22,15 @@ simple Cache
 {
     parameters:
         @display("i=block/table2");
-
+        
+        @signal[receive](type="long");
+        @signal[answer](type="long");
+        @signal[hitRate](type="double");
+        
+        @statistic[requestsReceived](title="requests received"; source="receive"; record=vector,stats; interpolationmode=none);
+		@statistic[requestsAnswered](title="requests answered"; source="answer"; record=vector,stats; interpolationmode=none);
+		@statistic[hitRate](title="hit rate"; source="hitRate"; record=vector,stats; interpolationmode=none);
+    
     gates:
         input socketIn;
         output socketOut;
