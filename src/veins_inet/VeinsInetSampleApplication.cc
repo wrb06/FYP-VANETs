@@ -52,6 +52,9 @@ bool VeinsInetSampleApplication::startApplication()
     // Initialise
     this->initialize();
 
+    // setup request vector
+    this->requests = {};
+
     // add a message gate
     addGate("messagesIn", cGate::INPUT);
 
@@ -69,19 +72,18 @@ bool VeinsInetSampleApplication::startApplication()
     cache->display();
     dataServer->display();
 
-    // setup request
-
+    // setup requests
     auto callback = [this]() {
         //search for a random bit of data
         auto it = availableData.begin();
         std::advance(it, rand()%availableData.size());
         auto searchFor = *it;
-        cout << "searching for "<< searchFor.first << endl;
+        //cout << "searching for "<< searchFor.first << endl;
         startSearch(searchFor.first);
 
     };
     timerManager.create(veins::TimerSpecification(callback).interval(SimTime(5 + rand()%5, SIMTIME_S)).openEnd());
-    return true;
+
 }
 
 bool VeinsInetSampleApplication::stopApplication()
@@ -109,15 +111,15 @@ void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
 void VeinsInetSampleApplication::startSearch(string dataId) {
     this->logStarted(dataId);
 
-    cout << getParentModule()->getFullName() << " begin search for " << dataId << endl;
+    //cout << getParentModule()->getFullName() << " begin search for " << dataId << endl;
 
-    if (cache->containsDataAt(dataId)){
+    if (cache->containsDataAt(dataId) && this->cachingEnabled){
         this->logReceived(dataId);
-        cout << "found in cache" << endl;
+        //cout << "found in cache" << endl;
         return;
     } else {
         // check dataServer
-        cout<< "not found in cache - asking data server" << endl;
+        //cout<< "not found in cache - asking data server" << endl;
         auto sendPayload = makeShared<DataRequestMessage>();
         auto sendingPacket = createPacket("cache request");
 
@@ -131,7 +133,7 @@ void VeinsInetSampleApplication::startSearch(string dataId) {
 }
 
 void VeinsInetSampleApplication::startExternalSearch(string dataId) {
-    cout << "sending externally" << endl;
+    //cout << "sending externally" << endl;
     auto sendPayload = makeShared<DataRequestMessage>();
     auto sendingPacket = createPacket("cache request");
     timestampPayload(sendPayload);
@@ -149,16 +151,16 @@ void VeinsInetSampleApplication::processDataRequestMessage(std::shared_ptr<inet:
     string dataId = payloadReceived->getDataId();
 
     // log received message
-    cout << "Host: " << myAddress
-         << " Received packet: " << payloadReceived
-         << " From: " << requesterAddress
-         << " Requesting: " << dataId << endl;
+    //cout << "Host: " << myAddress
+    //     << " Received packet: " << payloadReceived
+    //     << " From: " << requesterAddress
+    //     << " Requesting: " << dataId << endl;
 
     // ignore our own requests
     if (!strcmp(myAddress.c_str(), requesterAddress.c_str())) {
-        cout << "discarding - own request" << endl;
-    } else if (cache->containsDataAt(payloadReceived->getDataId())){
-        cout << "in my cache" << endl;
+        //cout << "discarding - own request" << endl;
+    } else if (cache->containsDataAt(payloadReceived->getDataId()) && this->cachingEnabled){
+        //cout << "in my cache" << endl;
         // if its in the cache generate a reply message
         auto replyPayload = makeShared<DataReplyMessage>();
         timestampPayload(replyPayload);
@@ -171,10 +173,10 @@ void VeinsInetSampleApplication::processDataRequestMessage(std::shared_ptr<inet:
         auto replyPacket = createPacket("cache reply");
         replyPacket->insertAtBack(replyPayload);
         sendPacket(std::move(replyPacket));
-        cout << "reply sent" << endl;
+        //cout << "reply sent" << endl;
     } else {
         // check dataServer
-        cout<< "not found in cache - asking data server" << endl;
+        //cout<< "not found in cache - asking data server" << endl;
         auto sendPayload = makeShared<DataRequestMessage>();
         auto sendingPacket = createPacket("data request");
 
@@ -186,7 +188,7 @@ void VeinsInetSampleApplication::processDataRequestMessage(std::shared_ptr<inet:
         sendDirect(sendingPacket.release(), dataServer->gate("socketIn"));
 
     }
-    cout << endl;
+    //cout << endl;
 }
 
 void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::Packet> pk) {
@@ -198,31 +200,33 @@ void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::P
     bool broadcast = payloadReceived->getBroadcast();
 
     // log received message
-    cout << "Host: " << myAddress
-         << " Received packet: " << payloadReceived
-         << " RequesterAddress: " << requesterAddress
-         << " Broadcast:  " << broadcast
-         << " Requesting: " << dataId
-         << " Data: " << data
-         << endl;
+    //cout << "Host: " << myAddress
+    //     << " Received packet: " << payloadReceived
+    //     << " RequesterAddress: " << requesterAddress
+    //     << " Broadcast:  " << broadcast
+    //     << " Requesting: " << dataId
+    //     << " Data: " << data
+    //     << endl;
 
     if (data.empty())
     {
         // return packet was empty, ask externally
-        cout << "return packet was empty" << endl;
+        //cout << "return packet was empty" << endl;
         if (!strcmp(requesterAddress.c_str(), getParentModule()->getFullPath().c_str())){
             startExternalSearch(dataId);
         }
     }
     else
     {
-        cout << "saving in my cache" << endl;
+        //cout << "saving in my cache" << endl;
         // save in the cache
+        if (this->cachingEnabled){
         cache->refer(dataId, data);
-        cache->display();
+        //cache->display();
+        }
 
         if (payloadReceived->getBroadcast()){
-            cout << "forwarding" << endl;
+            //cout << "forwarding" << endl;
             auto replyPacket = createPacket("data reply");
             auto replyPayload = makeShared<DataReplyMessage>();
 
@@ -240,38 +244,55 @@ void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::P
             logReceived(dataId);
         }
     }
-    cout << endl;
+    //cout << endl;
 }
 
 void VeinsInetSampleApplication::processOtherMessage(std::shared_ptr<inet::Packet> pk) {
-    cout << pk->peekData()->getClassName() << endl;
+    //cout << pk->peekData()->getClassName() << endl;
 }
 
 void VeinsInetSampleApplication::initialize() {
     this->packetReceivedTime = registerSignal("receiveTime");
-    cout<<"initialised"<<endl;
+    //cout<<"initialised"<<endl;
 
 }
 
 void VeinsInetSampleApplication::logReceived(string dataId) {
+
     double currentTime = simTime().dbl();
 
-    for (auto value : requests){
-        if (value.first == dataId){
-            emit(this->packetReceivedTime, (long)(currentTime - value.second.dbl()));
-            remove(requests.begin(), requests.end(), value);
-            return;
+    for (auto it = requests.begin(); it != requests.end(); it++){
+        if ((*it).first == dataId && (currentTime - (*it).second.dbl()) < 1){
+            emit(this->packetReceivedTime, (currentTime - (*it).second.dbl()));
+            cout << getFullPath() << " received message " << (*it).first << " at " << simTime() << endl;
+            cout << "removed" << (*it).first << "took" <<  (currentTime - (*it).second.dbl()) << endl;
+            requests.erase(it);
+            break;
         }
     }
+
+    for (auto i : requests){
+        cout << i.first <<" "<< i.second << endl;
+    }
+    cout << endl;
+    return;
 }
 
 void VeinsInetSampleApplication::logStarted(string dataId) {
-    for (auto value : requests){
+    for (auto it = requests.begin(); it != requests.end(); it++){
         // 1s timeout for requests
-        if (value.first == dataId && simTime().dbl() > value.second.dbl() + 1.0 ){
-            value.second = simTime();
+        if ((*it).first == dataId){
+            (*it).second = simTime().dbl();
             return;
         }
     }
     requests.push_back(std::make_pair(dataId, simTime().dbl()));
+
+
+    cout << getFullPath() << " added message " << dataId << " at " << simTime() << endl;
+    for (auto i : requests){
+       cout << i.first <<" "<< i.second << endl;
+    }
+    cout<<endl;
+    return;
 }

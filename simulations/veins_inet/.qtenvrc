@@ -13,3 +13,595 @@ fast-min-playback-speed=1
 fast-max-playback-speed=1e+6
 fast-min-animation-speed=nan
 fast-max-animation-speed=nan
+
+[Inspector-0]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-1]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-2]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-3]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-4]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-5]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-6]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-7]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-8]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-9]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-10]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-11]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-12]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-13]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-14]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-15]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-16]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-17]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-18]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-19]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-20]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-21]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-22]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-23]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-24]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-25]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-26]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-27]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-28]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-29]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-30]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-31]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-32]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-33]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-34]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-35]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-36]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-37]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-38]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-39]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-40]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-41]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-42]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-43]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-44]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-45]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-46]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-47]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-48]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-49]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-50]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-51]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-52]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-53]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-54]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-55]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-56]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-57]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-58]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-59]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-60]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-61]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-62]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-63]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-64]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-65]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-66]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-67]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-68]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-69]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-70]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-71]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-72]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false
+
+[Inspector-73]
+object=Scenario.canvas.rootFigure.roads.
+classname=omnetpp::cPolylineFigure
+id=@Variant(\0\0\0\x81\xff\xff\xff\xff\xff\xff\xff\xff)
+type=1
+geom=@Rect(760 382 400 300)
+fullscreen=false

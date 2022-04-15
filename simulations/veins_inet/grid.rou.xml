@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2022-04-11 15:11:32 by Eclipse SUMO netedit Version 1.10.0
+<!-- generated on 2022-04-15 00:14:54 by Eclipse SUMO netedit Version 1.10.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="C:\Users\William\Documents\GitHub\fyp\simulations\veins_inet\grid.net.xml"/>
+    </input>
 
     <output>
         <output-file value="C:\Users\William\Documents\GitHub\fyp\simulations\veins_inet\grid.net.xml"/>
     </output>
 
     <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.max-grade.fix value="false"/>
         <offset.disable-normalization value="true"/>
+        <lefthand value="false"/>
     </processing>
 
     <junctions>
         <no-turnarounds value="true"/>
+        <junctions.corner-detail value="5"/>
+        <junctions.limit-turn-speed value="5.5"/>
+        <rectangular-lane-cut value="false"/>
     </junctions>
+
+    <pedestrian>
+        <walkingareas value="false"/>
+    </pedestrian>
 
     <netedit>
         <route-files value="C:\Users\William\Documents\GitHub\fyp\simulations\veins_inet\grid.rou.xml"/>
@@ -27,9 +41,8 @@
 -->
 
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
-    <trip id="vehicle_0" depart="0.00" from="gneE0" to="-gneE3" via="gneE7 gneE8 gneE10 gneE12 gneE5 gneE6"/>
-    <trip id="vehicle_1" depart="0.00" from="gneE0" to="gneE4" via="gneE1 -gneE1"/>
-    <trip id="vehicle_2" depart="0.00" from="gneE12" to="-gneE2" via="-gneE4 -gneE3 gneE7"/>
-    <trip id="vehicle_3" depart="0.00" from="-gneE1" to="-gneE4" via="gneE10 gneE5 -gneE7 -gneE3"/>
-    <trip id="vehicle_4" depart="0.00" from="-gneE2" to="gneE4" via="gneE1 -gneE4 -gneE1"/>
+    <trip id="vehicle_0" depart="0.00" from="-gneE7" to="gneE4" via="gneE3 -gneE12 -gneE8 gneE3 -gneE5 -gneE8 -gneE1 -gneE4 gneE9 -gneE2 gneE2 gneE0 -gneE0 -gneE1 gneE1 gneE10 -gneE10 -gneE8 gneE8 gneE5 -gneE5 gneE6 -gneE6 -gneE3 -gneE2 -gneE1"/>
+    <trip id="vehicle_1" depart="0.00" from="-gneE4" to="-gneE3" via="gneE2 -gneE2 -gneE1 gneE9 -gneE9 gneE9 gneE1 -gneE4 gneE4 -gneE5 gneE5 -gneE6 gneE6 gneE3 gneE0 -gneE0 gneE7 -gneE7 -gneE8 -gneE10 gneE10 gneE8 gneE10 -gneE12 gneE12 -gneE12"/>
+    <trip id="vehicle_2" depart="0.00" from="gneE0" to="-gneE7" via="-gneE0 -gneE1 gneE1 -gneE9 -gneE2 -gneE3 gneE6 gneE5 -gneE5 -gneE6 gneE3 -gneE9 gneE9 gneE4 -gneE4 -gneE12 gneE12 -gneE8 -gneE10 gneE10 gneE8 gneE7"/>
+    <trip id="vehicle_3" depart="0.00" from="-gneE0" to="gneE3" via="gneE0 -gneE2 gneE2 -gneE1 -gneE4 gneE1 gneE9 gneE4 -gneE3 -gneE6 -gneE3 -gneE5 gneE7 gneE8 gneE10 gneE9 -gneE8 -gneE9 gneE10 -gneE10 -gneE7 -gneE12 gneE12 gneE5 gneE6"/>
 </routes>

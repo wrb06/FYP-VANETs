@@ -29,6 +29,7 @@
 
 class VEINS_INET_API VeinsInetSampleApplication : public veins::VeinsInetApplicationBase {
 private:
+    bool cachingEnabled = false;
 
 protected:
     Cache* cache;
@@ -38,14 +39,23 @@ protected:
     simsignal_t packetReceivedTime;
 
     unordered_map<string, string> availableData = {
-            {"/test/dataId1", "Test data one"},
-            {"/test/dataId2", "Test data two"},
-            {"/test/dataId3", "Test data three"},
-            {"/test/dataId4", "Test data four"},
-            {"/test/dataId5", "Test data five"},
-            {"/test/dataId6", "Test data six"},
-            {"/test/dataId7", "Test data seven"},
-            {"/test/dataId8", "Test data eight"},
+            {"/test/dataId_0", "Test data zero"},
+            {"/test/dataId_1", "Test data one"},
+            {"/test/dataId_2", "Test data two"},
+            {"/test/dataId_3", "Test data three"},
+            {"/test/dataId_4", "Test data four"},
+            {"/test/dataId_5", "Test data five"},
+            {"/test/dataId_6", "Test data six"},
+            {"/test/dataId_7", "Test data seven"},
+            {"/test/dataId_8", "Test data eight"},
+            {"/test/dataId_9", "Test data nine"},
+            {"/test/dataId_10", "Test data ten"},
+            {"/test/dataId_A", "Test data a"},
+            {"/test/dataId_B", "Test data b"},
+            {"/test/dataId_C", "Test data c"},
+            {"/test/dataId_D", "Test data d"},
+            {"/test/dataId_E", "Test data e"},
+            {"/test/dataId_F", "Test data f"},
     };
 
     virtual bool startApplication() override;

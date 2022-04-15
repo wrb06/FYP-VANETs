@@ -34,6 +34,5 @@
 <launch>
     <copy file="grid.net.xml" />
     <copy file="grid.rou.xml" />
-    <copy file="grid.poly.xml" />
     <copy file="grid.sumocfg" type="config" />
 </launch>

@@ -63,7 +63,7 @@ void DataServer::handleMessage(cMessage *msg)
     replyPacket->insertAtBack(replyPayload);
     replyPacket->addTag<inet::L3AddressInd>();
 
-    sendDirect(replyPacket, SimTime(rand()%100, SIMTIME_MS), SimTime(rand()%100, SIMTIME_MS),  mainApp->gate("messagesIn"));
+    sendDirect(replyPacket, SimTime(rand()%100, SIMTIME_MS), 0,  mainApp->gate("messagesIn"));
 
 }
 
