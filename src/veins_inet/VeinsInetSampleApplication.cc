@@ -69,8 +69,8 @@ bool VeinsInetSampleApplication::startApplication()
         }
     }
     // display data
-    cache->display();
-    dataServer->display();
+    //cache->display();
+    //dataServer->display();
 
     // setup requests
     auto callback = [this]() {
@@ -82,7 +82,7 @@ bool VeinsInetSampleApplication::startApplication()
         startSearch(searchFor.first);
 
     };
-    timerManager.create(veins::TimerSpecification(callback).interval(SimTime(5 + rand()%5, SIMTIME_S)).openEnd());
+    timerManager.create(veins::TimerSpecification(callback).interval(SimTime(5, SIMTIME_S)).openEnd());
 
 }
 
@@ -264,17 +264,17 @@ void VeinsInetSampleApplication::logReceived(string dataId) {
     for (auto it = requests.begin(); it != requests.end(); it++){
         if ((*it).first == dataId && (currentTime - (*it).second.dbl()) < 1){
             emit(this->packetReceivedTime, (currentTime - (*it).second.dbl()));
-            cout << getFullPath() << " received message " << (*it).first << " at " << simTime() << endl;
-            cout << "removed" << (*it).first << "took" <<  (currentTime - (*it).second.dbl()) << endl;
+            //cout << getFullPath() << " received message " << (*it).first << " at " << simTime() << endl;
+            //cout << "removed" << (*it).first << "took" <<  (currentTime - (*it).second.dbl()) << endl;
             requests.erase(it);
             break;
         }
     }
 
-    for (auto i : requests){
-        cout << i.first <<" "<< i.second << endl;
-    }
-    cout << endl;
+    //for (auto i : requests){
+    //    cout << i.first <<" "<< i.second << endl;
+    //}
+    //cout << endl;
     return;
 }
 
@@ -289,10 +289,10 @@ void VeinsInetSampleApplication::logStarted(string dataId) {
     requests.push_back(std::make_pair(dataId, simTime().dbl()));
 
 
-    cout << getFullPath() << " added message " << dataId << " at " << simTime() << endl;
-    for (auto i : requests){
-       cout << i.first <<" "<< i.second << endl;
-    }
+    //cout << getFullPath() << " added message " << dataId << " at " << simTime() << endl;
+    //for (auto i : requests){
+    //   cout << i.first <<" "<< i.second << endl;
+    //}
     cout<<endl;
     return;
 }

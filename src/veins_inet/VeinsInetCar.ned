@@ -47,7 +47,7 @@ module VeinsInetCar extends AdhocHost
     submodules:
 
         cache: Cache {
-            @display("p=323.84616,75.38462");
+            @display("p=287.3,74.1");
         }
         dataServer: DataServer {
             @display("p=998.46155,75.38462");

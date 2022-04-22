@@ -1,0 +1,28 @@
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="C:\Users\William\Documents\GitHub\fyp\simulations\veins_inet\A14\osm.net.xml"/>
+        <route-files value="C:\Users\William\Documents\GitHub\fyp\simulations\veins_inet\A14\osm.passenger.trips.xml"/>
+        <additional-files value="C:\Users\William\Documents\GitHub\fyp\simulations\veins_inet\A14\osm.poly.xml"/>
+    </input>
+
+    <processing>
+        <ignore-route-errors value="true"/>
+    </processing>
+
+    <routing>
+        <device.rerouting.adaptation-steps value="18"/>
+        <device.rerouting.adaptation-interval value="10"/>
+    </routing>
+
+    <report>
+        <verbose value="true"/>
+        <duration-log.statistics value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <gui_only>
+        <gui-settings-file value="C:\Users\William\Documents\GitHub\fyp\simulations\veins_inet\A14\osm.view.xml"/>
+    </gui_only>
+
+<remote-port value="61345"/><seed value="0"/><random value="false"/></configuration>
