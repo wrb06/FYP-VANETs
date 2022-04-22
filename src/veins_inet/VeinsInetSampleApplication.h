@@ -29,7 +29,7 @@
 
 class VEINS_INET_API VeinsInetSampleApplication : public veins::VeinsInetApplicationBase {
 private:
-    bool cachingEnabled = true;
+    bool cachingEnabled = false;
 
 protected:
     Cache* cache;
