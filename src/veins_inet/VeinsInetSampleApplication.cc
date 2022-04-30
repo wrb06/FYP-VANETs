@@ -221,7 +221,7 @@ void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::P
         //cout << "saving in my cache" << endl;
         // save in the cache
         if (this->cachingEnabled){
-        cache->refer(dataId, data);
+        cache->saveData(dataId, data);
         //cache->display();
         }
 

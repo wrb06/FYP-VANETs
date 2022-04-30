@@ -16,13 +16,16 @@
 package v2v_caching.veins_inet.Cache;
 
 //
-// TODO auto-generated module
+// Cache network design file
+//
+// See Cache.h for description
 //
 simple Cache
 {
     parameters:
         @display("i=block/table2");
         
+        // signals and statistics for logging
         @signal[receive](type="long");
         @signal[answer](type="long");
         @signal[hitRate](type="double");

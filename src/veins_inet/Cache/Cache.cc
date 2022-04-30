@@ -20,14 +20,20 @@
 #include <iostream>
 
 using namespace std;
+using namespace omnetpp;
 
+/*
+ * Cache source file
+ */
 Define_Module(Cache);
 
 void Cache::initialize()
 {
+    // display variables whilst simulation is running
     WATCH(requestsReceived);
     WATCH(requestsAnswered);
 
+    // logging
     this->answerSignal = registerSignal("answer");
     this->receiveSignal = registerSignal("receive");
 
@@ -36,12 +42,11 @@ void Cache::initialize()
 
 void Cache::handleMessage(cMessage *msg)
 {
-    // TODO - Generated method body
 }
 
 Cache::Cache()
 {
-    csize = 1000;
+    csize = 1024;
 }
 
 Cache::Cache(int n)
@@ -49,29 +54,30 @@ Cache::Cache(int n)
     csize = n;
 }
 
-void Cache::refer(string name, string data)
+void Cache::saveData(string name, string data)
 {
-    // not present in cache
+    // if not in cache
     if ((hashmap.find(name) == hashmap.end())) {
-        // cache is full
+
+        // if cache is full
         if (keys.size() == csize) {
             // delete least recently used element
             string last = keys.back();
 
-            // Pops the last element
+            // remove from keys
             keys.pop_back();
 
-            // Erase the last
+            // remove from map
             hashmap.erase(last);
         }
     }
 
-    // present in cache
+    // remove from keys
     else{
         keys.remove(name);
     }
 
-    // update reference
+    // update references
     keys.push_front(name);
     hashmap[name] = data;
 }
@@ -79,8 +85,7 @@ void Cache::refer(string name, string data)
 
 void Cache::display()
 {
-
-    // Iterate over the hashmap and print all the elements in its
+    // Iterate over the hashmap and print all the elements in it to console
     cout << this->getFullPath() << endl;
     for (auto it = keys.begin(); it != keys.end(); it++){
         cout << "    " << (*it) << " ";
@@ -90,6 +95,7 @@ void Cache::display()
 }
 
 void Cache::finish() {
+    // log results on finish
     EV << "Requests Received: " << requestsReceived << endl;
     EV << "Requests Answered: " << requestsAnswered << endl;
 
@@ -109,9 +115,12 @@ bool Cache::containsDataAt(string name) {
     this->increaseRequestCount();
     if(!(hashmap.find(name) == hashmap.end())){
         this->increaseAnswerCount();
+
+        // log hit rate
         emit(this->hitRate, ((float)requestsAnswered)/((float)requestsReceived));
         return true;
     } else {
+        // log hit rate
         emit(this->hitRate, ((float)requestsAnswered)/((float)requestsReceived));
         return false;
     }
@@ -124,11 +133,13 @@ string Cache::getDataAt(string name) {
 void Cache::increaseRequestCount() {
     requestsReceived++;
 
+    // log request received
     emit(this->receiveSignal, requestsReceived);
 }
 
 void Cache::increaseAnswerCount() {
     requestsAnswered++;
 
+    // log request answered
     emit(answerSignal, requestsAnswered);
 }

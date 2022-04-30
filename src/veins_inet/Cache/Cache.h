@@ -20,18 +20,25 @@
 #include <vector>
 #include <unordered_map>
 
-using namespace omnetpp;
 using namespace std;
+using namespace omnetpp;
+
 /**
- * TODO - Generated class
+ * Cache header file
+ *
+ * Replacement Policy : LRU
+ * Default size : 1024 items
  */
 class Cache : public cSimpleModule
 {
 protected:
+    // implement interface methods
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
     virtual void finish();
+
 private:
+    // Cache variables
     list<string> keys;
     unordered_map<string, string> hashmap;
     int csize = 0;
@@ -45,13 +52,17 @@ private:
 
     simsignal_t hitRate;
 
+    // methods for accurate logging
     void increaseRequestCount();
     void increaseAnswerCount();
 
 public:
+    // constructors
     Cache();
     Cache(int n);
-    void refer(string name, string data);
+
+    // cache interface methods
+    void saveData(string name, string data);
     void display();
     bool containsDataAt(string name);
     string getDataAt(string name);
