@@ -45,7 +45,7 @@ module VeinsInetCar extends AdhocHost
         @display("i=device/cellphone");
 
     submodules:
-
+		// include cache and data server within the car
         cache: Cache {
             @display("p=287.3,74.1");
         }

@@ -1,14 +1,14 @@
 version 2
-run canvas-0-20220430-18:15:10-4552
+run canvas-0-20220430-19:39:05-3240
 attr configname canvas
-attr datetime 20220430-18:15:10
+attr datetime 20220430-19:39:05
 attr experiment canvas
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network Scenario
-attr processid 4552
+attr processid 3240
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -29,7 +29,7 @@ param *.visualizer.*.mobilityVisualizer.displayVelocities true
 param *.visualizer.*.mobilityVisualizer.displayMovementTrails true
 param *.visualizer.*.mobilityVisualizer.moduleFilter "\"**.antenna.mobility\""
 param *.node[*].numApps 1
-param *.node[*].app[0].typename "\"v2v_caching.veins_inet.VeinsInetSampleApplication\""
+param *.node[*].app[0].typename "\"v2v_caching.veins_inet.VeinsInetVehicleApplication\""
 param *.node[*].app[0].interface "\"wlan0\""
 param *.node[*].wlan[0].opMode "\"p\""
 param *.node[*].wlan[0].radio.typename "\"Ieee80211DimensionalRadio\""
@@ -167,702 +167,759 @@ vector 27 Scenario.node[3].dataServer requestsReceived:vector ETV
 attr interpolationmode none
 attr source receive
 attr title "requests received, vector"
-vector 28 Scenario.node[1].app[0] packetReceived:vector(packetBytes) ETV
+vector 28 Scenario.node[3].app[0] packetReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetReceived
 attr title "packets received, vector(packetBytes)"
-vector 29 Scenario.node[1].app[0] throughput:vector ETV
+vector 29 Scenario.node[3].app[0] throughput:vector ETV
 attr source throughput(packetReceived)
 attr title "throughput, vector"
 attr unit bps
-vector 30 Scenario.node[1].app[0] packetSent:vector(packetBytes) ETV
+vector 30 Scenario.node[3].app[0] packetSent:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetSent
 attr title "packets sent, vector(packetBytes)"
-vector 31 Scenario.node[1].udp packetSent:vector(packetBytes) ETV
+vector 31 Scenario.node[3].udp packetSent:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetSent
 attr title "packets sent, vector(packetBytes)"
-vector 32 Scenario.node[1].lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+vector 32 Scenario.node[3].lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetReceivedFromUpper
 attr title "packets received from higher layer, vector(packetBytes)"
-vector 33 Scenario.node[1].lo[0].lo passedUpPk:vector(packetBytes) ETV
+vector 33 Scenario.node[3].lo[0].lo passedUpPk:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetSentToUpper
 attr title "packets passed to higher layer, vector(packetBytes)"
-vector 34 Scenario.node[1].wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+vector 34 Scenario.node[3].wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets received from upper layer, vector(packetBytes)"
-vector 35 Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue packetPushed:vector(packetBytes) ETV
+vector 35 Scenario.node[3].wlan[0].mac.dcf.channelAccess.pendingQueue packetPushed:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packet pushed, vector(packetBytes)"
-vector 36 Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
+vector 36 Scenario.node[3].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
 attr interpolationmode sample-hold
 attr source "count(packetPushed) - count(packetPopped) - count(packetRemoved) - count(packetDropped)"
 attr title "queue length, vector"
-vector 37 Scenario.node[1].wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
+vector 37 Scenario.node[3].wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
 attr interpolationmode none
 attr title "backoff periods, vector"
-vector 38 Scenario.node[1].wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
+vector 38 Scenario.node[3].wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
 attr interpolationmode sample-hold
 attr source count(backoffStarted)-count(backoffStopped)
 attr title "backoff active, vector"
-vector 39 Scenario.node[1].udp packetReceived:vector(packetBytes) ETV
+vector 39 Scenario.node[3].udp packetReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetReceived
 attr title "packets received, vector(packetBytes)"
-vector 40 Scenario.node[1].udp passedUpPk:vector(count) ETV
+vector 40 Scenario.node[3].udp passedUpPk:vector(count) ETV
 attr interpolationmode none
 attr source packetSentToUpper
 attr title "packets passed up, vector(count)"
-vector 41 Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue packetPopped:vector(packetBytes) ETV
+vector 41 Scenario.node[3].wlan[0].mac.dcf.channelAccess.pendingQueue packetPopped:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packet popped, vector(packetBytes)"
-vector 42 Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
+vector 42 Scenario.node[3].wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
 attr interpolationmode none
 attr source queueingTime(packetPopped)
 attr title "queueing times, vector"
 attr unit s
-vector 43 Scenario.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
+vector 43 Scenario.node[3].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, vector"
-vector 44 Scenario.node[1].wlan[0].mac.dcf datarateSelected:vector ETV
+vector 44 Scenario.node[3].wlan[0].mac.dcf datarateSelected:vector ETV
 attr interpolationmode none
 attr title "datarates selected, vector"
-vector 45 Scenario.node[1].wlan[0].mac packetSentToLower:vector(packetBytes) ETV
+vector 45 Scenario.node[3].wlan[0].mac packetSentToLower:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets sent to lower layer, vector(packetBytes)"
-vector 46 Scenario.node[1].wlan[0].mac.dcf frameSequenceActive:vector ETV
+vector 46 Scenario.node[3].wlan[0].mac.dcf frameSequenceActive:vector ETV
 attr interpolationmode sample-hold
 attr source count(frameSequenceStarted)-count(frameSequenceFinished)
 attr title "frame sequence active, vector"
-vector 47 Scenario.node[1].wlan[0].radio transmissionState:vector ETV
+vector 47 Scenario.node[3].wlan[0].radio transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "Radio transmission state, vector"
-vector 48 Scenario.node[1].wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
+vector 48 Scenario.node[3].wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets sent, vector(packetBytes)"
-vector 49 Scenario.node[1].wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
+vector 49 Scenario.node[3].wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
 attr interpolationmode none
 attr source ieee80211Multicast(packetSentToPeer)
 attr title "packets sent: multicast, vector(packetBytes)"
-vector 50 Scenario.node[1].wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
+vector 50 Scenario.node[3].wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
 attr interpolationmode none
 attr source ieee80211NotRetry(packetSentToPeer)
 attr title "packets sent: without retry, vector(packetBytes)"
-vector 51 Scenario.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
+vector 51 Scenario.node[3].wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
 attr interpolationmode none
 attr source queueingTime(packetDequeued)
 attr title "queueing times, vector"
-vector 52 Scenario.node[3].wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
+vector 52 Scenario.node[2].wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets received from lower layer, vector(packetBytes)"
-vector 53 Scenario.node[3].wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
+vector 53 Scenario.node[2].wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets received, vector(packetBytes)"
-vector 54 Scenario.node[3].wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
+vector 54 Scenario.node[2].wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
 attr interpolationmode none
 attr source ieee80211Multicast(packetReceivedFromPeer)
 attr title "packets received: multicast, vector(packetBytes)"
-vector 55 Scenario.node[3].wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
+vector 55 Scenario.node[2].wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
 attr interpolationmode none
 attr source ieee80211NotRetry(packetReceivedFromPeer)
 attr title "packets received: without retry, vector(packetBytes)"
-vector 56 Scenario.node[3].wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
+vector 56 Scenario.node[2].wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets sent to upper layer, vector(packetBytes)"
-vector 57 Scenario.node[3].udp packetReceived:vector(packetBytes) ETV
+vector 57 Scenario.node[2].udp packetReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetReceived
 attr title "packets received, vector(packetBytes)"
-vector 58 Scenario.node[3].udp passedUpPk:vector(count) ETV
+vector 58 Scenario.node[2].udp passedUpPk:vector(count) ETV
 attr interpolationmode none
 attr source packetSentToUpper
 attr title "packets passed up, vector(count)"
-vector 59 Scenario.node[3].app[0] packetReceived:vector(packetBytes) ETV
+vector 59 Scenario.node[2].app[0] packetReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetReceived
 attr title "packets received, vector(packetBytes)"
-vector 60 Scenario.node[3].app[0] throughput:vector ETV
+vector 60 Scenario.node[2].app[0] throughput:vector ETV
 attr source throughput(packetReceived)
 attr title "throughput, vector"
 attr unit bps
-vector 61 Scenario.node[2].wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
+vector 61 Scenario.node[0].wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets received from lower layer, vector(packetBytes)"
-vector 62 Scenario.node[2].wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
+vector 62 Scenario.node[0].wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets received, vector(packetBytes)"
-vector 63 Scenario.node[2].wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
+vector 63 Scenario.node[0].wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
 attr interpolationmode none
 attr source ieee80211Multicast(packetReceivedFromPeer)
 attr title "packets received: multicast, vector(packetBytes)"
-vector 64 Scenario.node[2].wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
+vector 64 Scenario.node[0].wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
 attr interpolationmode none
 attr source ieee80211NotRetry(packetReceivedFromPeer)
 attr title "packets received: without retry, vector(packetBytes)"
-vector 65 Scenario.node[2].wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
+vector 65 Scenario.node[0].wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets sent to upper layer, vector(packetBytes)"
-vector 66 Scenario.node[2].udp packetReceived:vector(packetBytes) ETV
+vector 66 Scenario.node[0].udp packetReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetReceived
 attr title "packets received, vector(packetBytes)"
-vector 67 Scenario.node[2].udp passedUpPk:vector(count) ETV
+vector 67 Scenario.node[0].udp passedUpPk:vector(count) ETV
 attr interpolationmode none
 attr source packetSentToUpper
 attr title "packets passed up, vector(count)"
-vector 68 Scenario.node[2].app[0] packetReceived:vector(packetBytes) ETV
+vector 68 Scenario.node[0].app[0] packetReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetReceived
 attr title "packets received, vector(packetBytes)"
-vector 69 Scenario.node[2].app[0] throughput:vector ETV
+vector 69 Scenario.node[0].app[0] throughput:vector ETV
 attr source throughput(packetReceived)
 attr title "throughput, vector"
 attr unit bps
-vector 70 Scenario.node[0].wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
+vector 70 Scenario.node[1].wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets received from lower layer, vector(packetBytes)"
-vector 71 Scenario.node[0].wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
+vector 71 Scenario.node[1].wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets received, vector(packetBytes)"
-vector 72 Scenario.node[0].wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
+vector 72 Scenario.node[1].wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
 attr interpolationmode none
 attr source ieee80211Multicast(packetReceivedFromPeer)
 attr title "packets received: multicast, vector(packetBytes)"
-vector 73 Scenario.node[0].wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
+vector 73 Scenario.node[1].wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
 attr interpolationmode none
 attr source ieee80211NotRetry(packetReceivedFromPeer)
 attr title "packets received: without retry, vector(packetBytes)"
-vector 74 Scenario.node[0].wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
+vector 74 Scenario.node[1].wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets sent to upper layer, vector(packetBytes)"
-vector 75 Scenario.node[0].udp packetReceived:vector(packetBytes) ETV
+vector 75 Scenario.node[1].udp packetReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetReceived
 attr title "packets received, vector(packetBytes)"
-vector 76 Scenario.node[0].udp passedUpPk:vector(count) ETV
+vector 76 Scenario.node[1].udp passedUpPk:vector(count) ETV
 attr interpolationmode none
 attr source packetSentToUpper
 attr title "packets passed up, vector(count)"
-vector 77 Scenario.node[0].app[0] packetReceived:vector(packetBytes) ETV
+vector 77 Scenario.node[1].app[0] packetReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetReceived
 attr title "packets received, vector(packetBytes)"
-vector 78 Scenario.node[0].app[0] throughput:vector ETV
+vector 78 Scenario.node[1].app[0] throughput:vector ETV
 attr source throughput(packetReceived)
 attr title "throughput, vector"
 attr unit bps
-vector 79 Scenario.node[0].app[0] RequestReceiveTime:vector ETV
+vector 79 Scenario.node[2].app[0] RequestReceiveTime:vector ETV
 attr interpolationmode none
 attr source receiveTime
 attr title "request time, vector"
-vector 80 Scenario.node[2].app[0] packetSent:vector(packetBytes) ETV
+vector 80 Scenario.node[0].app[0] packetSent:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetSent
 attr title "packets sent, vector(packetBytes)"
-vector 81 Scenario.node[2].udp packetSent:vector(packetBytes) ETV
+vector 81 Scenario.node[0].udp packetSent:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetSent
 attr title "packets sent, vector(packetBytes)"
-vector 82 Scenario.node[2].lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+vector 82 Scenario.node[0].lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetReceivedFromUpper
 attr title "packets received from higher layer, vector(packetBytes)"
-vector 83 Scenario.node[2].lo[0].lo passedUpPk:vector(packetBytes) ETV
+vector 83 Scenario.node[0].lo[0].lo passedUpPk:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetSentToUpper
 attr title "packets passed to higher layer, vector(packetBytes)"
-vector 84 Scenario.node[2].wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+vector 84 Scenario.node[0].wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets received from upper layer, vector(packetBytes)"
-vector 85 Scenario.node[2].wlan[0].mac.dcf.channelAccess.pendingQueue packetPushed:vector(packetBytes) ETV
+vector 85 Scenario.node[0].wlan[0].mac.dcf.channelAccess.pendingQueue packetPushed:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packet pushed, vector(packetBytes)"
-vector 86 Scenario.node[2].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
+vector 86 Scenario.node[0].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
 attr interpolationmode sample-hold
 attr source "count(packetPushed) - count(packetPopped) - count(packetRemoved) - count(packetDropped)"
 attr title "queue length, vector"
-vector 87 Scenario.node[2].wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
+vector 87 Scenario.node[0].wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
 attr interpolationmode none
 attr title "backoff periods, vector"
-vector 88 Scenario.node[2].wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
+vector 88 Scenario.node[0].wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
 attr interpolationmode sample-hold
 attr source count(backoffStarted)-count(backoffStopped)
 attr title "backoff active, vector"
-vector 89 Scenario.node[2].wlan[0].mac.dcf.channelAccess.pendingQueue packetPopped:vector(packetBytes) ETV
+vector 89 Scenario.node[0].wlan[0].mac.dcf.channelAccess.pendingQueue packetPopped:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packet popped, vector(packetBytes)"
-vector 90 Scenario.node[2].wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
+vector 90 Scenario.node[0].wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
 attr interpolationmode none
 attr source queueingTime(packetPopped)
 attr title "queueing times, vector"
 attr unit s
-vector 91 Scenario.node[2].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
+vector 91 Scenario.node[0].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, vector"
-vector 92 Scenario.node[2].wlan[0].mac.dcf datarateSelected:vector ETV
+vector 92 Scenario.node[0].wlan[0].mac.dcf datarateSelected:vector ETV
 attr interpolationmode none
 attr title "datarates selected, vector"
-vector 93 Scenario.node[2].wlan[0].mac packetSentToLower:vector(packetBytes) ETV
+vector 93 Scenario.node[0].wlan[0].mac packetSentToLower:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets sent to lower layer, vector(packetBytes)"
-vector 94 Scenario.node[2].wlan[0].mac.dcf frameSequenceActive:vector ETV
+vector 94 Scenario.node[0].wlan[0].mac.dcf frameSequenceActive:vector ETV
 attr interpolationmode sample-hold
 attr source count(frameSequenceStarted)-count(frameSequenceFinished)
 attr title "frame sequence active, vector"
-vector 95 Scenario.node[2].wlan[0].radio transmissionState:vector ETV
+vector 95 Scenario.node[0].wlan[0].radio transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "Radio transmission state, vector"
-vector 96 Scenario.node[2].wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
+vector 96 Scenario.node[0].wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets sent, vector(packetBytes)"
-vector 97 Scenario.node[2].wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
+vector 97 Scenario.node[0].wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
 attr interpolationmode none
 attr source ieee80211Multicast(packetSentToPeer)
 attr title "packets sent: multicast, vector(packetBytes)"
-vector 98 Scenario.node[2].wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
+vector 98 Scenario.node[0].wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
 attr interpolationmode none
 attr source ieee80211NotRetry(packetSentToPeer)
 attr title "packets sent: without retry, vector(packetBytes)"
-vector 99 Scenario.node[2].wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
+vector 99 Scenario.node[0].wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
 attr interpolationmode none
 attr source queueingTime(packetDequeued)
 attr title "queueing times, vector"
-vector 100 Scenario.node[1].wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
+vector 100 Scenario.node[3].wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets received from lower layer, vector(packetBytes)"
-vector 101 Scenario.node[1].wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
+vector 101 Scenario.node[3].wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets received, vector(packetBytes)"
-vector 102 Scenario.node[1].wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
+vector 102 Scenario.node[3].wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
 attr interpolationmode none
 attr source ieee80211Multicast(packetReceivedFromPeer)
 attr title "packets received: multicast, vector(packetBytes)"
-vector 103 Scenario.node[1].wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
+vector 103 Scenario.node[3].wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
 attr interpolationmode none
 attr source ieee80211NotRetry(packetReceivedFromPeer)
 attr title "packets received: without retry, vector(packetBytes)"
-vector 104 Scenario.node[1].wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
+vector 104 Scenario.node[3].wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets sent to upper layer, vector(packetBytes)"
-vector 105 Scenario.node[3].app[0] packetSent:vector(packetBytes) ETV
+vector 105 Scenario.node[3].app[0] RequestReceiveTime:vector ETV
+attr interpolationmode none
+attr source receiveTime
+attr title "request time, vector"
+vector 106 Scenario.node[1].app[0] packetSent:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetSent
 attr title "packets sent, vector(packetBytes)"
-vector 106 Scenario.node[3].udp packetSent:vector(packetBytes) ETV
+vector 107 Scenario.node[1].udp packetSent:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetSent
 attr title "packets sent, vector(packetBytes)"
-vector 107 Scenario.node[3].lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+vector 108 Scenario.node[1].lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetReceivedFromUpper
 attr title "packets received from higher layer, vector(packetBytes)"
-vector 108 Scenario.node[3].lo[0].lo passedUpPk:vector(packetBytes) ETV
+vector 109 Scenario.node[1].lo[0].lo passedUpPk:vector(packetBytes) ETV
 attr interpolationmode none
 attr source packetSentToUpper
 attr title "packets passed to higher layer, vector(packetBytes)"
-vector 109 Scenario.node[3].wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+vector 110 Scenario.node[1].wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets received from upper layer, vector(packetBytes)"
-vector 110 Scenario.node[3].wlan[0].mac.dcf.channelAccess.pendingQueue packetPushed:vector(packetBytes) ETV
+vector 111 Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue packetPushed:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packet pushed, vector(packetBytes)"
-vector 111 Scenario.node[3].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
+vector 112 Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
 attr interpolationmode sample-hold
 attr source "count(packetPushed) - count(packetPopped) - count(packetRemoved) - count(packetDropped)"
 attr title "queue length, vector"
-vector 112 Scenario.node[3].wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
+vector 113 Scenario.node[1].wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
 attr interpolationmode none
 attr title "backoff periods, vector"
-vector 113 Scenario.node[3].wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
+vector 114 Scenario.node[1].wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
 attr interpolationmode sample-hold
 attr source count(backoffStarted)-count(backoffStopped)
 attr title "backoff active, vector"
-vector 114 Scenario.node[3].wlan[0].mac.dcf.channelAccess.pendingQueue packetPopped:vector(packetBytes) ETV
+vector 115 Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue packetPopped:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packet popped, vector(packetBytes)"
-vector 115 Scenario.node[3].wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
+vector 116 Scenario.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
 attr interpolationmode none
 attr source queueingTime(packetPopped)
 attr title "queueing times, vector"
 attr unit s
-vector 116 Scenario.node[3].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
+vector 117 Scenario.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
 attr interpolationmode sample-hold
 attr source "count(packetEnqueued) - count(packetDequeued)"
 attr title "queue length, vector"
-vector 117 Scenario.node[3].wlan[0].mac.dcf datarateSelected:vector ETV
+vector 118 Scenario.node[1].wlan[0].mac.dcf datarateSelected:vector ETV
 attr interpolationmode none
 attr title "datarates selected, vector"
-vector 118 Scenario.node[3].wlan[0].mac packetSentToLower:vector(packetBytes) ETV
+vector 119 Scenario.node[1].wlan[0].mac packetSentToLower:vector(packetBytes) ETV
 attr interpolationmode none
 attr title "packets sent to lower layer, vector(packetBytes)"
-vector 119 Scenario.node[3].wlan[0].mac.dcf frameSequenceActive:vector ETV
+vector 120 Scenario.node[1].wlan[0].mac.dcf frameSequenceActive:vector ETV
 attr interpolationmode sample-hold
 attr source count(frameSequenceStarted)-count(frameSequenceFinished)
 attr title "frame sequence active, vector"
-vector 120 Scenario.node[3].wlan[0].radio transmissionState:vector ETV
+vector 121 Scenario.node[1].wlan[0].radio transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "Radio transmission state, vector"
-vector 121 Scenario.node[3].wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
-attr interpolationmode none
-attr title "packets sent, vector(packetBytes)"
-vector 122 Scenario.node[3].wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
-attr interpolationmode none
-attr source ieee80211Multicast(packetSentToPeer)
-attr title "packets sent: multicast, vector(packetBytes)"
-vector 123 Scenario.node[3].wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr source ieee80211NotRetry(packetSentToPeer)
-attr title "packets sent: without retry, vector(packetBytes)"
-vector 124 Scenario.node[3].wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
-attr interpolationmode none
-attr source queueingTime(packetDequeued)
-attr title "queueing times, vector"
-vector 125 Scenario.node[2].app[0] RequestReceiveTime:vector ETV
-attr interpolationmode none
-attr source receiveTime
-attr title "request time, vector"
-vector 126 Scenario.node[3].app[0] RequestReceiveTime:vector ETV
-attr interpolationmode none
-attr source receiveTime
-attr title "request time, vector"
 0	2	0.1	0
 0	2	0.1	0
 0	2	0.1	2
+0	126	5.177424347218	3
+0	132	5.177848347218	2
 1	2	0.1	3
 2	2	0.1	1
-2	48	1.101000704685	3
-2	65	1.101424704685	1
-2	90	1.162000620016	3
-2	101	1.162424620016	1
-2	132	1.184424620133	3
-2	142	1.184848620133	1
-2	172	1.220425403392	3
+2	87	5.113000347218	3
+2	98	5.113424347218	1
+2	126	5.177424347218	0
+2	132	5.177848347218	1
 3	2	0.1	15
 4	2	0.1	0
 4	2	0.1	0
 4	2	0.1	2
-4	44	1.101	3
-4	50	1.101424	2
-4	168	1.220424699806	3
+4	162	5.182	3
 5	2	0.1	3
 6	2	0.1	1
-6	44	1.101	0
-6	50	1.101424	1
-6	91	1.162000699806	3
-6	108	1.162424699806	1
-6	133	1.184424909808	3
-6	148	1.184848909808	1
-6	168	1.220424699806	0
+6	88	5.11300056542	3
+6	105	5.11342456542	1
+6	130	5.177424940615	3
+6	145	5.177848940615	1
+6	162	5.182	0
 7	2	0.1	15
 8	2	0.1	0
 8	2	0.1	0
 8	2	0.1	2
-8	87	1.162	3
-8	93	1.162424	2
 9	2	0.1	3
 10	2	0.1	1
-10	47	1.101000699806	3
-10	58	1.101424699806	1
-10	87	1.162	0
-10	93	1.162424	1
-10	131	1.184424545906	3
-10	136	1.184848545906	1
-10	171	1.220425398511	3
+10	86	5.113000104884	3
+10	91	5.113424104884	1
+10	129	5.177424798901	3
+10	139	5.177848798901	1
 11	2	0.1	15
 12	2	0.1	0
 12	2	0.1	0
 12	2	0.1	2
-12	129	1.184424272953	3
-12	135	1.184848272953	2
+12	84	5.113	3
+12	90	5.113424	2
 13	2	0.1	3
 14	2	0.1	1
-14	46	1.101000636855	3
-14	51	1.101424636855	1
-14	89	1.162000272953	3
-14	94	1.162424272953	1
-14	129	1.184424272953	0
-14	135	1.184848272953	1
-14	170	1.220425335893	3
+14	84	5.113	0
+14	90	5.113424	1
+14	128	5.177424694436	3
+14	133	5.177848694436	1
 15	2	0.1	15
-16	24	1.1	1
-16	70	1.101424704685	2
-16	106	1.162424620016	3
-17	24	1.1	0
-17	70	1.101424704685	0
-17	106	1.162424620016	0
-18	25	1.1	1
-18	113	1.162424699806	2
-19	25	1.1	0
-19	113	1.162424699806	0
-20	26	1.1	1
-20	63	1.101424699806	2
-21	26	1.1	0
-21	63	1.101424699806	0
-22	27	1.1	1
-22	56	1.101424636855	2
-22	99	1.162424272953	3
-23	27	1.1	0
-23	56	1.101424636855	0
-23	99	1.162424272953	0
-24	29	1.1	1
-24	71	1.101424704685	2
-24	107	1.162424620016	3
-25	30	1.1	1
-25	114	1.162424699806	2
-26	31	1.1	1
-26	64	1.101424699806	2
-27	32	1.1	1
-27	57	1.101424636855	2
-27	100	1.162424272953	3
-28	33	1.101	512
-28	41	1.101	512
-28	113	1.162424699806	512
-28	153	1.184848909808	512
-28	157	1.220424699806	512
-28	165	1.220424699806	512
-29	33	0.1	0
-29	33	0.2	0
-29	33	0.3	0
-29	33	0.4	0
-29	33	0.5	0
-29	33	0.6	0
-29	33	0.7	0
-29	33	0.8	0
-29	33	0.9	0
-29	33	1	0
-29	33	1.1	0
-29	157	1.2	163840
-30	33	1.101	512
-30	157	1.220424699806	512
-31	34	1.101	520
-31	158	1.220424699806	520
-32	36	1.101	540
-32	160	1.220424699806	540
-33	36	1.101	540
-33	160	1.220424699806	540
-34	39	1.101	542
-34	163	1.220424699806	542
-35	39	1.101	570
-35	163	1.220424699806	570
-36	39	1.101	1
-36	43	1.101	0
-36	163	1.220424699806	1
-36	167	1.220424699806	0
-37	39	1.101	4
-37	163	1.220424699806	8
-38	39	1.101	1
-38	42	1.101	0
-38	163	1.220424699806	1
-38	166	1.220424699806	0
-39	40	1.101	520
-39	112	1.162424699806	520
-39	152	1.184848909808	520
-39	164	1.220424699806	520
-40	40	1.101	1
-40	112	1.162424699806	2
-40	152	1.184848909808	3
-40	164	1.220424699806	4
-41	43	1.101	570
-41	167	1.220424699806	570
-42	43	1.101	0
-42	167	1.220424699806	0
-43	43	1.101	1
-43	49	1.101424	0
-43	167	1.220424699806	1
-44	43	1.101	12000000
-44	167	1.220424699806	12000000
-45	43	1.101	570
-45	167	1.220424699806	570
-46	43	1.101	1
-46	49	1.101424	0
-46	167	1.220424699806	1
-47	44	1.101	1
-47	45	1.101	2
-47	49	1.101424	1
-47	50	1.101424	0
-47	168	1.220424699806	1
-47	169	1.220424699806	2
-48	49	1.101424	570
-49	49	1.101424	570
-50	49	1.101424	570
-51	49	1.101424	0.000424
-52	52	1.101424636855	570
-52	95	1.162424272953	570
-53	52	1.101424636855	570
-53	95	1.162424272953	570
-54	52	1.101424636855	570
-54	95	1.162424272953	570
-55	52	1.101424636855	570
-55	95	1.162424272953	570
-56	52	1.101424636855	542
-56	95	1.162424272953	542
-57	55	1.101424636855	520
-57	98	1.162424272953	520
-57	125	1.184424272953	520
-58	55	1.101424636855	1
-58	98	1.162424272953	2
-58	125	1.184424272953	3
-59	56	1.101424636855	512
-59	74	1.152424636855	512
-59	99	1.162424272953	512
-59	118	1.184424272953	512
-59	126	1.184424272953	512
-59	154	1.19	512
-60	56	0.1	0
-60	56	0.2	0
-60	56	0.3	0
-60	56	0.4	0
-60	56	0.5	0
-60	56	0.6	0
-60	56	0.7	0
-60	56	0.8	0
-60	56	0.9	0
-60	56	1	0
-60	56	1.1	0
-61	59	1.101424699806	570
-61	137	1.184848545906	570
-62	59	1.101424699806	570
-62	137	1.184848545906	570
-63	59	1.101424699806	570
-63	137	1.184848545906	570
-64	59	1.101424699806	570
-64	137	1.184848545906	570
-65	59	1.101424699806	542
-65	137	1.184848545906	542
-66	62	1.101424699806	520
-66	83	1.162	520
-66	140	1.184848545906	520
-67	62	1.101424699806	1
-67	83	1.162	2
-67	140	1.184848545906	3
-68	63	1.101424699806	512
-68	76	1.162	512
-68	84	1.162	512
-68	115	1.169424699806	512
-68	141	1.184848545906	512
-69	63	0.1	0
-69	63	0.2	0
-69	63	0.3	0
-69	63	0.4	0
-69	63	0.5	0
-69	63	0.6	0
-69	63	0.7	0
-69	63	0.8	0
-69	63	0.9	0
-69	63	1	0
-69	63	1.1	0
-70	66	1.101424704685	570
-70	102	1.162424620016	570
-70	143	1.184848620133	570
-71	66	1.101424704685	570
-71	102	1.162424620016	570
-71	143	1.184848620133	570
-72	66	1.101424704685	570
-72	102	1.162424620016	570
-72	143	1.184848620133	570
-73	66	1.101424704685	570
-73	102	1.162424620016	570
-73	143	1.184848620133	570
-74	66	1.101424704685	542
-74	102	1.162424620016	542
-74	143	1.184848620133	542
-75	69	1.101424704685	520
-75	105	1.162424620016	520
-75	146	1.184848620133	520
-76	69	1.101424704685	1
-76	105	1.162424620016	2
-76	146	1.184848620133	3
-77	70	1.101424704685	512
-77	73	1.152	512
-77	75	1.155424704685	512
-77	106	1.162424620016	512
-77	117	1.174424620016	512
-77	147	1.184848620133	512
-78	70	0.1	0
-78	70	0.2	0
-78	70	0.3	0
-78	70	0.4	0
-78	70	0.5	0
-78	70	0.6	0
-78	70	0.7	0
-78	70	0.8	0
-78	70	0.9	0
-78	70	1	0
-78	70	1.1	0
-79	73	1.152	0.052
-80	76	1.162	512
-81	77	1.162	520
-82	79	1.162	540
-83	79	1.162	540
-84	82	1.162	542
-85	82	1.162	570
-86	82	1.162	1
-86	86	1.162	0
-87	82	1.162	7
-88	82	1.162	1
-88	85	1.162	0
-89	86	1.162	570
-90	86	1.162	0
-91	86	1.162	1
-91	92	1.162424	0
-92	86	1.162	12000000
-93	86	1.162	570
-94	86	1.162	1
-94	92	1.162424	0
-95	87	1.162	1
-95	88	1.162	2
-95	92	1.162424	1
-95	93	1.162424	0
-96	92	1.162424	570
-97	92	1.162424	570
-98	92	1.162424	570
-99	92	1.162424	0.000424
-100	109	1.162424699806	570
-100	149	1.184848909808	570
-101	109	1.162424699806	570
-101	149	1.184848909808	570
-102	109	1.162424699806	570
-102	149	1.184848909808	570
-103	109	1.162424699806	570
-103	149	1.184848909808	570
-104	109	1.162424699806	542
-104	149	1.184848909808	542
-105	118	1.184424272953	512
-106	119	1.184424272953	520
-107	121	1.184424272953	540
-108	121	1.184424272953	540
-109	124	1.184424272953	542
-110	124	1.184424272953	570
-111	124	1.184424272953	1
-111	128	1.184424272953	0
-112	124	1.184424272953	6
-113	124	1.184424272953	1
-113	127	1.184424272953	0
-114	128	1.184424272953	570
-115	128	1.184424272953	0
-116	128	1.184424272953	1
-116	134	1.184848272953	0
-117	128	1.184424272953	12000000
-118	128	1.184424272953	570
-119	128	1.184424272953	1
-119	134	1.184848272953	0
-120	129	1.184424272953	1
-120	130	1.184424272953	2
-120	134	1.184848272953	1
-120	135	1.184848272953	0
-121	134	1.184848272953	570
-122	134	1.184848272953	570
-123	134	1.184848272953	570
-124	134	1.184848272953	0.000424
-125	141	1.184848545906	0.084848545906
-126	154	1.19	0.09
-78	172	1.2	245760
-78	172	1.220428678651	0
+16	64	5.1	1
+16	103	5.113424347218	2
+17	64	5.1	0
+17	103	5.113424347218	0
+18	65	5.1	1
+18	110	5.11342456542	2
+19	65	5.1	0
+19	110	5.11342456542	0
+20	66	5.1	1
+20	96	5.113424104884	2
+21	66	5.1	0
+21	96	5.113424104884	0
+22	67	5.1	1
+23	67	5.1	0
+24	69	5.1	1
+24	104	5.113424347218	2
+25	70	5.1	1
+25	111	5.11342456542	2
+26	71	5.1	1
+26	97	5.113424104884	2
+27	72	5.1	1
+28	73	5.113	512
+28	81	5.113	512
+28	138	5.177848694436	512
+29	73	0.1	0
+29	73	0.2	0
+29	73	0.3	0
+29	73	0.4	0
+29	73	0.5	0
+29	73	0.6	0
+29	73	0.7	0
+29	73	0.8	0
+29	73	0.9	0
+29	73	1	0
+29	73	1.1	0
+29	73	1.2	0
+29	73	1.3	0
+29	73	1.4	0
+29	73	1.5	0
+29	73	1.6	0
+29	73	1.7	0
+29	73	1.8	0
+29	73	1.9	0
+29	73	2	0
+29	73	2.1	0
+29	73	2.2	0
+29	73	2.3	0
+29	73	2.4	0
+29	73	2.5	0
+29	73	2.6	0
+29	73	2.7	0
+29	73	2.8	0
+29	73	2.9	0
+29	73	3	0
+29	73	3.1	0
+29	73	3.2	0
+29	73	3.3	0
+29	73	3.4	0
+29	73	3.5	0
+29	73	3.6	0
+29	73	3.7	0
+29	73	3.8	0
+29	73	3.9	0
+29	73	4	0
+29	73	4.1	0
+29	73	4.2	0
+29	73	4.3	0
+29	73	4.4	0
+29	73	4.5	0
+29	73	4.6	0
+29	73	4.7	0
+29	73	4.8	0
+29	73	4.9	0
+29	73	5	0
+29	73	5.1	0
+30	73	5.113	512
+31	74	5.113	520
+32	76	5.113	540
+33	76	5.113	540
+34	79	5.113	542
+35	79	5.113	570
+36	79	5.113	1
+36	83	5.113	0
+37	79	5.113	4
+38	79	5.113	1
+38	82	5.113	0
+39	80	5.113	520
+39	137	5.177848694436	520
+40	80	5.113	1
+40	137	5.177848694436	2
+41	83	5.113	570
+42	83	5.113	0
+43	83	5.113	1
+43	89	5.113424	0
+44	83	5.113	12000000
+45	83	5.113	570
+46	83	5.113	1
+46	89	5.113424	0
+47	84	5.113	1
+47	85	5.113	2
+47	89	5.113424	1
+47	90	5.113424	0
+48	89	5.113424	570
+49	89	5.113424	570
+50	89	5.113424	570
+51	89	5.113424	0.000424
+52	92	5.113424104884	570
+52	140	5.177848798901	570
+53	92	5.113424104884	570
+53	140	5.177848798901	570
+54	92	5.113424104884	570
+54	140	5.177848798901	570
+55	92	5.113424104884	570
+55	140	5.177848798901	570
+56	92	5.113424104884	542
+56	140	5.177848798901	542
+57	95	5.113424104884	520
+57	143	5.177848798901	520
+58	95	5.113424104884	1
+58	143	5.177848798901	2
+59	96	5.113424104884	512
+59	113	5.133424104884	512
+59	114	5.155	512
+59	144	5.177848798901	512
+60	96	0.1	0
+60	96	0.2	0
+60	96	0.3	0
+60	96	0.4	0
+60	96	0.5	0
+60	96	0.6	0
+60	96	0.7	0
+60	96	0.8	0
+60	96	0.9	0
+60	96	1	0
+60	96	1.1	0
+60	96	1.2	0
+60	96	1.3	0
+60	96	1.4	0
+60	96	1.5	0
+60	96	1.6	0
+60	96	1.7	0
+60	96	1.8	0
+60	96	1.9	0
+60	96	2	0
+60	96	2.1	0
+60	96	2.2	0
+60	96	2.3	0
+60	96	2.4	0
+60	96	2.5	0
+60	96	2.6	0
+60	96	2.7	0
+60	96	2.8	0
+60	96	2.9	0
+60	96	3	0
+60	96	3.1	0
+60	96	3.2	0
+60	96	3.3	0
+60	96	3.4	0
+60	96	3.5	0
+60	96	3.6	0
+60	96	3.7	0
+60	96	3.8	0
+60	96	3.9	0
+60	96	4	0
+60	96	4.1	0
+60	96	4.2	0
+60	96	4.3	0
+60	96	4.4	0
+60	96	4.5	0
+60	96	4.6	0
+60	96	4.7	0
+60	96	4.8	0
+60	96	4.9	0
+60	96	5	0
+60	96	5.1	0
+61	99	5.113424347218	570
+62	99	5.113424347218	570
+63	99	5.113424347218	570
+64	99	5.113424347218	570
+65	99	5.113424347218	542
+66	102	5.113424347218	520
+66	122	5.177424347218	520
+67	102	5.113424347218	1
+67	122	5.177424347218	2
+68	103	5.113424347218	512
+68	115	5.177424347218	512
+68	123	5.177424347218	512
+69	103	0.1	0
+69	103	0.2	0
+69	103	0.3	0
+69	103	0.4	0
+69	103	0.5	0
+69	103	0.6	0
+69	103	0.7	0
+69	103	0.8	0
+69	103	0.9	0
+69	103	1	0
+69	103	1.1	0
+69	103	1.2	0
+69	103	1.3	0
+69	103	1.4	0
+69	103	1.5	0
+69	103	1.6	0
+69	103	1.7	0
+69	103	1.8	0
+69	103	1.9	0
+69	103	2	0
+69	103	2.1	0
+69	103	2.2	0
+69	103	2.3	0
+69	103	2.4	0
+69	103	2.5	0
+69	103	2.6	0
+69	103	2.7	0
+69	103	2.8	0
+69	103	2.9	0
+69	103	3	0
+69	103	3.1	0
+69	103	3.2	0
+69	103	3.3	0
+69	103	3.4	0
+69	103	3.5	0
+69	103	3.6	0
+69	103	3.7	0
+69	103	3.8	0
+69	103	3.9	0
+69	103	4	0
+69	103	4.1	0
+69	103	4.2	0
+69	103	4.3	0
+69	103	4.4	0
+69	103	4.5	0
+69	103	4.6	0
+69	103	4.7	0
+69	103	4.8	0
+69	103	4.9	0
+69	103	5	0
+69	103	5.1	0
+70	106	5.11342456542	570
+70	146	5.177848940615	570
+71	106	5.11342456542	570
+71	146	5.177848940615	570
+72	106	5.11342456542	570
+72	146	5.177848940615	570
+73	106	5.11342456542	570
+73	146	5.177848940615	570
+74	106	5.11342456542	542
+74	146	5.177848940615	542
+75	109	5.11342456542	520
+75	149	5.177848940615	520
+75	158	5.182	520
+76	109	5.11342456542	1
+76	149	5.177848940615	2
+76	158	5.182	3
+77	110	5.11342456542	512
+77	150	5.177848940615	512
+77	151	5.182	512
+77	159	5.182	512
+78	110	0.1	0
+78	110	0.2	0
+78	110	0.3	0
+78	110	0.4	0
+78	110	0.5	0
+78	110	0.6	0
+78	110	0.7	0
+78	110	0.8	0
+78	110	0.9	0
+78	110	1	0
+78	110	1.1	0
+78	110	1.2	0
+78	110	1.3	0
+78	110	1.4	0
+78	110	1.5	0
+78	110	1.6	0
+78	110	1.7	0
+78	110	1.8	0
+78	110	1.9	0
+78	110	2	0
+78	110	2.1	0
+78	110	2.2	0
+78	110	2.3	0
+78	110	2.4	0
+78	110	2.5	0
+78	110	2.6	0
+78	110	2.7	0
+78	110	2.8	0
+78	110	2.9	0
+78	110	3	0
+78	110	3.1	0
+78	110	3.2	0
+78	110	3.3	0
+78	110	3.4	0
+78	110	3.5	0
+78	110	3.6	0
+78	110	3.7	0
+78	110	3.8	0
+78	110	3.9	0
+78	110	4	0
+78	110	4.1	0
+78	110	4.2	0
+78	110	4.3	0
+78	110	4.4	0
+78	110	4.5	0
+78	110	4.6	0
+78	110	4.7	0
+78	110	4.8	0
+78	110	4.9	0
+78	110	5	0
+78	110	5.1	0
+79	114	5.155	0.055000000000001
+80	115	5.177424347218	512
+81	116	5.177424347218	520
+82	118	5.177424347218	540
+83	118	5.177424347218	540
+84	121	5.177424347218	542
+85	121	5.177424347218	570
+86	121	5.177424347218	1
+86	125	5.177424347218	0
+87	121	5.177424347218	7
+88	121	5.177424347218	1
+88	124	5.177424347218	0
+89	125	5.177424347218	570
+90	125	5.177424347218	0
+91	125	5.177424347218	1
+91	131	5.177848347218	0
+92	125	5.177424347218	12000000
+93	125	5.177424347218	570
+94	125	5.177424347218	1
+94	131	5.177848347218	0
+95	126	5.177424347218	1
+95	127	5.177424347218	2
+95	131	5.177848347218	1
+95	132	5.177848347218	0
+96	131	5.177848347218	570
+97	131	5.177848347218	570
+98	131	5.177848347218	570
+99	131	5.177848347218	0.000424
+100	134	5.177848694436	570
+101	134	5.177848694436	570
+102	134	5.177848694436	570
+103	134	5.177848694436	570
+104	134	5.177848694436	542
+105	138	5.177848694436	0.077848694436001
+106	151	5.182	512
+107	152	5.182	520
+108	154	5.182	540
+109	154	5.182	540
+110	157	5.182	542
+111	157	5.182	570
+112	157	5.182	1
+112	161	5.182	0
+113	157	5.182	6
+114	157	5.182	1
+114	160	5.182	0
+115	161	5.182	570
+116	161	5.182	0
+117	161	5.182	1
+118	161	5.182	12000000
+119	161	5.182	570
+120	161	5.182	1
+121	162	5.182	1
+121	163	5.182	2
+69	163	5.182000350504	149853.017999
