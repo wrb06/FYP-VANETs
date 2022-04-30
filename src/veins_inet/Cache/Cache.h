@@ -61,7 +61,7 @@ public:
     Cache();
     Cache(int n);
 
-    // cache interface methods
+    // IO methods
     void saveData(string name, string data);
     void display();
     bool containsDataAt(string name);

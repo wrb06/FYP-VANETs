@@ -65,7 +65,7 @@ bool VeinsInetSampleApplication::startApplication()
     // randomly assign data to hosts
     for (auto pair : this->availableData){
         if(rand()%2 == 0){
-            dataServer->refer(pair.first, pair.second);
+            dataServer->saveData(pair.first, pair.second);
         }
     }
     // display data

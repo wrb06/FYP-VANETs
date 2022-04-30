@@ -16,13 +16,14 @@
 package v2v_caching.veins_inet.DataServer;
 
 //
-// TODO auto-generated module
+// Data Server network design file
 //
 simple DataServer
 {
     parameters:
         @display("i=block/table2");
         
+        // signals and statistics for logging
         @signal[receive](type="long");
         @statistic[requestsReceived](title="requests received"; source="receive"; record=vector,stats; interpolationmode=none);
         

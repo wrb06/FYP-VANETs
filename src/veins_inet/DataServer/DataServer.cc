@@ -26,17 +26,22 @@
 #include "veins_inet/VeinsInetApplicationBase.h"
 #include "inet/networklayer/common/L3AddressTag_m.h"
 
-Define_Module(DataServer);
-
 using namespace inet;
+
+/*
+ * Data server source file
+ */
+Define_Module(DataServer);
 
 void DataServer::initialize()
 {
+    // logging
     this->receiveSignal = registerSignal("receive");
 }
 
 void DataServer::handleMessage(cMessage *msg)
 {
+    // log
     emit(this->receiveSignal, ++requestsReceived);
 
     // receive a request
@@ -44,25 +49,32 @@ void DataServer::handleMessage(cMessage *msg)
     auto payloadReceived = pk->peekAtFront<DataRequestMessage>();
     delete msg;
 
+    // use variables for use of use
     auto mainApp = getParentModule()->getSubmodule("app", 0);
     auto replyPayload = makeShared<DataReplyMessage>();
 
+    // form reply
     replyPayload->setRequesterAddress(payloadReceived->getRequesterAddress());
     replyPayload->setChunkLength(B(512));
     replyPayload->setDataId(payloadReceived->getDataId());
+
+    // add data if we have it
     if (this->containsDataAt(payloadReceived->getDataId()))
     {
         replyPayload->setData(getDataAt(payloadReceived->getDataId()).c_str());
     }
+
+    // set the broadcast flag if the request is not from ourselves
     if (strcmp(payloadReceived->getRequesterAddress(), getParentModule()->getFullPath().c_str())){
         replyPayload->setBroadcast(true);
     }
 
-    // send message
+    // setup packet
     auto replyPacket = new Packet("cache reply");
     replyPacket->insertAtBack(replyPayload);
     replyPacket->addTag<inet::L3AddressInd>();
 
+    // send message
     sendDirect(replyPacket, SimTime(rand()%100, SIMTIME_MS), 0,  mainApp->gate("messagesIn"));
 
 }
@@ -84,6 +96,6 @@ void DataServer::display() {
     cout << endl;
 }
 
-void DataServer::refer(string name, string data) {
+void DataServer::saveData(string name, string data) {
     hashmap[name] = data;
 }

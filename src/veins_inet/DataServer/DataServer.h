@@ -25,24 +25,29 @@
 using namespace omnetpp;
 using namespace std;
 /**
- * TODO - Generated class
+ * Data Server header file
  */
 class DataServer : public cSimpleModule
 {
 private:
+    // varibles for logging
     long requestsReceived = 0;
     simsignal_t receiveSignal;
+
+    // data storage
     unordered_map<string, string> hashmap;
 
 protected:
+    // implement interface methods
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
 
 public:
+    // IO methods
     void display();
     string getDataAt(string name);
     bool containsDataAt(string dataId);
-    void refer(string name, string data);
+    void saveData(string name, string data);
 };
 
 #endif
