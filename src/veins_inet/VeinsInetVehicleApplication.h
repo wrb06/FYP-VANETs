@@ -27,17 +27,27 @@
 #include "veins_inet/DataServer/DataServer.h"
 #include "veins_inet/VeinsInetApplicationBase.h"
 
-class VEINS_INET_API VeinsInetSampleApplication : public veins::VeinsInetApplicationBase {
+/*
+ * The application that the vehicles run, it contains the main logic for the
+ * request -> reply algorithm, but is spread out due to the event based nature
+ * of the system.
+ */
+
+class VEINS_INET_API VeinsInetVehicleApplication : public veins::VeinsInetApplicationBase {
 private:
+    // default caching to true
     bool cachingEnabled = true;
 
 protected:
+    // store pointers for ease of use
     Cache* cache;
     DataServer* dataServer;
 
+    // logging variables
     vector<pair<string, simtime_t>> requests;
     simsignal_t packetReceivedTime;
 
+    // data for logging
     unordered_map<string, string> availableData = {
             {"/test/dataId_0", "Test data zero"},
             {"/test/dataId_1", "Test data one"},
@@ -57,20 +67,26 @@ protected:
             {"/test/dataId_E", "Test data e"},
             {"/test/dataId_F", "Test data f"},
     };
-
+    // override methods
     virtual bool startApplication() override;
     virtual bool stopApplication() override;
     virtual void processPacket(std::shared_ptr<inet::Packet> pk) override;
+    virtual void initialize();
+
+    // searching helper methods
     virtual void startSearch(string dataId);
     virtual void startExternalSearch(string dataId);
+
+    // Process messages
     virtual void processDataRequestMessage(std::shared_ptr<inet::Packet> pk);
     virtual void processDataReplyMessage(std::shared_ptr<inet::Packet> pk);
     virtual void processOtherMessage(std::shared_ptr<inet::Packet> pk);
-    virtual void initialize();
+
+    // logging methods
     virtual void logReceived(string dataId);
     virtual void logStarted(string dataId);
 
 public:
-    VeinsInetSampleApplication();
-    ~VeinsInetSampleApplication();
+    VeinsInetVehicleApplication();
+    ~VeinsInetVehicleApplication();
 };

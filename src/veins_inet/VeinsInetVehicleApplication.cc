@@ -20,7 +20,8 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-#include "veins_inet/VeinsInetSampleApplication.h"
+#include "VeinsInetVehicleApplication.h"
+
 #include "veins_inet/Cache/Cache.h"
 #include "veins_inet/DataServer/DataServer.h"
 #include "veins_inet/Messages/DataRequestMessage_m.h"
@@ -39,15 +40,15 @@
 using namespace inet;
 using namespace std;
 
-Define_Module(VeinsInetSampleApplication);
+Define_Module(VeinsInetVehicleApplication);
 
 #define myAddress getParentModule()->getFullPath()
 
-VeinsInetSampleApplication::VeinsInetSampleApplication()
+VeinsInetVehicleApplication::VeinsInetVehicleApplication()
 {
 }
 
-bool VeinsInetSampleApplication::startApplication()
+bool VeinsInetVehicleApplication::startApplication()
 {
     // Initialise
     this->initialize();
@@ -86,18 +87,18 @@ bool VeinsInetSampleApplication::startApplication()
 
 }
 
-bool VeinsInetSampleApplication::stopApplication()
+bool VeinsInetVehicleApplication::stopApplication()
 {
     cache->display();
     dataServer->display();
     return true;
 }
 
-VeinsInetSampleApplication::~VeinsInetSampleApplication()
+VeinsInetVehicleApplication::~VeinsInetVehicleApplication()
 {
 }
 
-void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
+void VeinsInetVehicleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
 {
     if (!strcmp(pk->peekData()->getClassName(), "DataRequestMessage")){
         processDataRequestMessage(pk);
@@ -108,7 +109,7 @@ void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
     }
 }
 
-void VeinsInetSampleApplication::startSearch(string dataId) {
+void VeinsInetVehicleApplication::startSearch(string dataId) {
     this->logStarted(dataId);
 
     //cout << getParentModule()->getFullName() << " begin search for " << dataId << endl;
@@ -132,7 +133,7 @@ void VeinsInetSampleApplication::startSearch(string dataId) {
     }
 }
 
-void VeinsInetSampleApplication::startExternalSearch(string dataId) {
+void VeinsInetVehicleApplication::startExternalSearch(string dataId) {
     //cout << "sending externally" << endl;
     auto sendPayload = makeShared<DataRequestMessage>();
     auto sendingPacket = createPacket("cache request");
@@ -144,7 +145,7 @@ void VeinsInetSampleApplication::startExternalSearch(string dataId) {
     sendPacket(std::move(sendingPacket));
 }
 
-void VeinsInetSampleApplication::processDataRequestMessage(std::shared_ptr<inet::Packet> pk) {
+void VeinsInetVehicleApplication::processDataRequestMessage(std::shared_ptr<inet::Packet> pk) {
     // disassemble packet
     auto payloadReceived = pk->peekAtFront<DataRequestMessage>();
     string requesterAddress = payloadReceived->getRequesterAddress();
@@ -191,7 +192,7 @@ void VeinsInetSampleApplication::processDataRequestMessage(std::shared_ptr<inet:
     //cout << endl;
 }
 
-void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::Packet> pk) {
+void VeinsInetVehicleApplication::processDataReplyMessage(std::shared_ptr<inet::Packet> pk) {
     // disassemble chunk
     auto payloadReceived = pk->peekAtFront<DataReplyMessage>();
     string requesterAddress = payloadReceived->getRequesterAddress();
@@ -247,17 +248,17 @@ void VeinsInetSampleApplication::processDataReplyMessage(std::shared_ptr<inet::P
     //cout << endl;
 }
 
-void VeinsInetSampleApplication::processOtherMessage(std::shared_ptr<inet::Packet> pk) {
+void VeinsInetVehicleApplication::processOtherMessage(std::shared_ptr<inet::Packet> pk) {
     //cout << pk->peekData()->getClassName() << endl;
 }
 
-void VeinsInetSampleApplication::initialize() {
+void VeinsInetVehicleApplication::initialize() {
     this->packetReceivedTime = registerSignal("receiveTime");
     //cout<<"initialised"<<endl;
 
 }
 
-void VeinsInetSampleApplication::logReceived(string dataId) {
+void VeinsInetVehicleApplication::logReceived(string dataId) {
 
     double currentTime = simTime().dbl();
 
@@ -278,7 +279,7 @@ void VeinsInetSampleApplication::logReceived(string dataId) {
     return;
 }
 
-void VeinsInetSampleApplication::logStarted(string dataId) {
+void VeinsInetVehicleApplication::logStarted(string dataId) {
     for (auto it = requests.begin(); it != requests.end(); it++){
         // 1s timeout for requests
         if ((*it).first == dataId){

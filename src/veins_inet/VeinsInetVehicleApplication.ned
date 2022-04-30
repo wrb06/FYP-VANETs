@@ -24,13 +24,12 @@ package v2v_caching.veins_inet;
 
 import v2v_caching.veins_inet.VeinsInetApplicationBase;
 
-simple VeinsInetSampleApplication extends VeinsInetApplicationBase
+simple VeinsInetVehicleApplication extends VeinsInetApplicationBase
 {
     parameters:
-        @class(VeinsInetSampleApplication);
+        @class(VeinsInetVehicleApplication);
         
+        // signals and statistics for logging
         @signal[receiveTime](type="double");
-        
         @statistic[RequestReceiveTime](title = "request time"; source="receiveTime"; record=vector, stats; interpolationmode=none);
-    gates:
 }

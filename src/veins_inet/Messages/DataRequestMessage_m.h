@@ -24,8 +24,11 @@ class DataRequestMessage;
 #include "inet/common/packet/chunk/Chunk_m.h" // import inet.common.packet.chunk.Chunk
 
 /**
- * Class generated from <tt>veins_inet/Messages/DataRequestMessage.msg:19</tt> by nedtool.
+ * Class generated from <tt>veins_inet/Messages/DataRequestMessage.msg:22</tt> by nedtool.
  * <pre>
+ * //
+ * // Data reply message definition
+ * //
  * class DataRequestMessage extends inet::FieldsChunk
  * {
  *     string requesterAddress;

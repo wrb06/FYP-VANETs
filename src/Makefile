@@ -34,7 +34,7 @@ OBJS = \
     $O/veins_inet/VeinsInetApplicationBase.o \
     $O/veins_inet/VeinsInetManager.o \
     $O/veins_inet/VeinsInetMobility.o \
-    $O/veins_inet/VeinsInetSampleApplication.o \
+    $O/veins_inet/VeinsInetVehicleApplication.o \
     $O/veins_inet/Cache/Cache.o \
     $O/veins_inet/DataServer/DataServer.o \
     $O/veins_inet/Messages/DataReplyMessage_m.o \
