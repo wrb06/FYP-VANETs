@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scave:Analysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:scave="http://www.omnetpp.org/omnetpp/scave">
+  <inputs>
+    <inputs name="/V2V_Caching/Results/Rural - caching/General-#0.sca"/>
+    <inputs name="/V2V_Caching/Results/Rural - caching/General-#0.vec"/>
+    <inputs name="/V2V_Caching/Results/Rural - without caching/General-#0.sca"/>
+    <inputs name="/V2V_Caching/Results/Rural - without caching/General-#0.vec"/>
+    <inputs name="/V2V_Caching/Results/Highway - caching/General-#0.sca"/>
+    <inputs name="/V2V_Caching/Results/Highway - caching/General-#0.vec"/>
+    <inputs name="/V2V_Caching/Results/Highway - without caching/General-#0.sca"/>
+    <inputs name="/V2V_Caching/Results/Highway - without caching/General-#0.vec"/>
+    <inputs name="/V2V_Caching/Results/Urban - caching/General-#0.sca"/>
+    <inputs name="/V2V_Caching/Results/Urban - caching/General-#0.vec"/>
+    <inputs name="/V2V_Caching/Results/Urban - without caching/General-#0.sca"/>
+    <inputs name="/V2V_Caching/Results/Urban - without caching/General-#0.vec"/>
+  </inputs>
+  <datasets>
+    <datasets name="Urban Caching">
+      <items xsi:type="scave:Add" filterPattern="file(&quot;/V2V_Caching/Results/Highway - caching/General-#0.vec&quot;)  AND module(Scenario.node[2].app[0])" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(&quot;/V2V_Caching/Results/Highway - caching/General-#0.vec&quot;)  AND module(Scenario.node[3].app[0])" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(&quot;/V2V_Caching/Results/Highway - caching/General-#0.vec&quot;)  AND module(Scenario.node[6].app[0])" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(&quot;/V2V_Caching/Results/Highway - caching/General-#0.vec&quot;)  AND module(Scenario.node[5].app[0])" type="VECTOR"/>
+    </datasets>
+    <datasets name="UCacheC">
+      <items xsi:type="scave:Add" filterPattern="file(&quot;/V2V_Caching/Results/Urban - caching/General-#0.sca&quot;)" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(&quot;/V2V_Caching/Results/Urban - caching/General-#0.vec&quot;)" type="VECTOR"/>
+    </datasets>
+    <datasets name="UCacheD">
+      <items xsi:type="scave:Add" filterPattern="file(&quot;/V2V_Caching/Results/Highway - caching/General-#0.vec&quot;)  AND module(Scenario.node[2].dataServer)" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(&quot;/V2V_Caching/Results/Highway - caching/General-#0.vec&quot;)  AND module(Scenario.node[3].dataServer)" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(&quot;/V2V_Caching/Results/Highway - caching/General-#0.vec&quot;)  AND module(Scenario.node[6].dataServer)" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="file(&quot;/V2V_Caching/Results/Highway - caching/General-#0.vec&quot;)  AND module(Scenario.node[5].dataServer)" type="VECTOR"/>
+    </datasets>
+    <datasets name="UCache - ART">
+      <items xsi:type="scave:Add" sourceDataset="//@datasets/@datasets.1" filterPattern=" name(RequestReceiveTime:vector)" type="VECTOR"/>
+      <items xsi:type="scave:BarChart" name=""/>
+    </datasets>
+    <datasets name="UCache - CHR">
+      <items xsi:type="scave:Add" filterPattern="file(&quot;/V2V_Caching/Results/Urban - caching/General-#0.sca&quot;) AND attr:configname(General) AND attr:runnumber(0) AND name(hitRate:stats)" type="STATISTICS"/>
+      <items xsi:type="scave:HistogramChart" name=""/>
+    </datasets>
+    <datasets name="UCacheRTC">
+      <items xsi:type="scave:Add" sourceDataset="//@datasets/@datasets.1" filterPattern="name(requestsReceived:vector)" type="VECTOR"/>
+      <items xsi:type="scave:LineChart" name="" lineNameFormat="">
+        <properties name="Graph.Title" value=" "/>
+        <properties name="X.Axis.Title" value="Scenario Time (s)"/>
+        <properties name="Y.Axis.Title" value="Requests to the cache"/>
+        <properties name="Axis.Title.Font" value="Arial-regular-14"/>
+        <properties name="Label.Font" value="Arial-regular-14"/>
+        <properties name="Y.Axis.Max" value="100.0"/>
+        <properties name="Legend.Display" value="true"/>
+        <properties name="Legend.Border" value="true"/>
+        <properties name="Legend.Font" value="Arial-regular-14"/>
+        <properties name="X.Axis.Max" value="180.0"/>
+        <properties name="Line.Name/Scenario.node[0].cache" value="Node 0"/>
+        <properties name="Line.Name/Scenario.node[5].cache" value="Node 5"/>
+        <properties name="Line.Name/Scenario.node[23].cache" value="Node 23"/>
+        <properties name="Line.Name/Scenario.node[31].cache" value="Node 31"/>
+        <properties name="Symbols.Size" value="6"/>
+        <properties name="Line.Type" value="Linear"/>
+        <properties name="Symbols.Size/Scenario.node[2].cache" value="6"/>
+        <properties name="Line.Type/Scenario.node[2].cache" value="Linear"/>
+        <properties name="Line.Name/Scenario.node[2].cache" value="Node 2"/>
+        <properties name="Symbols.Size/Scenario.node[3].cache" value="6"/>
+        <properties name="Line.Type/Scenario.node[3].cache" value="Linear"/>
+        <properties name="Line.Name/Scenario.node[3].cache" value="Node 3"/>
+        <properties name="Symbols.Size/Scenario.node[6].cache" value="6"/>
+        <properties name="Line.Type/Scenario.node[6].cache" value="Linear"/>
+        <properties name="Line.Name/Scenario.node[6].cache" value="Node 6"/>
+      </items>
+    </datasets>
+    <datasets name="UCacheRTD">
+      <items xsi:type="scave:Add" sourceDataset="//@datasets/@datasets.2" filterPattern="name(requestsReceived:vector)" type="VECTOR"/>
+      <items xsi:type="scave:LineChart" name="" lineNameFormat="">
+        <properties name="Graph.Title" value=" "/>
+        <properties name="X.Axis.Title" value="Scenario Time (s)"/>
+        <properties name="Y.Axis.Title" value="Requests to the data server"/>
+        <properties name="Axis.Title.Font" value="Arial-regular-14"/>
+        <properties name="Label.Font" value="Arial-regular-14"/>
+        <properties name="Y.Axis.Max" value="100.0"/>
+        <properties name="Legend.Display" value="true"/>
+        <properties name="Legend.Border" value="true"/>
+        <properties name="Legend.Font" value="Arial-regular-14"/>
+        <properties name="X.Axis.Max" value="180.0"/>
+        <properties name="Line.Name/Scenario.node[0].dataServer" value="Node 0"/>
+        <properties name="Line.Name/Scenario.node[5].dataServer" value="Node 5"/>
+        <properties name="Line.Name/Scenario.node[23].dataServer" value="Node 23"/>
+        <properties name="Line.Name/Scenario.node[31].dataServer" value="Node 31"/>
+        <properties name="Symbols.Size" value="6"/>
+        <properties name="Line.Type" value="Linear"/>
+        <properties name="Symbols.Size/Scenario.node[2].dataServer" value="6"/>
+        <properties name="Line.Type/Scenario.node[2].dataServer" value="Linear"/>
+        <properties name="Line.Name/Scenario.node[2].dataServer" value="Node 2"/>
+        <properties name="Symbols.Size/Scenario.node[3].dataServer" value="6"/>
+        <properties name="Line.Type/Scenario.node[3].dataServer" value="Linear"/>
+        <properties name="Line.Name/Scenario.node[3].dataServer" value="Node 3"/>
+        <properties name="Symbols.Size/Scenario.node[6].dataServer" value="6"/>
+        <properties name="Line.Type/Scenario.node[6].dataServer" value="Linear"/>
+        <properties name="Line.Name/Scenario.node[6].dataServer" value="Node 6"/>
+      </items>
+    </datasets>
+  </datasets>
+  <chartSheets>
+    <chartSheets name="default" charts="//@datasets/@datasets.5/@items.1 //@datasets/@datasets.6/@items.1 //@datasets/@datasets.3/@items.1 //@datasets/@datasets.4/@items.1"/>
+  </chartSheets>
+</scave:Analysis>
