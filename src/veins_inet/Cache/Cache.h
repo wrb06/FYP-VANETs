@@ -36,6 +36,7 @@ protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
     virtual void finish();
+    void refreshDisplay() const override;
 
 private:
     // Cache variables

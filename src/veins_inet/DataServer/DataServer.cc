@@ -99,3 +99,14 @@ void DataServer::display() {
 void DataServer::saveData(string name, string data) {
     hashmap[name] = data;
 }
+
+void DataServer::refreshDisplay() const
+{
+    string s = "";
+    for (auto it = hashmap.begin(); it != hashmap.end(); it++){
+        s += (*it).first;
+        s += "\n";
+    }
+
+    getDisplayString().setTagArg("t", 0, s.c_str());
+}

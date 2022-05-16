@@ -59,7 +59,6 @@ protected:
             {"/test/dataId_7", "Test data seven"},
             {"/test/dataId_8", "Test data eight"},
             {"/test/dataId_9", "Test data nine"},
-            {"/test/dataId_10", "Test data ten"},
             {"/test/dataId_A", "Test data a"},
             {"/test/dataId_B", "Test data b"},
             {"/test/dataId_C", "Test data c"},
@@ -86,6 +85,8 @@ protected:
     virtual void logReceived(string dataId);
     virtual void logStarted(string dataId);
 
+    virtual void setupDemoNode();
+    virtual void setupStandardNode();
 public:
     VeinsInetVehicleApplication();
     ~VeinsInetVehicleApplication();

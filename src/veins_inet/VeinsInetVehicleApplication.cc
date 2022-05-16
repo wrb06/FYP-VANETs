@@ -48,8 +48,51 @@ VeinsInetVehicleApplication::VeinsInetVehicleApplication()
 {
 }
 
+void VeinsInetVehicleApplication::setupDemoNode(){
+    if (getParentModule()->getIndex() == 0){
+        auto callback = [this]() {
+            // search for a random bit of data
+            auto it = availableData.begin();
+            std::advance(it, rand()%availableData.size());
+            auto searchFor = *it;
+            startSearch(searchFor.first);
+
+        };
+        timerManager.create(veins::TimerSpecification(callback).interval(SimTime(5, SIMTIME_S)).openEnd());
+
+    } else {
+        // assign data to non-0 hosts
+        for (auto pair : this->availableData){
+            dataServer->saveData(pair.first, pair.second);
+        }
+    }
+}
+
+void VeinsInetVehicleApplication::setupStandardNode(){
+    // randomly assign data to hosts
+    for (auto pair : this->availableData){
+        if(rand()%2 == 0){
+            dataServer->saveData(pair.first, pair.second);
+        }
+    }
+
+    // setup requests
+    auto callback = [this]() {
+        //search for a random bit of data
+        auto it = availableData.begin();
+        std::advance(it, rand()%availableData.size());
+        auto searchFor = *it;
+        //cout << "searching for "<< searchFor.first << endl;
+        startSearch(searchFor.first);
+
+    };
+    timerManager.create(veins::TimerSpecification(callback).interval(SimTime(5, SIMTIME_S)).openEnd());
+}
+
+
 bool VeinsInetVehicleApplication::startApplication()
 {
+
     // Initialise
     this->initialize();
 
@@ -63,27 +106,12 @@ bool VeinsInetVehicleApplication::startApplication()
     cache = (Cache*)(getParentModule()->getSubmodule("cache"));
     dataServer = (DataServer*)(getParentModule()->getSubmodule("dataServer"));
 
-    // randomly assign data to hosts
-    for (auto pair : this->availableData){
-        if(rand()%2 == 0){
-            dataServer->saveData(pair.first, pair.second);
-        }
-    }
+    setupDemoNode();
+
     // display data
-    //cache->display();
-    //dataServer->display();
+    cache->display();
+    dataServer->display();
 
-    // setup requests
-    auto callback = [this]() {
-        //search for a random bit of data
-        auto it = availableData.begin();
-        std::advance(it, rand()%availableData.size());
-        auto searchFor = *it;
-        //cout << "searching for "<< searchFor.first << endl;
-        startSearch(searchFor.first);
-
-    };
-    timerManager.create(veins::TimerSpecification(callback).interval(SimTime(5, SIMTIME_S)).openEnd());
 
 }
 

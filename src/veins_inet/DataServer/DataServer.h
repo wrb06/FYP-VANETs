@@ -41,6 +41,7 @@ protected:
     // implement interface methods
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+    void refreshDisplay() const override;
 
 public:
     // IO methods
