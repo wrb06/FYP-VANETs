@@ -5,8 +5,10 @@ Vehicular ad-hoc networks (VANETs) are an emerging technology in the field of in
 ## Scenerio types
 Rural - Lode/Bottisham/Swaffham Bulbeck
 ![Rural](https://github.com/wrb06/fyp/blob/main/images/Lode.PNG)
+
 Urban - Cherry Hinton Road/Hills Road/Long Road, Cambridge
 ![Urban](https://github.com/wrb06/fyp/blob/main/images/Hills.PNG)
+
 Highway - A14 junction 35 and surrounding area
 ![Highway](https://github.com/wrb06/fyp/blob/main/images/A14.PNG)
 
